@@ -1,4 +1,4 @@
-baseURL = 'https://linzeyang.github.io/blog/'
+baseURL = 'http://example.org'
 languageCode = 'en-us'
 title = 'BlueberryPy'
 theme = "hugo-theme-stack"
