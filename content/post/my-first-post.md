@@ -12,6 +12,8 @@ series = []
 
 ## Introduction
 
-This is **bold** text, and this is *emphasized* text.
+This site is synced across:
 
-Visit the [Hugo](https://gohugo.io) website!
+- [Github Pages](https://linzeyang.github.io/blog/)
+- [Netlify](https://blueberrypy.netlify.app/)
+- [Render](https://blueberrypy.onrender.com/)

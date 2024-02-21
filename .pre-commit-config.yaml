@@ -18,7 +18,7 @@ repos:
       - id: markdownlint-fix
         args: ["--disable", "MD013"]
   - repo: https://github.com/jackdewinter/pymarkdown
-    rev: 0.9.16
+    rev: v0.9.17
     hooks:
       - id: pymarkdown
         args: ["-d", "MD013,MD025,MD041", "scan"]
