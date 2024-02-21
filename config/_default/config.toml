@@ -1,0 +1,47 @@
+# https://stack.jimmycai.com/config/
+
+hasCJKLanguage = true
+
+[Params]
+favicon = "favicon-32x32.png"
+
+[Params.Article]
+toc = true
+
+[Params.Article.License]
+enabled = true
+default = "Licensed under CC BY-NC-SA 4.0"
+
+[Params.DateFormat]
+published = "Mon Jan 2 2006 15:04:05 MST"
+lastUpdated = "Mon Jan 2 2006 15:04:05 MST"
+
+[Params.Sidebar]
+subtitle = "Python & Fun"
+
+[Params.Sidebar.Avatar]
+enable = true
+local = true
+src = "avatar.jpg"
+
+[Params.Opengraph.twitter]
+site = "linzeyang"
+card = "summary"
+
+[Params.Footer]
+since = "2024"
+
+[[Params.Widgets.homepage]]
+type = "categories"
+
+[Params.Widgets.homepage.params]
+limit = 10
+
+[[Params.Widgets.homepage]]
+type = "tag-cloud"
+
+[Params.Widgets.homepage.params]
+limit = 10
+
+[[Params.Widgets.page]]
+type = "toc"
