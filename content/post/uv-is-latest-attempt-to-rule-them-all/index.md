@@ -20,7 +20,7 @@ If you are still interested, I hope you can spend a couple of minutes so that I 
 
 language: Rust
 
-version: 0.1.6 (at the time of writing)
+version: 0.1.13 (at the time of updating this post)
 
 repo: [github](https://github.com/astral-sh/uv) (6k stars)
 
@@ -48,7 +48,7 @@ the insructions in its git repo. And that's it, no Python or Rust runtime requir
 
 Creating a virtual environment is now as easy as `uv venv`, though you now need at least one Python interpreter ready to make it work.
 
-The virtual env it creates is just a standard Python venv, except it does not include `pip` by default (however if you need pip you can let it be included by using extra flag, or install it manually after).
+The virtual env it creates is just a standard Python venv, except it does not include `pip` by default (however if you need pip, you can let it be included by using an extra flag, or you could install it manually anytime after).
 
 Some of your daily commands can then be like (but faster):
 
@@ -143,6 +143,7 @@ The only two major top-level sub-commands the cli currently supports are
 
 - venv
 - pip
+- cache
 
 It thus can only create a virtual environment, install dependencies into it and outputs a "lock" file, etc.
 
@@ -150,7 +151,7 @@ I want it to list installed packages, or run commands using the interpreter insi
 
 Not to mention that it cannot run tests, switch virtual environments or lint source files.
 
-But it's still in its early age, and the pace is like one minor version every couple of days, isn't it?
+But it's still in its early age, and the pace is like one patch version every couple of days, isn't it?
 
 ## What about Rye
 
@@ -166,7 +167,7 @@ The name `uv` seems not relevant to [`libuv`](https://github.com/libuv/libuv), [
 
 Maybe it's short for "universal/ultimate/unified virtualenv manager"?
 
-The dedicated docs pages of `uv` are not present, which is a pitty.
+The dedicated docs pages of `uv` are not present at the time of writing, which is a pitty.
 
 ## References
 
