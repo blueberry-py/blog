@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v4.6.0
     hooks:
       - id: check-added-large-files
       - id: check-merge-conflict
@@ -18,7 +18,7 @@ repos:
       - id: markdownlint-fix
         args: ["--disable", "MD013"]
   - repo: https://github.com/jackdewinter/pymarkdown
-    rev: v0.9.17
+    rev: v0.9.18
     hooks:
       - id: pymarkdown
         args: ["-d", "MD013,MD025,MD041", "scan"]
