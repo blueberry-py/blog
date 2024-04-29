@@ -113,6 +113,10 @@ series = []
 
 `esbenp.prettier-vscode`
 
+### Prettier SQL VSCode
+
+`inferrinizzard.prettier-sql-vscode`
+
 ------------------
 
 ### Mojo

@@ -12,25 +12,25 @@ series = ["one liner"]
 
 ## One-Liner series: Node.js and NPM
 
-### Optional 1: DEB package through apt
+### Option 1: DEB package through apt
 
 [source: nodesource github](https://github.com/nodesource/distributions/blob/master/README.md)
 
 #### Install on Ubuntu
 
 ```bash
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
 sudo apt install -y nodejs
 ```
 
 #### Install on Debian, as _root_
 
 ```bash
-curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
 apt install -y nodejs
 ```
 
-### Optional 2: Through NVM (Node Version Manager)
+### Option 2: Through NVM (Node Version Manager)
 
 [source: nodejs.org](https://nodejs.org/en/download/package-manager)
 
@@ -39,5 +39,5 @@ apt install -y nodejs
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 
 # Download and install Node.js
-nvm install 20
+nvm install 22
 ```

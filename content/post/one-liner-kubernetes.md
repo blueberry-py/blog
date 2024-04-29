@@ -25,7 +25,7 @@ series = ["one liner"]
 ```bash
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 
-sudo install minikube-linux-amd64 /usr/local/bin/minikube
+sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-amd64
 ```
 
 #### As DEB
@@ -47,7 +47,7 @@ sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 ```
 
 >To download a specific version, replace the $(curl -L -s <https://dl.k8s.io/release/stable.txt>) portion of the command with the specific version.
->eg. v1.21.0
+>eg. v1.30.0: `curl -LO https://dl.k8s.io/release/v1.30.0/bin/linux/amd64/kubectl`
 
 ### Install kustomize
 
