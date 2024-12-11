@@ -4,7 +4,7 @@ date = 2021-05-31T09:47:01+08:00
 description = "A list of vs code extensions"
 slug = "my-vs-code-extensions"
 authors = ["Zeyang Lin"]
-tags = ["python", "vscode"]
+tags = ["python", "vscode", "IDE", "json"]
 categories = ["python"]
 externalLink = ""
 series = []
@@ -117,6 +117,10 @@ series = []
 
 `inferrinizzard.prettier-sql-vscode`
 
+### SQL Formatter
+
+`adpyke.vscode-sql-formatter`
+
 ------------------
 
 ### Mojo
@@ -128,6 +132,10 @@ series = []
 ### AWS Toolkit
 
 `amazonwebservices.aws-toolkit-vscode`
+
+### Amazon Q
+
+`amazonwebservices.amazon-q-vscode`
 
 ### Baidu Comate
 
@@ -144,6 +152,14 @@ series = []
 ### CodeShell
 
 `wisdomshell.codeshell-vscode`
+
+### Gemini Code Assist
+
+`google.geminicodeassist`
+
+### Google Cloud Code
+
+`googlecloudtools.cloudcode`
 
 ### Github Copilot
 
