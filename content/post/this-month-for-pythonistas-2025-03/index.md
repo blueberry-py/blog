@@ -1,8 +1,8 @@
 +++
-title = 'This Month for Pythonista - March 2025'
+title = 'This Month for Pythonistas - March 2025'
 description = "a monthly update on Python and other fun stuff"
-slug = "this-month-for-pythonista-2025-03"
-date = 2024-03-31T15:00:00+08:00
+slug = "this-month-for-pythonistas-2025-03"
+date = 2025-03-31T15:00:00+08:00
 authors = ["Zeyang Lin"]
 tags = ["python", "cli", "linux", "windows"]
 categories = ["python"]
@@ -20,9 +20,9 @@ print(date.today().year, date.today().month)
 
 ![issue-2025-03](splash.webp)
 
-Welcome to **This Month for Pythonista**, a monthly update dedicated to Python developers, professionals and hobbists.
+Welcome to **This Month for Pythonistas**, a monthly update dedicated to Python developers, professionals, and hobbyists.
 
-In this issue I would like to compile a list of news, repositories, tools worth noticing in March 2025 and/or other fun stuff which does not necessarily bound to Python.
+In this issue, I would like to compile a list of news, articles, repositories, and tools worth noting in March 2025, as well as other fun stuff that is not necessarily bound to Python.
 
 Ready? Let's get started!
 
@@ -34,9 +34,11 @@ The first major version update in three years. [pypi](https://pypi.org/project/i
 
 ## Tutorials
 
-TBD
+- Deeplearning.ai [Event-Driven Agentic Document Workflows](https://www.deeplearning.ai/short-courses/event-driven-agentic-document-workflows/) from LlamaIndex
 
-## Articals
+> Build an event-driven agentic workflow that parses forms, retrieves relevant information from a source document using RAG, and returns answers to the form’s fields as structured outputs.
+
+## Articles
 
 TBD
 
@@ -46,7 +48,19 @@ TBD
 
 - [Episode 241: Deciphering Python Jargon & Compiling Python 1.0](https://realpython.com/podcasts/rpp/241/)
 
+### Python Bytes Podcast
+
+- [#422 You need 4 spaces](https://pythonbytes.fm/episodes/show/422/you-need-4-spaces)
+
+### Pybites Podcast
+
+- [#183: AI’s silent takeover - are we losing our programming skills?](https://www.pybitespodcast.com/1501156/episodes/16730593-183-ai-s-silent-takeover-are-we-losing-our-programming-skills)
+
 ## Tools
+
+### Warp on Windows
+
+Warp is one of my favorite new toys in year 2024, and now it comes to Windows platform. Check their [blog](https://www.warp.dev/blog/launching-warp-on-windows)!
 
 ### Cherry Studio 1.0.6
 
