@@ -1,6 +1,6 @@
 +++
 title = 'This Month for Pythonistas - March 2025'
-description = "A monthly update on Python and other fun stuff"
+description = "MCP, OpenAI agents, dify, langgraph, Gemma 3, and other fun stuff"
 slug = "this-month-for-pythonistas-2025-03"
 date = 2025-03-17T15:00:00+08:00
 authors = ["Zeyang Lin"]
@@ -21,11 +21,19 @@ print(date.today().year, date.today().month)
 
 ![issue-2025-03](splash.webp)
 
-Welcome to **This Month for Pythonistas**, a monthly update dedicated to Python developers, professionals, and hobbyists.
+Welcome and thank you for reading **This Month for Pythonistas**, a monthly update dedicated to Python developers, professionals, and hobbyists.
 
 In this *inaugural* issue, I would like to compile a list of news, articles, repositories, and tools worth noting in March 2025, as well as other fun stuff that may not necessarily be bound to Python community.
 
+Before we continue, please note that this blog is synced across several platforms:
+
+- [Github Pages](https://linzeyang.github.io/blog/post/this-month-for-pythonistas-2025-03/)
+- [Netlify](https://blueberrypy.netlify.app/post/this-month-for-pythonistas-2025-03/)
+- [Render](https://blueberrypy.onrender.com/post/this-month-for-pythonistas-2025-03/)
+
 Ready? Let's get started!
+
+---
 
 ## Events & Social
 
@@ -37,7 +45,7 @@ Ready? Let's get started!
 
 Python Core Developer [Savannah Ostrowski](https://www.linkedin.com/in/savannahostrowski/) is going to be the keynote speaker this year.
 
-More stuff can be found in their [blog](https://blog.europython.eu/keynote-ticket-sales-announcement/).
+Get to know more in their [blog](https://blog.europython.eu/keynote-ticket-sales-announcement/).
 
 ## New versions
 
@@ -63,11 +71,17 @@ Check this particular release on [github](https://github.com/langgenius/dify/rel
 
 - RealPython's [LangGraph: Build Stateful AI Agents in Python](https://realpython.com/langgraph-python/)
 
+Here is another tutorial regarding `LangGraph`.
+
 > Explore the full tutorial to gain hands-on experience with LangGraph, including setting up workflows and building a LangGraph agent that can autonomously parse emails, send emails, and interact with API services.
 
 - RealPython's [Python's Instance, Class, and Static Methods Demystified](https://realpython.com/instance-class-and-static-methods-demystified/)
 
 > Instance, class, and static methods each serve a distinct role in Python, and knowing when to use one over another is key to writing clean, maintainable code. Instance methods operate on individual objects using self, while class methods use cls to access class-level data. Static methods, on the other hand, provide organizational structure without relying on class or instance state.
+
+- RealPython's [Python Code Quality: Best Practices and Tools](https://realpython.com/python-code-quality/)
+
+> In this tutorial, you’ll learn about code quality and the key factors that make Python code high-quality. You’ll explore effective strategies, powerful tools, and best practices to elevate your code to the next level.
 
 ## Articles
 
@@ -156,9 +170,11 @@ The source code is hosted on [github](https://github.com/lmstudio-ai/lmstudio-py
 
 ### `openai-agents-python` (MIT)
 
-OpenAI's latest contribution to open-source includes this framework for creating multi-agent workflows. This is also among the new tools which I mentioned earlier in this issue.
+OpenAI's latest contribution to open-source includes this framework for creating multi-agent workflows. This is also among the new toys from OpenAI which I mentioned earlier in this issue.
 
 The source code is on [github](https://github.com/openai/openai-agents-python), and the [documentation](https://openai.github.io/openai-agents-python/) too.
+
+Update: The Agents SDK has support for MCP, which means you can now [connect MCP servers to Agents](https://openai.github.io/openai-agents-python/mcp/).
 
 ### `smolagents` (Apache-2.0)
 
@@ -166,7 +182,15 @@ Another light-weight ("smol") framework which helps you build AI agents, brought
 
 Here's the [repostitory](https://github.com/huggingface/smolagents)
 
-## Time for some fun?
+### `DeepSeek-V3-0324`
+
+The is an updated version of V3, released just this March. The weights can be found on [HuggingFace](https://huggingface.co/deepseek-ai/DeepSeek-V3-0324)
+
+### `Qwen2.5-Omni-7B`
+
+Qwen team has released *their* version of "omni" model on [HuggingFace](https://huggingface.co/Qwen/Qwen2.5-Omni-7B).
+
+## Have time for some fun?
 
 ### Command & Conquer games go open-source
 
@@ -188,3 +212,15 @@ It would be on the shelves on June 26th (or 24th for Deluxe Edition owners), 202
 The price starts from 69.99 USD, 79.99 EUR, 568 HKD or 8,980 JPY.
 
 More details can be found in this [playstation blog](https://blog.playstation.com/2025/03/09/death-stranding-2-on-the-beach-launches-june-26-collectors-edition-revealed/).
+
+### StarCraft goes to tabletop
+
+In their [blog](https://archon-studio.com/blog/starcraft-tmg/starcraft-tabletop-miniatures-game-announcement), Archon Studio announced an official partnership with Blizzard Entertainment, launching a StarCraft tabletop miniatures game in 2026, followed by board games set in the StarCraft universe in 2027.
+
+![starcraft-miniatures](https://archon-studio.com/files/scaled-thumbs/Blog/starcraft-tabletop-miniatures-game-announcement/SC%201x1%20announcement.png/1200_1200.webp)
+
+More details, like miniature previews and gameplay mechanics, will be revealed later in 2025.
+
+---
+
+Alright, that concludes the very first issue of "This Month of Pythonistas". Thank you again for reading my post. I hope you enjoy it or find something useful, and see you in April!

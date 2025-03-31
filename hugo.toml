@@ -1,4 +1,4 @@
-baseURL = 'http://example.org'
+baseURL = 'https://blueberrypy.netlify.app/'
 languageCode = 'en-us'
 title = 'BlueberryPy'
 theme = "hugo-theme-stack"
