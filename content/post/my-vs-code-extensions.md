@@ -4,7 +4,7 @@ date = 2021-05-31T09:47:01+08:00
 description = "A list of vs code extensions"
 slug = "my-vs-code-extensions"
 authors = ["Zeyang Lin"]
-tags = ["python", "vscode", "IDE", "json"]
+tags = ["python", "vscode", "IDE", "git", "ssh", "AI"]
 categories = ["python"]
 externalLink = ""
 series = []
@@ -129,10 +129,6 @@ series = []
 
 ------------------
 
-### AWS Toolkit
-
-`amazonwebservices.aws-toolkit-vscode`
-
 ### Amazon Q
 
 `amazonwebservices.amazon-q-vscode`
@@ -145,13 +141,9 @@ series = []
 
 `aminer.codegeex`
 
-### Codeium
+### Windsurf Plugin (formerly Codeium)
 
 `codeium.codeium`
-
-### CodeShell
-
-`wisdomshell.codeshell-vscode`
 
 ### Gemini Code Assist
 
@@ -176,6 +168,10 @@ series = []
 ### TONGYI Lingma
 
 `alibaba-cloud.tongyi-lingma`
+
+### MarsCode AI: Coding Assistant
+
+`marscode.marscode-extension`
 
 ------------------
 

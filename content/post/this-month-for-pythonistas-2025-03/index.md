@@ -43,7 +43,7 @@ Ready? Let's get started!
 
 ![europython-2025-keynote-speaker](https://blog.europython.eu/content/images/2025/03/savannah-2.svg)
 
-Python Core Developer [Savannah Ostrowski](https://www.linkedin.com/in/savannahostrowski/) is going to be the keynote speaker this year.
+Python Core Developer [Savannah Ostrowski](https://www.linkedin.com/in/savannahostrowski/) is going to be one of the keynote speakers this year.
 
 Get to know more in their [blog](https://blog.europython.eu/keynote-ticket-sales-announcement/).
 
@@ -149,6 +149,7 @@ KBLaM is a new approach to integrate structured knowledge bases into pre-trained
 ### 🍕 Pybites Podcast
 
 - [#183: AI’s silent takeover - are we losing our programming skills?](https://www.pybitespodcast.com/1501156/episodes/16730593-183-ai-s-silent-takeover-are-we-losing-our-programming-skills)
+- [#184: The pathway to success - how an open mind can lead to your dream job](https://www.pybitespodcast.com/1501156/episodes/16755254-184-the-pathway-to-success-how-an-open-mind-can-lead-to-your-dream-job)
 
 ## Tools
 
