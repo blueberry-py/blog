@@ -2,7 +2,7 @@
 title = 'This Month for Pythonistas - March 2025'
 description = "MCP, OpenAI agents, dify, langgraph, Gemma 3, and other fun stuff"
 slug = "this-month-for-pythonistas-2025-03"
-date = 2025-03-17T15:00:00+08:00
+date = 2025-03-31T15:00:00+08:00
 authors = ["Zeyang Lin"]
 tags = ["python", "cli", "linux", "windows", "news"]
 categories = ["python"]

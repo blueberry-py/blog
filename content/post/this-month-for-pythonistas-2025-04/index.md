@@ -2,7 +2,7 @@
 title = 'This Month for Pythonistas - April 2025'
 description = "A monthly update on Python and other fun stuff"
 slug = "this-month-for-pythonistas-2025-04"
-date = 2025-04-30T15:00:00+08:00
+date = 2025-04-10T15:00:00+08:00
 authors = ["Zeyang Lin"]
 tags = ["python", "cli", "linux", "windows", "news"]
 categories = ["python"]
