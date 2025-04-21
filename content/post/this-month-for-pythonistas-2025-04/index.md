@@ -2,12 +2,12 @@
 title = 'This Month for Pythonistas - April 2025'
 description = "A monthly update on Python and other fun stuff"
 slug = "this-month-for-pythonistas-2025-04"
-date = 2025-04-10T15:00:00+08:00
+date = 2025-04-21T15:00:00+08:00
 authors = ["Zeyang Lin"]
 tags = ["python", "cli", "linux", "windows", "news"]
 categories = ["python"]
 series = ["this month for pythonistas"]
-keywords = ["python", "pypi", "linux", "github", "podcast", "AI", "LLM"]
+keywords = ["python", "pypi", "pycon", "linux", "github", "podcast", "AI", "LLM"]
 image = "title.webp"
 draft = false
 +++
@@ -43,17 +43,11 @@ Dublin, Ireland is the host city of this year's DjangoCon Europe, which is held 
 
 ### Microsoft turns 50
 
-Like it or not, Microsoft had remarkable influence over the past decades and is still making a big impact right at the moment. This year it celebrates its [50th anniversary](https://unlocked.microsoft.com/50th/).
+Like it or not, Microsoft had remarkable influence over the past decades and is still making a big impact right at the moment. In [this page](https://unlocked.microsoft.com/50th/) it celebrates its 50th anniversary by looking back at some iconic moments from the history, sharing some stories, and giving out digital goodies.
 
 ### GvR BDFL (🤡 April Fools 🤡)
 
-<blockquote class="bluesky-embed" data-bluesky-uri="at://did:plc:sfrl4dmvaxeq4lqgaucotygo/app.bsky.feed.post/3llr34uismc2y" data-bluesky-cid="bafyreihuvskxhzkwxhqttm3hjsika6nksayqnf7rbuk23akdrwox2nn3qm" data-bluesky-embed-color-mode="system"><p lang="en">BREAKING! Guido van Rossum, the legendary creator of #Python, has officially reinstated himself as Benevolent Dictator for Life (BDFL).
-
-Feat. Guido van Rossum, @pumpichank.bsky.social, @snarky.ca and @mariatta.ca
-
-Stay tuned for the documentary coming this summer!
-
-www.youtube.com/watch?v=wgxB...<br><br><a href="https://bsky.app/profile/did:plc:sfrl4dmvaxeq4lqgaucotygo/post/3llr34uismc2y?ref_src=embed">[image or embed]</a></p>&mdash; Python Software Foundation (<a href="https://bsky.app/profile/did:plc:sfrl4dmvaxeq4lqgaucotygo?ref_src=embed">@python.org</a>) <a href="https://bsky.app/profile/did:plc:sfrl4dmvaxeq4lqgaucotygo/post/3llr34uismc2y?ref_src=embed">April 1, 2025 at 10:22 PM</a></blockquote><script async src="https://embed.bsky.app/static/embed.js" charset="utf-8"></script>
+BREAKING! Guido van Rossum, the legendary creator of #Python, has officially reinstated himself as Benevolent Dictator for Life (BDFL).
 
 ## New versions
 
@@ -75,9 +69,19 @@ VS Code joins Claude Desktop and other "AI IDEs", having [Agent Mode](https://co
 
 A new open-source and local MCP server is introduced, allowing integration with any LLM tool supporting MCP. Read the details in [Vibe coding with GitHub Copilot: Agent mode and MCP support rolling out to all VS Code users](https://github.blog/news-insights/product-news/github-copilot-agent-mode-activated/).
 
+Update: Agent Mode is now officially turned on for everyone.
+
 ### Django 5.2 LTS
 
-This LTS version introduces new features and deprecates some functionalities, and it will receive security updates for the next three years at least. Check its [release notes](https://docs.djangoproject.com/en/5.2/releases/5.2/).
+This LTS version introduces new features (Automatic model imports in the shell, Composite primary keys, etc.) and deprecates some functionalities, and it will receive security updates for the next three years at least. Check its [release notes](https://docs.djangoproject.com/en/5.2/releases/5.2/).
+
+### Ubuntu 25.04, Fedora 42, MX 23.6 and Manjaro 25.0
+
+It seems like a big month for Linux distros since several popular distro have major/minor updates:
+- [Ubuntu 25.04 "Plucky Puffin"](https://lists.ubuntu.com/archives/ubuntu-announce/2025-April/000311.html) introduces Linux 6.14 kernel, GNOME 48, and offers 9 months of support.
+- [Fedora 42](https://fedoramagazine.org/announcing-fedora-linux-42/) promotes KDE Plasma variation to "Full Edition".
+- [MX Linux](https://mxlinux.org/blog/mx-23-6-now-available/) is a regular refresh containing bugfixes, kernel updates, and application updates.
+- [Manjaro 25.0 "Zetar"](https://forum.manjaro.org/t/manjaro-25-0-zetar-released/177008) brings various updates to different desktop environment editions.
 
 ## Tutorials
 
@@ -90,6 +94,10 @@ Take your own discretion on "Vibe Coding" (there's an article about it below), b
 - Deeplearning.ai's [Getting Structured LLM Output](https://www.deeplearning.ai/short-courses/getting-structured-llm-output/) from DotTxt
 
 > You’ll gain a fundamental understanding of structured outputs and learn efficient ways to generate outputs in your defined schema or format.
+
+- Deeplearning.ai's [Building AI Browser Agents](https://www.deeplearning.ai/short-courses/building-ai-browser-agents/) from AGI Inc.
+
+> Learn the fundamentals of autonomous web agents, what they are, how they work, their limitations, and the decision-making strategies taken to optimize their performance.
 
 - RealPython's [Introducing DuckDB](https://realpython.com/python-duckdb/)
 
@@ -105,9 +113,19 @@ A series of tutorials introducing various aspects of AI Agents.
 
 ## Articles
 
+- [PEP 750 – Template Strings](https://peps.python.org/pep-0750/)
+
+PEP 750 is **accepted**. This PEP introduces *template strings* which are a generalization of *f-strings*. Putting a `t` before a string *template* would keep it from being evaluated as a normal string but make it an instance of a new type `Template`.
+
 - [PEP 751 – A file format to record Python dependencies for installation reproducibility](https://peps.python.org/pep-0751/)
 
 PEP 751 is **accepted**. This PEP proposes a standard for the format of a file recording the requirements/dependencies of a Python project (ie. a lock file but standardized, agreed across the whole community).
+
+Update: `pdm` 2.24+ supports exporting to `pylock.toml`:
+
+```bash
+pdm export --format pylock --output pylock.toml
+```
 
 - [Share Python Scripts Like a Pro: uv and PEP 723 for Easy Deployment](https://thisdavej.com/share-python-scripts-like-a-pro-uv-and-pep-723-for-easy-deployment/)
 
@@ -122,6 +140,22 @@ This article highlights the simplicity of initializing a project with `uv`, whic
 ![llama-4-family](https://scontent-dfw5-2.xx.fbcdn.net/v/t39.2365-6/489528324_1866126614188079_2353760794201377773_n.png?_nc_cat=106&ccb=1-7&_nc_sid=e280be&_nc_ohc=6Mwql30RFp0Q7kNvwEs5-qS&_nc_oc=AdkUMZTdVtRQosXgVAxnJNZyg8mWiY3AyZ2a84hbzpIUiAM0UMZozRt5TS9UAQS0nSg&_nc_zt=14&_nc_ht=scontent-dfw5-2.xx&_nc_gid=7djufmCTfsR3gFwPt7uUMQ&oh=00_AfGHllzK9vdklX6gQDkECMvrCDZZUPMv7hq_ZBf6yC1nFQ&oe=681048F3)
 
 Meta has introduced Llama 4, its latest suite of multimodal AI models including "Llama 4 Scout" and "Llama 4 Maverick", offering significant advancements in personalized AI experiences. Both models utilize a mixture-of-experts (MoE) architecture, allowing efficient use of parameters: Maverick has 17 billion active parameters with 128 experts, while Scout offers a remarkable context length of 10 million tokens. "Llama 4 Behemoth", a larger model with 288 billion parameters, serves as a teacher for the others, enhancing their capabilities.
+
+- [Agent Development Kit: Making it easy to build multi-agent applications](https://developers.googleblog.com/en/agent-development-kit-easy-to-build-multi-agent-applications/)
+
+![google-vertex-ai-multi-agent](https://storage.googleapis.com/gweb-cloudblog-publish/images/Multi-agent_systems_with_Vertex_.max-2500x2500.jpg)
+
+Google brings its own agent-building solution by announcing open-source framework **Agent Development Kit (ADK)** at [Google Cloud NEXT 2025](https://cloud.withgoogle.com/next/25), additionally it introduces [Agent2Agent (A2A) protocol](https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/), [Agent Engine](https://cloud.google.com/vertex-ai/generative-ai/docs/agent-engine/overview) as well as [Agent Garden](https://console.cloud.google.com/vertex-ai/agents/agent-garden).
+
+- [Introducing GPT-4.1 in the API](https://openai.com/index/gpt-4-1/)
+
+GPT‑4.1, GPT‑4.1 mini, and GPT‑4.1 nano are available through OpenAI's API service. These new models appear to focus mainly on coding and instruction following.
+
+Update: They are also available through Github Models.
+
+- [Introducing OpenAI o3 and o4-mini](https://openai.com/index/introducing-o3-and-o4-mini/)
+
+OpenAI then release o3 and o4-mini of the o-series models, claiming they are their "smartest" models to date.
 
 - [The role of developer skills in agentic coding](https://martinfowler.com/articles/exploring-gen-ai.html#memo-13)
 
@@ -141,6 +175,10 @@ In the author's point of view, while MCP is popular, its success is uncertain. M
 
 Despite its benefits, such as standardized APIs and persistent sessions, MCP has significant security risks. These risks include potential side-channels into shells, secrets, or infrastructure when agents are connected to arbitrary servers without proper security measures. The author emphasizes the need for better security in MCP to prevent these vulnerabilities.
 
+- [MCP vs. A2A: Friends or Foes?](https://www.newsletter.swirlai.com/p/mcp-vs-a2a-friends-or-foes)
+
+MCP standardizes how applications integrate with large language models (LLMs), while A2A facilitates communication between agents across different systems. Although MCP currently excels in establishing context for LLMs, it lacks essential features like security and task management, which A2A addresses. As both protocols evolve, their roles may intertwine, but A2A appears poised for dominance in inter-agent communication, potentially overshadowing MCP's relevance in the future.
+
 - [Git turns 20: A Q&A with Linus Torvalds](https://github.blog/open-source/git/git-turns-20-a-qa-with-linus-torvalds/)
 
 ![git-turns-twenty](https://github.blog/wp-content/uploads/2025/04/GitTurns20_BlogHeader_001-2.png?w=1600)
@@ -159,24 +197,37 @@ In this blogpost, the author shows how to use sentence-transformers to finetune 
 
 ### 🥝 core.py
 
+- [Episode 21: A Garbage Episode](https://open.spotify.com/episode/6UTlYsa61miMc9vwCaAyWm)
+
 ### 🐍 RealPython Podcast
 
 - [Episode 245: GUIs & TUIs: Choosing a User Interface for Your Python Project](https://realpython.com/podcasts/rpp/245/)
+- [Episode 246: Learning Intermediate Python With a Deep Dive Course](https://realpython.com/podcasts/rpp/246/)
+- [Episode 247: Exploring DuckDB & Comparing Python Expressions vs Statements](https://realpython.com/podcasts/rpp/247/)
 
 ### 🥧 Python Bytes Podcast
 
 - [#426 Committing to Formatted Markdown](https://pythonbytes.fm/episodes/show/426/committing-to-formatted-markdown)
 - [#427 Rise of the Python Lord](https://pythonbytes.fm/episodes/show/427/rise-of-the-python-lord)
+- [#428 How old is your Python?](https://pythonbytes.fm/episodes/show/428/how-old-is-your-python)
 
 ### 🦜 Talk Python to me
 
 - [#499: BeeWare and the State of Python on Mobile](https://talkpython.fm/episodes/show/499/beeware-and-the-state-of-python-on-mobile)
+- [#500: Django Simple Deploy and other DevOps Things](https://talkpython.fm/episodes/show/500/django-simple-deploy-and-other-devops-things)
+- [#501: Marimo - Reactive Notebooks for Python](https://talkpython.fm/episodes/show/501/marimo-reactive-notebooks-for-python)
 
 ### 🍕 Pybites Podcast
 
 - [#185: Expanding the world of Pybites with cohort coaching, book platforms and more!](https://www.pybitespodcast.com/1501156/episodes/16903500-185-expanding-the-world-of-pybites-with-cohort-coaching-book-platforms-and-more)
+- [#186: Rethinking the art of coding](https://www.pybitespodcast.com/1501156/episodes/16944372-186-rethinking-the-art-of-coding)
+- [#187: Beyond the resume - how to stand out in the competitive world of tech](https://www.pybitespodcast.com/1501156/episodes/16974259-187-beyond-the-resume-how-to-stand-out-in-the-competitive-world-of-tech)
 
 ## Repositories
+
+### `google/adk-python` (Apache-2.0)
+
+https://github.com/google/adk-python
 
 ### `awslabs/mcp` (Apache-2.0)
 
@@ -200,6 +251,18 @@ python
 
 https://github.com/andrewromanenco/cocommit
 
+### `InternVL3-78B`
+
+https://huggingface.co/OpenGVLab/InternVL3-78B
+
+### `moonshotai/Kimi-VL-A3B-Thinking`
+
+https://huggingface.co/moonshotai/Kimi-VL-A3B-Thinking
+
+### `THUDM/GLM-Z1-32B-0414`
+
+https://huggingface.co/THUDM/GLM-Z1-32B-0414
+
 ## Have time for some fun?
 
 ### Nintendo Switch 2 has a launch date
@@ -213,7 +276,5 @@ Nintendo reveals in their "Direct" livestream event that Switch 2 is available o
 In this dark fantasy RPG, players will explore the mysterious city of Lumière and engage in immersive turn-based battles with unique mechanics. Check their [official website](https://www.expedition33.com/) for more info.
 
 ---
-
-As we wrap up this journey together, I want to take a moment to express my gratitude for your reading. If you’ve enjoyed what you’ve read and would like to help sustain this blog, consider <a href='https://ko-fi.com/O5O4ONNCD' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi6.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a> or <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="zeyanglin" data-color="#5F7FFF" data-emoji=""  data-font="Comic" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#FFDD00" ></script>. Your generosity would be great motivation for me to keep updating the blogs!
 
 Alright, that concludes the second issue of "This Month of Pythonistas". Thank you again for reading my post. I hope you enjoy it or find something useful, and see you in May!
