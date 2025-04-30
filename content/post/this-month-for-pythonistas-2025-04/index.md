@@ -2,7 +2,7 @@
 title = 'This Month for Pythonistas - April 2025'
 description = "A monthly update on Python and other fun stuff"
 slug = "this-month-for-pythonistas-2025-04"
-date = 2025-04-21T15:00:00+08:00
+date = 2025-04-30T15:00:00+08:00
 authors = ["Zeyang Lin"]
 tags = ["python", "cli", "linux", "windows", "news"]
 categories = ["python"]
@@ -21,7 +21,7 @@ print(date.today().year, date.today().month)
 
 ![issue-2025-04](splash.webp)
 
-Welcome back! TBD
+Welcome back and I'm glad to see you back reading the second issue of my "This month for Pythonistas" series which curates the news, articles, tutorials and more Python stuff worth noting in this April.
 
 Before we continue, please note that this blog is synced across several platforms:
 
@@ -41,13 +41,25 @@ Dublin, Ireland is the host city of this year's DjangoCon Europe, which is held 
 
 [djangocon europe website](https://2025.djangocon.eu/)
 
+### EuroPython 2025
+
+EuroPython has announced three more Keynote Speakers: Sebastián Ramírez (Creator os FastAPI, Typer, SQLModel, etc.), Brett Cannon (Python Core Developer), and Petr Baudiš (co-founder and CTO of Rossum).
+
+Besides, EuroPython will have a booth at PyCon US this year.
+
 ### Microsoft turns 50
 
 Like it or not, Microsoft had remarkable influence over the past decades and is still making a big impact right at the moment. In [this page](https://unlocked.microsoft.com/50th/) it celebrates its 50th anniversary by looking back at some iconic moments from the history, sharing some stories, and giving out digital goodies.
 
+### Discord server for free-threaded Python
+
+There is a dedicated place to discuss free-threaded python on [Discord](https://discord.gg/rqgHCDqdRr) now.
+
 ### GvR BDFL (🤡 April Fools 🤡)
 
-BREAKING! Guido van Rossum, the legendary creator of #Python, has officially reinstated himself as Benevolent Dictator for Life (BDFL).
+BREAKING! Guido van Rossum, the legendary creator of Python, has officially [reinstated himself as Benevolent Dictator for Life (BDFL)](https://www.youtube.com/watch?v=wgxBHuUOmjA).
+
+![GvR BDFL](./gvr_bdfl.jpg)
 
 ## New versions
 
@@ -75,6 +87,10 @@ Update: Agent Mode is now officially turned on for everyone.
 
 This LTS version introduces new features (Automatic model imports in the shell, Composite primary keys, etc.) and deprecates some functionalities, and it will receive security updates for the next three years at least. Check its [release notes](https://docs.djangoproject.com/en/5.2/releases/5.2/).
 
+### PyTorch 2.7
+
+[This release](https://pytorch.org/blog/pytorch-2-7/) introduces support for NVIDIA’s new Blackwell GPU architecture and ships pre-built wheels for CUDA 12.8. `TorchAudio` is updated to `2.7.0` and `TorchVision` is `0.22.0`.
+
 ### Ubuntu 25.04, Fedora 42, MX 23.6 and Manjaro 25.0
 
 It seems like a big month for Linux distros since several popular distro have major/minor updates:
@@ -99,6 +115,10 @@ Take your own discretion on "Vibe Coding" (there's an article about it below), b
 
 > Learn the fundamentals of autonomous web agents, what they are, how they work, their limitations, and the decision-making strategies taken to optimize their performance.
 
+- Deeplearning.ai's [Building Code Agents with Hugging Face smolagents](https://www.deeplearning.ai/short-courses/building-code-agents-with-hugging-face-smolagents/) from HuggingFace
+
+> Understand the architecture and benefits of code agents that write code to perform tasks, compare them to traditional tool-calling agents, and learn when to use each approach.
+
 - RealPython's [Introducing DuckDB](https://realpython.com/python-duckdb/)
 
 > The tutorial will equip you with the practical knowledge necessary to get started with DuckDB, including its Online Analytical Processing (OLAP) features, which enable fast access to data through query optimization and buffering.
@@ -113,15 +133,31 @@ A series of tutorials introducing various aspects of AI Agents.
 
 ## Articles
 
-- [PEP 750 – Template Strings](https://peps.python.org/pep-0750/)
+- [Python's new t-strings](https://davepeck.org/2025/04/11/pythons-new-t-strings/)
 
-PEP 750 is **accepted**. This PEP introduces *template strings* which are a generalization of *f-strings*. Putting a `t` before a string *template* would keep it from being evaluated as a normal string but make it an instance of a new type `Template`.
+[PEP 750 – Template Strings](https://peps.python.org/pep-0750/) is **accepted**. This PEP introduces *template strings* which are a generalization of *f-strings*. Putting a `t` before a string *template* would keep it from being evaluated as a normal string but make it an instance of a new type `Template`.
+
+In his blog, Dave introduces the motivation behind this PEP and shows how to play with it.
 
 - [PEP 751 – A file format to record Python dependencies for installation reproducibility](https://peps.python.org/pep-0751/)
 
 PEP 751 is **accepted**. This PEP proposes a standard for the format of a file recording the requirements/dependencies of a Python project (ie. a lock file but standardized, agreed across the whole community).
 
-Update: `pdm` 2.24+ supports exporting to `pylock.toml`:
+Update:
+
+`pip` 25.1+ adds experimental `pip lock` command:
+
+```bash
+pip lock -r .\requirements.txt --output pylock.toml
+```
+
+`uv` 0.7.0+ adds support through `uv export` command:
+
+```bash
+uv export --format pylock.toml --output-file pylock.toml
+```
+
+`pdm` 2.24+ also supports exporting to `pylock.toml`:
 
 ```bash
 pdm export --format pylock --output pylock.toml
@@ -210,18 +246,23 @@ In this blogpost, the author shows how to use sentence-transformers to finetune 
 - [#426 Committing to Formatted Markdown](https://pythonbytes.fm/episodes/show/426/committing-to-formatted-markdown)
 - [#427 Rise of the Python Lord](https://pythonbytes.fm/episodes/show/427/rise-of-the-python-lord)
 - [#428 How old is your Python?](https://pythonbytes.fm/episodes/show/428/how-old-is-your-python)
+- [#429 Nitpicking Python](https://pythonbytes.fm/episodes/show/429/nitpicking-python)
+- [#430 Or you go to jail](https://pythonbytes.fm/episodes/show/430/or-you-go-to-jail)
 
 ### 🦜 Talk Python to me
 
 - [#499: BeeWare and the State of Python on Mobile](https://talkpython.fm/episodes/show/499/beeware-and-the-state-of-python-on-mobile)
 - [#500: Django Simple Deploy and other DevOps Things](https://talkpython.fm/episodes/show/500/django-simple-deploy-and-other-devops-things)
 - [#501: Marimo - Reactive Notebooks for Python](https://talkpython.fm/episodes/show/501/marimo-reactive-notebooks-for-python)
+- [#502: Django Ledger: Accounting with Python](https://talkpython.fm/episodes/show/502/django-ledger-accounting-with-python)
+- [#503: The PyArrow Revolution](https://talkpython.fm/episodes/show/503/the-pyarrow-revolution)
 
 ### 🍕 Pybites Podcast
 
 - [#185: Expanding the world of Pybites with cohort coaching, book platforms and more!](https://www.pybitespodcast.com/1501156/episodes/16903500-185-expanding-the-world-of-pybites-with-cohort-coaching-book-platforms-and-more)
 - [#186: Rethinking the art of coding](https://www.pybitespodcast.com/1501156/episodes/16944372-186-rethinking-the-art-of-coding)
 - [#187: Beyond the resume - how to stand out in the competitive world of tech](https://www.pybitespodcast.com/1501156/episodes/16974259-187-beyond-the-resume-how-to-stand-out-in-the-competitive-world-of-tech)
+- [#188: Career crossroads - navigating the path to job fulfillment](https://www.pybitespodcast.com/1501156/episodes/17013337-188-career-crossroads-navigating-the-path-to-job-fulfillment)
 
 ## Repositories
 
@@ -239,18 +280,6 @@ https://github.com/awslabs/mcp
 
 https://github.com/github/github-mcp-server
 
-### `playwright-mcp` (MIT)
-
-javascript
-
-https://github.com/microsoft/playwright-mcp
-
-### `cocommit` (MIT)
-
-python
-
-https://github.com/andrewromanenco/cocommit
-
 ### `InternVL3-78B`
 
 https://huggingface.co/OpenGVLab/InternVL3-78B
@@ -263,6 +292,10 @@ https://huggingface.co/moonshotai/Kimi-VL-A3B-Thinking
 
 https://huggingface.co/THUDM/GLM-Z1-32B-0414
 
+### `Qwen 3`
+
+https://huggingface.co/Qwen/Qwen3-235B-A22B
+
 ## Have time for some fun?
 
 ### Nintendo Switch 2 has a launch date
@@ -273,7 +306,7 @@ Nintendo reveals in their "Direct" livestream event that Switch 2 is available o
 
 ### Clair Obscur: Expedition 33 sets sail on April 24th
 
-In this dark fantasy RPG, players will explore the mysterious city of Lumière and engage in immersive turn-based battles with unique mechanics. Check their [official website](https://www.expedition33.com/) for more info.
+In this dark fantasy RPG inspired by JRPG and Soul-like games and made by a small French team "Sandfall Interactive", players will explore the mysterious city of Lumière and engage in immersive turn-based battles with unique mechanics. After playing it for around 30 hours I must say I really enjoyed the visual style and the rewarding action part in the battles. Check their [official website](https://www.expedition33.com/) for more info.
 
 ---
 
