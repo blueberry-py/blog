@@ -1,6 +1,6 @@
 +++
 title = 'This Month for Pythonistas - April 2025'
-description = "A monthly update on Python and other fun stuff"
+description = "More MCP, A2A, Vibe Coding, Llama 4 and other fun stuff"
 slug = "this-month-for-pythonistas-2025-04"
 date = 2025-04-30T15:00:00+08:00
 authors = ["Zeyang Lin"]
@@ -43,7 +43,7 @@ Dublin, Ireland is the host city of this year's DjangoCon Europe, which is held 
 
 ### EuroPython 2025
 
-EuroPython has announced three more Keynote Speakers: Sebastián Ramírez (Creator os FastAPI, Typer, SQLModel, etc.), Brett Cannon (Python Core Developer), and Petr Baudiš (co-founder and CTO of Rossum).
+EuroPython has announced three more Keynote Speakers: Sebastián Ramírez (Creator os FastAPI, Typer, SQLModel, etc.), [Brett Cannon](https://www.linkedin.com/in/drbrettcannon/) (Python Core Developer), and [Petr Baudiš](https://www.linkedin.com/in/petr-baudis-906a213/) (co-founder and CTO of Rossum).
 
 Besides, EuroPython will have a booth at PyCon US this year.
 
@@ -59,7 +59,7 @@ There is a dedicated place to discuss free-threaded python on [Discord](https://
 
 BREAKING! Guido van Rossum, the legendary creator of Python, has officially [reinstated himself as Benevolent Dictator for Life (BDFL)](https://www.youtube.com/watch?v=wgxBHuUOmjA).
 
-![GvR BDFL](./gvr_bdfl.jpg)
+![GvR BDFL](gvr_bdfl.jpg)
 
 ## New versions
 
