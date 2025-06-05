@@ -151,7 +151,7 @@ Update:
 pip lock -r .\requirements.txt --output pylock.toml
 ```
 
-`uv` 0.7.0+ adds support through `uv export` command:
+`uv` 0.6.15+ adds support through `uv export` command:
 
 ```bash
 uv export --format pylock.toml --output-file pylock.toml
@@ -172,8 +172,6 @@ pdm export --format pylock --output pylock.toml
 This article highlights the simplicity of initializing a project with `uv`, which sets up essential files like `pyproject.toml`, `README.md`, and folder structures. This allows developers to manage dependencies effortlessly and set up virtual environments. It emphasizes the convenience of editable installations, enabling instant updates to package code without needing reinstallation.
 
 - [The Llama 4 herd: The beginning of a new era of natively multimodal AI innovation](https://ai.meta.com/blog/llama-4-multimodal-intelligence/)
-
-![llama-4-family](https://scontent-dfw5-2.xx.fbcdn.net/v/t39.2365-6/489528324_1866126614188079_2353760794201377773_n.png?_nc_cat=106&ccb=1-7&_nc_sid=e280be&_nc_ohc=6Mwql30RFp0Q7kNvwEs5-qS&_nc_oc=AdkUMZTdVtRQosXgVAxnJNZyg8mWiY3AyZ2a84hbzpIUiAM0UMZozRt5TS9UAQS0nSg&_nc_zt=14&_nc_ht=scontent-dfw5-2.xx&_nc_gid=7djufmCTfsR3gFwPt7uUMQ&oh=00_AfGHllzK9vdklX6gQDkECMvrCDZZUPMv7hq_ZBf6yC1nFQ&oe=681048F3)
 
 Meta has introduced Llama 4, its latest suite of multimodal AI models including "Llama 4 Scout" and "Llama 4 Maverick", offering significant advancements in personalized AI experiences. Both models utilize a mixture-of-experts (MoE) architecture, allowing efficient use of parameters: Maverick has 17 billion active parameters with 128 experts, while Scout offers a remarkable context length of 10 million tokens. "Llama 4 Behemoth", a larger model with 288 billion parameters, serves as a teacher for the others, enhancing their capabilities.
 
@@ -268,33 +266,33 @@ In this blogpost, the author shows how to use sentence-transformers to finetune 
 
 ### `google/adk-python` (Apache-2.0)
 
-https://github.com/google/adk-python
+[source](https://github.com/google/adk-python)
 
 ### `awslabs/mcp` (Apache-2.0)
 
-https://github.com/awslabs/mcp
+[source](https://github.com/awslabs/mcp)
 
 ### `github-mcp-server` (MIT)
 
 ![github-mcp-server](https://github.com/user-attachments/assets/a2926942-1c3d-4f95-bb73-861d8003aecb)
 
-https://github.com/github/github-mcp-server
+[source](https://github.com/github/github-mcp-server)
 
 ### `InternVL3-78B`
 
-https://huggingface.co/OpenGVLab/InternVL3-78B
+[source](https://huggingface.co/OpenGVLab/InternVL3-78B)
 
 ### `moonshotai/Kimi-VL-A3B-Thinking`
 
-https://huggingface.co/moonshotai/Kimi-VL-A3B-Thinking
+[source](https://huggingface.co/moonshotai/Kimi-VL-A3B-Thinking)
 
 ### `THUDM/GLM-Z1-32B-0414`
 
-https://huggingface.co/THUDM/GLM-Z1-32B-0414
+[source](https://huggingface.co/THUDM/GLM-Z1-32B-0414)
 
 ### `Qwen 3`
 
-https://huggingface.co/Qwen/Qwen3-235B-A22B
+[source](https://huggingface.co/Qwen/Qwen3-235B-A22B)
 
 ## Have time for some fun?
 

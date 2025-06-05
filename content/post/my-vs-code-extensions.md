@@ -50,6 +50,10 @@ series = []
 
 `charliermarsh.ruff`
 
+### ty
+
+`astral-sh.ty`
+
 ### autoDocstring: VSCode Python Docstring Generator
 
 `njpwerner.autodocstring`
@@ -137,6 +141,10 @@ series = []
 
 `baiducomate.comate`
 
+### Cline
+
+`saoudrizwan.claude-dev`
+
 ### CodeGeeX
 
 `aminer.codegeex`
@@ -169,7 +177,7 @@ series = []
 
 `alibaba-cloud.tongyi-lingma`
 
-### MarsCode AI: Coding Assistant
+### Trae AI(formerly MarsCode): Coding Assistant
 
 `marscode.marscode-extension`
 

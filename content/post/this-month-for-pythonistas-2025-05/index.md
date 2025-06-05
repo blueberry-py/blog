@@ -1,6 +1,6 @@
 +++
 title = "This Month for Pythonistas - May 2025"
-description = "PyCon US, MS Build, Python 3.14 beta 1, more MCP and other fun stuff"
+description = "PyCon US, MS Build, Python 3.14 beta, more MCP and other fun stuff"
 slug = "this-month-for-pythonistas-2025-05"
 date = 2025-05-30T20:00:00+08:00
 authors = ["Zeyang Lin"]
@@ -21,7 +21,7 @@ print(date.today().year, date.today().month)
 
 ![issue-2025-05](splash.webp)
 
-Welcome back! I'm glad to see you back reading the third issue of my "This month for Pythonistas" series which curates the news, articles, tutorials and more Python stuff worth noting in this May. This May witnesses several conferences, Python 3.14 Beta 1, more tooling, and more _Agentic_ stuff.
+Welcome back! I'm glad to see you back reading the third issue of my "This month for Pythonistas" series which curates the news, articles, tutorials and more Python stuff worth noting in this May. This May witnesses several conferences, Python 3.14 Beta 1 & 2, more tooling, and more _Agentic_ stuff.
 
 Before we continue, please note that this blog is synced across several platforms:
 
@@ -70,9 +70,9 @@ A documentary about Python is coming. It will debut in July at EuroPython 2025 a
 
 ## New versions
 
-### Python 3.14.0 beta 1
+### Python 3.14.0 beta 1 and beta 2
 
-The first of four planned beta releases of 3.14 is here! Source code as well as binary distributions can be found on the [download page](https://www.python.org/downloads/release/python-3140b1/).
+The first and second of four planned beta releases of 3.14 are here! Source code as well as binary distributions can be found [here](https://www.python.org/downloads/release/python-3140b1/) and [here](https://www.python.org/downloads/release/python-3140b2/).
 
 ### wagtail 7.0 LTS
 
