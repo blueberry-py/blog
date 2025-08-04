@@ -138,6 +138,10 @@ The article argues that while the creation of code may be sped up by tools like 
 ### 🍕 Pybites Podcast
 
 - [#194: Evolution, not extinction: why developers still matter in the age of AI](https://www.pybitespodcast.com/1501156/episodes/17416659-194-evolution-not-extinction-why-developers-still-matter-in-the-age-of-ai)
+- [#195: Patterns, paradigms, and pythonic thinking with Rodrigo Girão Serrão](https://www.pybitespodcast.com/1501156/episodes/17436411-195-patterns-paradigms-and-pythonic-thinking-with-rodrigo-girao-serrao)
+- [#196: Robin Quintero on Complexipy](https://www.pybitespodcast.com/1501156/episodes/17514265-196-robin-quintero-on-complexipy)
+- [#197: Polars with Jeroen Janssens and Thijs Nieuwdorp](https://www.pybitespodcast.com/1501156/episodes/17538206-197-polars-with-jeroen-janssens-and-thijs-nieuwdorp)
+- [#198: Tim Hopper on UV and smarter Python development](https://www.pybitespodcast.com/1501156/episodes/17574426-198-tim-hopper-on-uv-and-smarter-python-development)
 
 ## Repositories
 
