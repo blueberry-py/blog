@@ -25,7 +25,7 @@ Welcome back! Summer is really here and I hope you all enjoy the heat or rain. I
 
 Before we continue, please note that this blog is synced across several platforms:
 
-- [Github Pages](https://linzeyang.github.io/blog/post/this-month-for-pythonistas-2025-06/)
+- [Github Pages](https://blueberry-py.github.io/blog/post/this-month-for-pythonistas-2025-06/)
 - [Netlify](https://blueberrypy.netlify.app/post/this-month-for-pythonistas-2025-06/)
 - [Render](https://blueberrypy.onrender.com/post/this-month-for-pythonistas-2025-06/)
 
@@ -190,6 +190,6 @@ IO Interactive, the developer behind _Hitman 47_ series, announces during _State
 
 ---
 
-As we wrap up this journey together, I want to take a moment to express my gratitude for your reading. If you've enjoyed what you just read and would like to help sustain this blog, consider [starring this blog on github](https://github.com/linzeyang/blog/stargazers), it would be great motivation for me to keep updating the blogs!
+As we wrap up this journey together, I want to take a moment to express my gratitude for your reading. If you've enjoyed what you just read and would like to help sustain this blog, consider [starring this blog on github](https://github.com/blueberry-py/blog/stargazers), it would be great motivation for me to keep updating the blogs!
 
 Alright, that concludes the fourth issue of "This Month of Pythonistas". Thank you again for reading my post. I hope you enjoy it or find something useful, and see you in July!

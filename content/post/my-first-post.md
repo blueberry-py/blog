@@ -14,6 +14,6 @@ series = []
 
 This site is synced across:
 
-- [Github Pages](https://linzeyang.github.io/blog/)
+- [Github Pages](https://blueberry-py.github.io/blog/)
 - [Netlify](https://blueberrypy.netlify.app/)
 - [Render](https://blueberrypy.onrender.com/)

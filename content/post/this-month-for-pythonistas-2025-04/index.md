@@ -25,7 +25,7 @@ Welcome back and I'm glad to see you back reading the second issue of my "This m
 
 Before we continue, please note that this blog is synced across several platforms:
 
-- [Github Pages](https://linzeyang.github.io/blog/post/this-month-for-pythonistas-2025-04/)
+- [Github Pages](https://blueberry-py.github.io/blog/post/this-month-for-pythonistas-2025-04/)
 - [Netlify](https://blueberrypy.netlify.app/post/this-month-for-pythonistas-2025-04/)
 - [Render](https://blueberrypy.onrender.com/post/this-month-for-pythonistas-2025-04/)
 

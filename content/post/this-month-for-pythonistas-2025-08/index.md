@@ -25,7 +25,7 @@ Welcome back Pythonistas! I hope you enjoy your summer vacation if you actually 
 
 Before we continue, please note that this blog is synced across several platforms:
 
-- [Github Pages](https://linzeyang.github.io/blog/post/this-month-for-pythonistas-2025-08/)
+- [Github Pages](https://blueberry-py.github.io/blog/post/this-month-for-pythonistas-2025-08/)
 - [Netlify](https://blueberrypy.netlify.app/post/this-month-for-pythonistas-2025-08/)
 - [Render](https://blueberrypy.onrender.com/post/this-month-for-pythonistas-2025-08/)
 
@@ -37,9 +37,37 @@ Ready? Let's get started!
 
 ## New Versions
 
+### Python 3.13.6
+
+...
+
+### Python 3.14 RC2
+
+...
+
 ## Tutorials
 
+- DeepLearning.ai's [Claude Code: A Highly Agentic Coding Assistant](https://www.deeplearning.ai/short-courses/claude-code-a-highly-agentic-coding-assistant/) from Anthropic
+
+> In this course, you’ll learn best practices for using Claude Code to improve your coding workflow. You’ll learn key tips on how to provide Claude Code with clear context, such as specifying the relevant files, clearly defining the features and functionality, and connecting Claude Code to MCP servers.
+
+- [Fast Prototyping of GenAI Apps with Streamlit](https://www.coursera.org/learn/fast-prototyping-of-genai-apps-with-streamlit)
+
+> Build and iterate GenAI apps in hours instead of days! Start with a simple chatbot, then add prompt engineering and RAG powered by Snowflake’s secure data and LLM services, then push your prototype to Snowflake or Streamlit Community Cloud for instant feedback and quick improvement.
+
+- RealPython's [What Are Mixin Classes in Python?](https://realpython.com/python-mixin/)
+
+> Mixins offer a powerful way to reuse code across multiple Python classes without forcing them into a rigid inheritance hierarchy. Instead of building deep and brittle class trees, you can use mixins to share common behaviors in a modular and flexible way.
+
 ## Articles
+
+- [How Python Grew From a Language to a Community](https://thenewstack.io/how-python-grew-from-a-language-to-a-community/)
+
+...
+
+- [asyncio: a library with too many sharp corners](https://sailor.li/asyncio)
+
+...
 
 - [From Async/Await to Virtual Threads](https://lucumr.pocoo.org/2025/7/26/virtual-threads/)
 
@@ -87,10 +115,11 @@ This blog highlights that vibe coding quickly generates tech debt as the produce
 ### 🥧 Python Bytes Podcast
 
 - [#443 Patching Multiprocessing](https://pythonbytes.fm/episodes/show/443/patching-multiprocessing)
+- [#444 Begone Python of Yore!](https://pythonbytes.fm/episodes/show/444/begone-python-of-yore)
 
 ### 🦜 Talk Python to me
 
-- []()
+- [#515: Durable Python Execution with Temporal](https://talkpython.fm/episodes/show/515/durable-python-execution-with-temporal)
 
 ### 🍕 Pybites Podcast
 
@@ -106,13 +135,21 @@ This is a 100% Python framework from [JD](www.jd.com) retail department for buil
 
 This is a Python library from Google which uses LLMs to extract structured information from unstructured text documents based on user-defined instructions.
 
+- [nottelabs/notte](https://github.com/nottelabs/notte) (Server Side Public License)
+
+...
+
+- [langdiff](https://github.com/globalaiplatform/langdiff) (Apache 2.0)
+
+...
+
 - [mcp-use](https://github.com/mcp-use/mcp-use) (MIT)
 
 This is a Python library that provides a simple way to connect any LLM to any MCP server and build custom MCP agents that have tool access, without using closed source or application clients.
 
 - [openai/gpt-oss](https://github.com/openai/gpt-oss) (Apache 2.0)
 
-This is the repository as part of OpenAI's "open model" program, which provides a set of code implementations including a `gpt-oss` Python library, some tools, and more.
+This is the repository as part of OpenAI's GPT-OSS, which provides a set of code implementations including a `gpt-oss` Python library, `harmony`, and more.
 
 - [KittenTTS](https://github.com/KittenML/KittenTTS) (Apache 2.0)
 
@@ -120,6 +157,6 @@ This is the accompanying Python library for KittenTTS, an open-source realistic 
 
 ---
 
-As we wrap up this journey together, I want to take a moment to express my gratitude for your reading. If you've enjoyed what you just read and would like to help sustain this blog, consider [starring this blog on github](https://github.com/linzeyang/blog/stargazers), it would be great motivation for me to keep updating the blogs!
+As we wrap up this journey together, I want to take a moment to express my gratitude for your reading. If you've enjoyed what you just read and would like to help sustain this blog, consider [starring this blog on github](https://github.com/blueberry-py/blog/stargazers), it would be great motivation for me to keep updating the blogs!
 
 Alright, that concludes the sixth issue of "This Month of Pythonistas". Thank you again for reading my post. I hope you enjoy it or find something useful, and see you in September!

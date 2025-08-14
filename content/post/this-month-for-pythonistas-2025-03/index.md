@@ -27,7 +27,7 @@ In this *inaugural* issue, I would like to compile a list of news, articles, rep
 
 Before we continue, please note that this blog is synced across several platforms:
 
-- [Github Pages](https://linzeyang.github.io/blog/post/this-month-for-pythonistas-2025-03/)
+- [Github Pages](https://blueberry-py.github.io/blog/post/this-month-for-pythonistas-2025-03/)
 - [Netlify](https://blueberrypy.netlify.app/post/this-month-for-pythonistas-2025-03/)
 - [Render](https://blueberrypy.onrender.com/post/this-month-for-pythonistas-2025-03/)
 

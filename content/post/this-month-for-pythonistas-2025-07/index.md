@@ -25,7 +25,7 @@ Welcome back Pythonistas! I hope you enjoy your summer vacation if you actually 
 
 Before we continue, please note that this blog is synced across several platforms:
 
-- [Github Pages](https://linzeyang.github.io/blog/post/this-month-for-pythonistas-2025-07/)
+- [Github Pages](https://blueberry-py.github.io/blog/post/this-month-for-pythonistas-2025-07/)
 - [Netlify](https://blueberrypy.netlify.app/post/this-month-for-pythonistas-2025-07/)
 - [Render](https://blueberrypy.onrender.com/post/this-month-for-pythonistas-2025-07/)
 
@@ -155,6 +155,6 @@ blog -> [Announcing GenAI Processors: Build powerful and flexible Gemini applica
 
 ---
 
-As we wrap up this journey together, I want to take a moment to express my gratitude for your reading. If you've enjoyed what you just read and would like to help sustain this blog, consider [starring this blog on github](https://github.com/linzeyang/blog/stargazers), it would be great motivation for me to keep updating the blogs!
+As we wrap up this journey together, I want to take a moment to express my gratitude for your reading. If you've enjoyed what you just read and would like to help sustain this blog, consider [starring this blog on github](https://github.com/blueberry-py/blog/stargazers), it would be great motivation for me to keep updating the blogs!
 
 Alright, that concludes the fifth issue of "This Month of Pythonistas". Thank you again for reading my post. I hope you enjoy it or find something useful, and see you in August!
