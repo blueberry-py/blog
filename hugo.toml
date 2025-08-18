@@ -2,3 +2,8 @@ baseURL = 'https://blueberrypy.netlify.app/'
 languageCode = 'en-us'
 title = 'BlueberryPy'
 theme = "hugo-theme-stack"
+
+[caches]
+
+[caches.images]
+dir = ':cacheDir/images'
