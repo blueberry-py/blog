@@ -4,7 +4,7 @@ name = 'hosting-cloudflare-worker'
 compatibility_date = '2025-07-31'
 
 [build]
-command = './build.sh'
+command = 'chmod +x ./build.sh && ./build.sh'
 
 [assets]
 directory = './public'
