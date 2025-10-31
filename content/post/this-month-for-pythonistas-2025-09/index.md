@@ -139,6 +139,7 @@ The Claude Code SDK is now Claude Agent SDK. It helps developers build powerful 
 - [Episode 4: Language Model Chat Provider (aka BYOK) API with Logan Ramos](https://www.vscodepodcast.com/4)
 - [Episode 5: Life of a VS Code SWE Intern with Christy Nguyen](https://www.vscodepodcast.com/5)
 - [Episode 6: The Future of Coding Agents in VS Code](https://www.vscodepodcast.com/6)
+- [Episode 7: The Origins & Evolution of the GitHub MCP Registry](https://www.vscodepodcast.com/7)
 
 ## Repositories
 
