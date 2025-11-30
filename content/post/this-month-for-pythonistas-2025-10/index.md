@@ -185,7 +185,7 @@ The article argues that while AI can generate code, it cannot truly "build softw
 ### 🥝 core.py
 
 - [Episode 26.1: CPython Sprint Week in Cambridge UK, Part 1](https://open.spotify.com/episode/3zMQYlP7hF7fKi8wdlAxyn)
-- [Episode 26.2: CPython Sprint Week in Cambridge UK, Part 2](https://open.spotify.com/episode/...)
+- [Episode 26.2: CPython Sprint Week in Cambridge UK, Part 2](https://open.spotify.com/episode/7rj1Sxqw8oOUvgkbbh59PN)
 
 ### 🐍 RealPython Podcast
 
@@ -213,7 +213,7 @@ The article argues that while AI can generate code, it cannot truly "build softw
 
 - [#203: Automating API Documentation with Zylosystems](https://www.pybitespodcast.com/1501156/episodes/17891539-203-automating-api-documentation-with-zylosystems)
 
-### VS Code Insiders Podcast
+### 🚀 VS Code Insiders Podcast
 
 - [Episode 8: Impact of AI on How We Learn to Code with Scott Tolinski](https://www.vscodepodcast.com/8)
 - [Episode 9: Building agent memory for VS Code with Harald Kirschner](https://www.vscodepodcast.com/9)
