@@ -4,7 +4,7 @@ name = 'blog'
 compatibility_date = '2025-07-31'
 
 [build]
-command = 'chmod +x ./build.sh && ./build.sh'
+command = "chmod a+x ./build.sh && ./build.sh"
 
 [assets]
 directory = './public'
