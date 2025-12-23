@@ -28,6 +28,7 @@ Before we continue, please note that this blog is synced across the following pl
 - [Github Pages](https://blueberry-py.github.io/blog/post/this-month-for-pythonistas-2025-11/)
 - [Netlify](https://blueberrypy.netlify.app/post/this-month-for-pythonistas-2025-11/)
 - [Render](https://blueberrypy.onrender.com/post/this-month-for-pythonistas-2025-11/)
+- [Vercel](https://blueberrypy-blog.vercel.app/post/this-month-for-pythonistas-2025-11/)
 
 Ready? Let's get started!
 
@@ -173,10 +174,6 @@ Cloudflare engineers initially suspected a DDoS attack but soon identified the c
 
 ## Podcasts
 
-### 🥝 core.py
-
-- [Episode 26.2: CPython Sprint Week in Cambridge UK, Part 2](https://open.spotify.com/episode/7rj1Sxqw8oOUvgkbbh59PN)
-
 ### 🐍 RealPython Podcast
 
 - [Episode 273: Advice for Writing Maintainable Python Code](https://realpython.com/podcasts/rpp/273/)
@@ -194,6 +191,7 @@ Cloudflare engineers initially suspected a DDoS attack but soon identified the c
 
 - [#526: Building Data Science with Foundation LLM Models](https://talkpython.fm/episodes/show/526/building-data-science-with-foundation-llm-models)
 - [#527: MCP Servers for Python Devs](https://talkpython.fm/episodes/show/527/mcp-servers-for-python-devs)
+- [#528: Python apps with LLM building blocks](https://talkpython.fm/episodes/show/528/python-apps-with-llm-building-blocks)
 
 ### 🍕 Pybites Podcast
 

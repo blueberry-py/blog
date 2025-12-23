@@ -10,3 +10,4 @@ The blog posts are synced across the following platforms:
 - [Github Pages](https://blueberry-py.github.io/blog/)
 - [Netlify](https://blueberrypy.netlify.app/)
 - [Render](https://blueberrypy.onrender.com/)
+- [Vercel](https://blueberrypy-blog.vercel.app/)
