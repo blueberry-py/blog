@@ -8,7 +8,7 @@ tags = ["python", "news", "podcast", "ai"]
 categories = ["python"]
 series = ["this month for pythonistas"]
 keywords = ["python", "news", "ai", "django", "vercel", "podcast", "openai", "gemini"]
-image = "splash.jpg"
+image = "title.jpg"
 draft = false
 +++
 
@@ -128,7 +128,7 @@ Additionally, _Python 3.14.2_ and _3.13.11_ (yet another two expedited releases)
 
 The highlights of this major release include: Template Partials, Background Tasks, Content Security Policy (CSP), Modernized Email API, and more. The full release notes can be found [here](https://docs.djangoproject.com/en/6.0/releases/6.0/). Read on and you can find articles down below that highlight this release.
 
-- ty 0.0.7
+- ty 0.0.8
 
 **ty**，the extremely fast Python type checker and language server from astral.sh, has [reached its beta phase](https://astral.sh/blog/ty). Both the CLI and the VSCode extension are now updated.
 
@@ -358,4 +358,4 @@ The Game Awards (TGA) 2025 was held on December 11th, 2025 at Peacock Theater in
 
 As we wrap up this journey together, I want to take a moment to express my gratitude for your reading. If you've enjoyed what you just read and would like to help sustain this blog, consider [starring this blog on github](https://github.com/blueberry-py/blog/stargazers), it would be great motivation for me to keep updating the blogs!
 
-Alright, that concludes the December and this year's last edition of "This Month of Pythonistas". Thank you again for reading my posts for this whole year! I hope you enjoy them or find something useful. Happy coding, Merry Christmas 🎄, and see you in 2026! 👋
+Alright, that concludes the December and this year's last edition of "This Month for Pythonistas". Thank you again for reading my posts for this whole year! I hope you enjoy them or find something useful. Happy coding, Merry Christmas 🎄, and see you in 2026! 👋
