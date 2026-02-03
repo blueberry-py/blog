@@ -19,14 +19,14 @@ series = ["one liner"]
 #### Install on Ubuntu
 
 ```bash
-curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash -
 sudo apt install -y nodejs
 ```
 
 #### Install on Debian, as _root_
 
 ```bash
-curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
+curl -fsSL https://deb.nodesource.com/setup_24.x | bash -
 apt install -y nodejs
 ```
 
@@ -36,8 +36,8 @@ apt install -y nodejs
 
 ```bash
 # Install NVM
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 
 # Download and install Node.js
-nvm install 22
+nvm install 24
 ```
