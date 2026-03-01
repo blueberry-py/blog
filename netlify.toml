@@ -1,8 +1,8 @@
 [build.environment]
-DART_SASS_VERSION = "1.97.2"
-GO_VERSION = "1.25.5"
-HUGO_VERSION = "0.154.5"
-NODE_VERSION = "24.13.0"
+DART_SASS_VERSION = "1.97.3"
+GO_VERSION = "1.26.0"
+HUGO_VERSION = "0.157.0"
+NODE_VERSION = "24.13.1"
 TZ = "Asia/Shanghai"
 
 [build]
