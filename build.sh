@@ -7,14 +7,36 @@
 # The Cloudflare Worker automatically installs Node.js dependencies.
 #------------------------------------------------------------------------------
 
+# Exit on error, undefined variables, or pipe failures
+set -euo pipefail
+
+build_temp_dir=""
+
+# Perform cleanup
+cleanup() {
+  if [[ -n "${build_temp_dir:-}" && -d "${build_temp_dir}" ]]; then
+    rm -rf "${build_temp_dir}"
+  fi
+}
+
+# Register the cleanup trap
+trap cleanup EXIT SIGINT SIGTERM
+
 main() {
 
-  DART_SASS_VERSION=1.98.0
+  DART_SASS_VERSION=1.99.0
   GO_VERSION=1.26.1
-  HUGO_VERSION=0.159.1
+  HUGO_VERSION=0.160.0
   NODE_VERSION=24.14.1
 
   export TZ=Asia/Shanghai
+
+  # Create and move into a temporary directory for downloads
+  build_temp_dir=$(mktemp -d)
+  pushd "${build_temp_dir}" > /dev/null
+
+  # Create the local tools directory
+  mkdir -p "${HOME}/.local"
 
   # Install Dart Sass
   echo "Installing Dart Sass ${DART_SASS_VERSION}..."
@@ -61,9 +83,8 @@ main() {
 
   # Build the site
   echo "Building the site..."
-  hugo --gc --minify
+  hugo build --gc --minify
 
 }
 
-set -euo pipefail
 main "$@"
