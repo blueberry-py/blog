@@ -12,7 +12,7 @@ series = ["one liner"]
 
 ## One-Liner series: Rustup
 
-[source: rust-lang.org](https://www.rust-lang.org/learn/get-started)
+[source: rust-lang.org](https://rust-lang.org/learn/get-started/)
 
 ### Install on Ubuntu
 

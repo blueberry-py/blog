@@ -12,7 +12,7 @@ series = ["one liner"]
 
 ## One-Liner series: Claude Code (Native Build)
 
-[source: Claude Docs](https://docs.claude.com/en/docs/claude-code/quickstart)
+[source: Claude Docs](https://code.claude.com/docs/en/quickstart)
 
 ### Install on Linux/macOS/WSL
 
