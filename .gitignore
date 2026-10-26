@@ -1,11 +1,9 @@
-# Generated files by hugo
-/resources/_gen/
-/assets/jsconfig.json
-
-# Temporary lock file while hugo is building
-.hugo_build.lock
-
-# Astro
+# Dependencies
 node_modules/
+
+# The cache of Astro and the output of the build
 /.astro/
 /dist/
+
+# The temporary files of Wrangler
+/.wrangler/

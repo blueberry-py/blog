@@ -31,12 +31,9 @@ ignores:
   - 'node_modules/**'
   - 'dist/**'
   - 'public/**'
-  - 'themes/**'
-  - 'resources/**'
   - '.astro/**'
+  - '.wrangler/**'
   # The migration plans and the ledger of the migration are working
   # documents, not site content.
   - 'docs/**'
   - '.superpowers/**'
-  # The Hugo archetype is removed together with Hugo.
-  - 'archetypes/**'

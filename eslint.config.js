@@ -19,14 +19,11 @@ export default [
       'dist/',
       '.astro/',
       'public/',
-      'resources/_gen/',
-      'themes/',
+      '.wrangler/',
       // The migration plans and the ledger of the migration are working
       // documents, not site sources.
       'docs/',
       '.superpowers/',
-      // The Hugo archetype is removed together with Hugo.
-      'archetypes/',
     ],
   },
   js.configs.recommended,
