@@ -54,3 +54,57 @@ pnpm test
 
 `pnpm verify:content` checks that every article still exists at the route it
 had, with the body and the local images it refers to.
+
+## Deployment
+
+Every host builds the same static output with `pnpm build` and publishes the
+`dist` directory. Two environment variables tell the build where the site
+lives; `astro.config.mjs` reads them:
+
+| Variable    | Meaning                                                                |
+| ----------- | ---------------------------------------------------------------------- |
+| `SITE_URL`  | The canonical URL of the site.                                         |
+| `BASE_PATH` | The path the site is served under, `/` on every host but GitHub Pages. |
+
+The canonical URL of the site is `https://blueberrypy.netlify.app` on every
+host but GitHub Pages, which serves the project site of the repository under
+`/blog`.
+
+| Host               | Settings                       | Publish | Build                                                                               |
+| ------------------ | ------------------------------ | ------- | ----------------------------------------------------------------------------------- |
+| GitHub Pages       | `.github/workflows/deploy.yml` | `dist`  | `withastro/action@v6`, `SITE_URL=https://blueberry-py.github.io`, `BASE_PATH=/blog` |
+| Netlify            | `netlify.toml`                 | `dist`  | `pnpm build`                                                                        |
+| Render             | the dashboard of the site      | `dist`  | `pnpm build`                                                                        |
+| Vercel             | `vercel.json`                  | `dist`  | `pnpm build`                                                                        |
+| Cloudflare Workers | `wrangler.toml`                | `dist`  | `pnpm build`, published by `pnpm deploy:cloudflare`                                 |
+
+The repository has to be set to "GitHub Actions" as the source of the GitHub
+Pages site, otherwise the workflow has no site to deploy to.
+
+### Render
+
+Render reads no configuration file from the repository, so the settings of the
+static site are made in its dashboard:
+
+- Build command: `pnpm build`
+- Publish path: `dist`
+- Environment: `TZ=Asia/Shanghai`; `SITE_URL` is not needed, because the
+  canonical URL of the site is the one of the default build.
+
+### Cloudflare Workers
+
+The Worker serves the static output of the site, with the 404 page of the site
+as the page of the unknown URLs. The deployment builds the site first:
+
+```sh
+pnpm deploy:cloudflare
+```
+
+A deployment from the Cloudflare dashboard (Workers Builds) uses the build
+command `pnpm build` and the deploy command `pnpm deploy:cloudflare`.
+
+The Worker can be served locally, against the built output:
+
+```sh
+pnpm build && pnpm exec wrangler dev
+```

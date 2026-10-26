@@ -1,13 +1,9 @@
 [build.environment]
-DART_SASS_VERSION = "1.105.1"
-GO_VERSION = "1.27.3"
-HUGO_VERSION = "0.168.0"
 NODE_VERSION = "24.22.1"
+PNPM_VERSION = "12.15.0"
 TZ = "Asia/Shanghai"
+SITE_URL = "https://blueberrypy.netlify.app"
 
 [build]
-publish = "public"
-command = """\
-  git config core.quotepath false && \
-  hugo build --gc --minify --baseURL "${URL}"
-  """
+publish = "dist"
+command = "pnpm build"

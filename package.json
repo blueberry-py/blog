@@ -15,10 +15,11 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint . && markdownlint-cli2 \"**/*.md\"",
-    "test": "node --test --test-concurrency=1 scripts/tooling.test.mjs scripts/migration/*.test.mjs scripts/routes.test.mjs scripts/taxonomy.test.mjs",
+    "test": "node --test --test-concurrency=1 scripts/tooling.test.mjs scripts/migration/*.test.mjs scripts/routes.test.mjs scripts/taxonomy.test.mjs scripts/deployment.test.mjs",
     "test:migration": "node --test scripts/migration/*.test.mjs",
     "verify:content": "node scripts/migration/verify-content.mjs",
-    "convert:frontmatter": "node scripts/migration/convert-frontmatter.mjs"
+    "convert:frontmatter": "node scripts/migration/convert-frontmatter.mjs",
+    "deploy:cloudflare": "pnpm build && wrangler deploy"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.12",
@@ -34,10 +35,11 @@
     "smol-toml": "1.9.1",
     "typescript": "6.0.3",
     "typescript-eslint": "8.72.0",
-    "yaml": "2.9.1"
+    "yaml": "2.9.1",
+    "wrangler": "4.152.0"
   },
   "dependencies": {
-    "@astrojs/rss": "^4.0.19",
-    "@astrojs/sitemap": "^3.7.4"
+    "@astrojs/rss": "4.0.19",
+    "@astrojs/sitemap": "3.7.4"
   }
 }

@@ -1,0 +1,6 @@
+allowBuilds:
+  # Both packages need their install script: esbuild links the binary of its
+  # platform package, and workerd links the runtime Cloudflare runs the Worker
+  # with.
+  esbuild: true
+  workerd: true
