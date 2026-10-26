@@ -308,7 +308,11 @@ describe('the README of the repository', () => {
   it('documents how a deployment is previewed', () => {
     const readme = read('README.md');
 
-    for (const command of ['netlify deploy', 'BASE_PATH=/blog']) {
+    for (const command of [
+      'pnpm build:root',
+      'pnpm build:pages',
+      'pnpm deploy:netlify',
+    ]) {
       assert.ok(
         readme.includes(command),
         `the README does not document ${command}`,

@@ -10,16 +10,19 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "build:root": "node scripts/build-host.mjs root",
+    "build:pages": "node scripts/build-host.mjs pages",
     "preview": "astro preview",
     "check": "astro check && pnpm lint && pnpm format:check",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint . && markdownlint-cli2 \"**/*.md\"",
-    "test": "node --test --test-concurrency=1 scripts/tooling.test.mjs scripts/migration/*.test.mjs scripts/routes.test.mjs scripts/taxonomy.test.mjs scripts/deployment.test.mjs scripts/repository.test.mjs scripts/public-guard.test.mjs",
+    "test": "node --test --test-concurrency=1 scripts/tooling.test.mjs scripts/migration/*.test.mjs scripts/routes.test.mjs scripts/taxonomy.test.mjs scripts/deployment.test.mjs scripts/repository.test.mjs scripts/public-guard.test.mjs scripts/build-host.test.mjs",
     "test:migration": "node --test scripts/migration/*.test.mjs",
     "verify:content": "node scripts/migration/verify-content.mjs",
     "convert:frontmatter": "node scripts/migration/convert-frontmatter.mjs",
-    "deploy:cloudflare": "pnpm build && wrangler deploy"
+    "deploy:cloudflare": "pnpm build:root && wrangler deploy",
+    "deploy:netlify": "pnpm build:root && netlify deploy --dir dist"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.12",

@@ -221,6 +221,43 @@ describe('the deployment to Vercel', () => {
   });
 });
 
+describe('the build of the site for a host', () => {
+  it('builds the site for the root of a domain', () => {
+    const scripts = readJson('package.json').scripts ?? {};
+
+    assert.match(
+      scripts['build:root'] ?? '',
+      /build-host\.mjs root/,
+      'the build for a root host is not there',
+    );
+  });
+
+  it('builds the site for the project site of GitHub Pages', () => {
+    const scripts = readJson('package.json').scripts ?? {};
+
+    assert.match(
+      scripts['build:pages'] ?? '',
+      /build-host\.mjs pages/,
+      'the build for the project site is not there',
+    );
+  });
+
+  it('builds the site of a deployment for its host', () => {
+    const scripts = readJson('package.json').scripts ?? {};
+
+    assert.match(
+      scripts['deploy:cloudflare'] ?? '',
+      /build:root/,
+      'the deployment to Cloudflare Workers does not build the site for its host',
+    );
+    assert.match(
+      scripts['deploy:netlify'] ?? '',
+      /build:root/,
+      'the deployment to Netlify does not build the site for its host',
+    );
+  });
+});
+
 describe('the deployment of the site', () => {
   it('has no Hugo workflow', () => {
     assert.equal(

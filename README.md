@@ -79,6 +79,17 @@ The canonical URL of the site is `https://blueberrypy.netlify.app` on every
 host but GitHub Pages, which serves the project site of the repository under
 `/blog`.
 
+A build for a host pins those two values, so the values another host left in
+the shell cannot shape it:
+
+| Command            | Host                                           |
+| ------------------ | ---------------------------------------------- |
+| `pnpm build:root`  | Netlify, Render, Vercel and Cloudflare Workers |
+| `pnpm build:pages` | the project site of GitHub Pages               |
+
+The plain `pnpm build` reads the two values from the environment, which is
+what the hosts do.
+
 | Host               | Settings                       | Publish | Build                                                                               |
 | ------------------ | ------------------------------ | ------- | ----------------------------------------------------------------------------------- |
 | GitHub Pages       | `.github/workflows/deploy.yml` | `dist`  | `withastro/action@v6`, `SITE_URL=https://blueberry-py.github.io`, `BASE_PATH=/blog` |
@@ -94,20 +105,22 @@ Pages site, otherwise the workflow has no site to deploy to.
 
 The preview of a host is the output of the build of the site, so a preview
 starts with a build. Every host but GitHub Pages serves the site from the root
-and uses the default build; the project site of GitHub Pages asks for the base
-path it is served under:
+and uses the build for the root; the project site of GitHub Pages asks for the
+base path it is served under:
 
 ```sh
-pnpm build
-SITE_URL=https://blueberry-py.github.io BASE_PATH=/blog pnpm build
+pnpm build:root
+pnpm build:pages
 ```
 
 Netlify shows a draft of the site under a temporary URL, and the site that is
 live keeps serving the last published deployment until the draft is published:
 
 ```sh
-netlify deploy --dir dist
+pnpm deploy:netlify
 ```
+
+The site has to be linked to the account of Netlify once, with `netlify link`.
 
 The Worker is previewed locally against the built output, as described in
 [Cloudflare Workers](#cloudflare-workers).
