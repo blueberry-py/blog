@@ -317,6 +317,46 @@ export function verifyManifest(manifest, rootDir) {
 }
 
 /**
+ * The entities of XML, decoded.
+ *
+ * A feed holds the body of an article as HTML, escaped into the text of an
+ * element, so the references of that body are only readable once the entities
+ * are decoded. The ampersand is decoded last, so an ampersand that was
+ * escaped twice stays escaped once.
+ */
+export function decodeXmlEntities(text) {
+  return text
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'")
+    .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
+    .replace(/&amp;/g, '&');
+}
+
+/**
+ * The absolute URLs a document names in the text of an element.
+ *
+ * A feed names the route of an item in the text of its `link` and `guid`
+ * elements, a sitemap names the routes it serves in the text of its `loc`
+ * elements. The links of an article body are left out: they may name a page of
+ * another site, and the audit is about the routes of this site.
+ */
+export function collectAbsoluteReferences(text) {
+  const found = new Set();
+
+  for (const match of text.matchAll(
+    /<(?:loc|link|guid)\b[^>]*>([^<]+)<\/(?:loc|link|guid)>/g,
+  )) {
+    const value = match[1].trim();
+
+    if (/^https?:\/\//.test(value)) found.add(value);
+  }
+
+  return [...found];
+}
+
+/**
  * The local references of a built page.
  *
  * A reference is local when it starts at the root of the site: the absolute
@@ -405,7 +445,13 @@ export function listBuiltPages(outputDir) {
   return pages;
 }
 
-/** Every HTML document of the built output. */
+/**
+ * Every document of the built output: the pages and the feeds.
+ *
+ * A feed and a sitemap are documents of the site as well: they name the routes
+ * of the site and hold the references of the articles, so they are audited
+ * like the pages are.
+ */
 export function listBuiltDocuments(outputDir) {
   const documents = [];
 
@@ -418,7 +464,12 @@ export function listBuiltDocuments(outputDir) {
         continue;
       }
 
-      if (entry.name.endsWith('.html')) documents.push(full);
+      if (entry.name.endsWith('.html') || entry.name.endsWith('.xml')) {
+        documents.push({
+          file: full,
+          kind: entry.name.endsWith('.xml') ? 'xml' : 'html',
+        });
+      }
     }
   };
 
@@ -428,24 +479,61 @@ export function listBuiltDocuments(outputDir) {
 }
 
 /**
+ * The canonical URL of the built site.
+ *
+ * The URL of the site is the URL of its home page, and its path is the
+ * directory the site is served from.
+ */
+export function detectSiteUrl(outputDir) {
+  const home = path.join(outputDir, 'index.html');
+  if (!existsSync(home)) return null;
+
+  const match = /<link rel="canonical" href="([^"]+)"/.exec(
+    readFileSync(home, 'utf8'),
+  );
+
+  return match ? match[1] : null;
+}
+
+/**
  * The base path the site was built with, read from the canonical URL of its home page.
  *
  * The canonical URL of the home page is the URL of the site, so its path is
  * the directory the site is served from.
  */
 export function detectBase(outputDir) {
-  const home = path.join(outputDir, 'index.html');
-  if (!existsSync(home)) return '/';
-
-  const match = /<link rel="canonical" href="([^"]+)"/.exec(
-    readFileSync(home, 'utf8'),
-  );
-  if (!match) return '/';
+  const canonical = detectSiteUrl(outputDir);
+  if (!canonical) return '/';
 
   try {
-    return new URL(match[1]).pathname;
+    return new URL(canonical).pathname;
   } catch {
     return '/';
+  }
+}
+
+/**
+ * The path of a URL of the site, or null when the URL names another site.
+ *
+ * The path of a route of the site carries the base path of the build, so it is
+ * the reference the pages of the output are checked with.
+ */
+function routeOfSite(reference, origin) {
+  if (!origin) return null;
+
+  let url;
+  try {
+    url = new URL(reference);
+  } catch {
+    return null;
+  }
+
+  if (url.origin !== origin) return null;
+
+  try {
+    return decodeURIComponent(url.pathname);
+  } catch {
+    return url.pathname;
   }
 }
 
@@ -455,8 +543,8 @@ export function detectBase(outputDir) {
  * The manifest says which routes the articles are served at and which images
  * they use; the output says which files the site is made of. This check joins
  * the two: every route of the manifest has a page, every local reference of
- * every page resolves to a file of the output, and every image of an article
- * is rendered by the page of that article.
+ * every page and of every feed resolves to a file of the output, and every
+ * image of an article is rendered by the page of that article.
  */
 export function verifyBuiltOutput(manifest, rootDir, options = {}) {
   const { base = '/', output = OUTPUT_DIRECTORY } = options;
@@ -469,13 +557,67 @@ export function verifyBuiltOutput(manifest, rootDir, options = {}) {
       detail: `the site is not built: the directory ${output} does not exist`,
     });
 
-    return { ok: false, problems, stats: { pages: 0, documents: 0, base } };
+    return {
+      ok: false,
+      problems,
+      stats: { pages: 0, documents: 0, feeds: 0, base },
+    };
   }
 
   const pages = listBuiltPages(outputDir);
   const documents = listBuiltDocuments(outputDir);
   const routes = new Map();
   const sources = new Map();
+
+  const siteUrl = detectSiteUrl(outputDir);
+  let siteOrigin = null;
+
+  if (siteUrl) {
+    try {
+      siteOrigin = new URL(siteUrl).origin;
+    } catch {
+      siteOrigin = null;
+    }
+  }
+
+  /**
+   * Audit one reference of a document of the output.
+   *
+   * @param {string} reference The path of the reference, with its base path.
+   * @param {string} name The name of the document, for the report.
+   * @param {string} label The reference as it is written, for the report.
+   */
+  const auditReference = (reference, name, label = reference) => {
+    const local = localPath(reference, base);
+
+    if (local === null) {
+      problems.push({
+        code: 'link-outside-base',
+        document: name,
+        detail: `the reference ${label} points outside of the base path ${base}`,
+      });
+      return;
+    }
+
+    const prefix = basePrefix(base);
+
+    if (prefix && local.startsWith(`${prefix}/`)) {
+      problems.push({
+        code: 'doubled-base',
+        document: name,
+        detail: `the reference ${label} uses the base path ${prefix} twice`,
+      });
+      return;
+    }
+
+    if (!outputFileFor(outputDir, local)) {
+      problems.push({
+        code: 'broken-link',
+        document: name,
+        detail: `the reference ${label} points at nothing`,
+      });
+    }
+  };
 
   for (const page of pages) {
     if (routes.has(page.route)) {
@@ -528,39 +670,25 @@ export function verifyBuiltOutput(manifest, rootDir, options = {}) {
   }
 
   for (const document of documents) {
-    const html = readFileSync(document, 'utf8');
-    const name = path.relative(rootDir, document).split(path.sep).join('/');
+    const raw = readFileSync(document.file, 'utf8');
+    const name = path
+      .relative(rootDir, document.file)
+      .split(path.sep)
+      .join('/');
+    const text = document.kind === 'xml' ? decodeXmlEntities(raw) : raw;
 
-    for (const reference of collectLocalReferences(html)) {
-      const local = localPath(reference, base);
+    for (const reference of collectLocalReferences(text)) {
+      auditReference(reference, name);
+    }
 
-      if (local === null) {
-        problems.push({
-          code: 'link-outside-base',
-          document: name,
-          detail: `the reference ${reference} points outside of the base path ${base}`,
-        });
-        continue;
-      }
+    if (document.kind !== 'xml') continue;
 
-      const prefix = basePrefix(base);
+    for (const reference of collectAbsoluteReferences(text)) {
+      const route = routeOfSite(reference, siteOrigin);
 
-      if (prefix && local.startsWith(`${prefix}/`)) {
-        problems.push({
-          code: 'doubled-base',
-          document: name,
-          detail: `the reference ${reference} uses the base path ${prefix} twice`,
-        });
-        continue;
-      }
+      if (route === null) continue;
 
-      if (!outputFileFor(outputDir, local)) {
-        problems.push({
-          code: 'broken-link',
-          document: name,
-          detail: `the reference ${reference} points at nothing`,
-        });
-      }
+      auditReference(route, name, reference);
     }
   }
 
@@ -597,7 +725,12 @@ export function verifyBuiltOutput(manifest, rootDir, options = {}) {
   return {
     ok: problems.length === 0,
     problems,
-    stats: { pages: pages.length, documents: documents.length, base },
+    stats: {
+      pages: pages.length,
+      documents: documents.length,
+      feeds: documents.filter((document) => document.kind === 'xml').length,
+      base,
+    },
   };
 }
 
@@ -641,7 +774,7 @@ function main(argv) {
 
     if (built) {
       console.log(
-        `built output OK: ${output.stats.pages} pages built under ${base}`,
+        `built output OK: ${output.stats.pages} pages and ${output.stats.feeds} feeds built under ${base}`,
       );
     } else {
       console.log('built output: not audited, the site is not built');

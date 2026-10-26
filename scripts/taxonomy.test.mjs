@@ -74,6 +74,73 @@ const posts = postEntries.map((entry) => {
   return { ...entry, ...fields };
 });
 
+/**
+ * The text of the feed, with the entities of XML decoded.
+ *
+ * @param {string} text The text of an element of the feed.
+ * @returns {string} The text, as a reader of the feed reads it.
+ */
+function decodeXml(text) {
+  return text
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'")
+    .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
+    .replace(/&amp;/g, '&');
+}
+
+/**
+ * The body of an article, as the page of the article renders it.
+ *
+ * The body of a post sits in the region of the content of the post. The region
+ * is read by counting the tags that open and the tags that close it, so a body
+ * that holds a block of HTML of its own does not end the region too early.
+ *
+ * @param {string} html The page of the post.
+ * @returns {string | null} The body, or nothing when the page has no region.
+ */
+function articleOf(html) {
+  const open = '<div class="post-content">';
+  const start = html.indexOf(open);
+
+  if (start < 0) return null;
+
+  let index = start + open.length;
+  let depth = 1;
+
+  while (depth > 0) {
+    const nextOpen = html.indexOf('<div', index);
+    const nextClose = html.indexOf('</div>', index);
+
+    if (nextClose < 0) return null;
+
+    if (nextOpen >= 0 && nextOpen < nextClose) {
+      depth += 1;
+      index = nextOpen + '<div'.length;
+      continue;
+    }
+
+    depth -= 1;
+    index = nextClose + '</div>'.length;
+  }
+
+  return html.slice(start + open.length, index - '</div>'.length);
+}
+
+/**
+ * The markup of a document, with its whitespace collapsed.
+ *
+ * Two renderings of the same body differ in the whitespace they carry, so the
+ * whitespace is collapsed before two of them are compared.
+ *
+ * @param {string} markup The markup of a document.
+ * @returns {string} The markup, without the whitespace that carries no meaning.
+ */
+function compact(markup) {
+  return markup.replace(/\s+/g, ' ').trim();
+}
+
 /** The file Astro writes for a route, e.g. `/tags/rust/` -> `dist/tags/rust/index.html`. */
 function pageFile(route) {
   const relative = route.replace(/^\/+/, '').replace(/\/+$/, '');
@@ -366,6 +433,39 @@ describe('the taxonomies of the built site', () => {
       existsSync(path.join(DIST_DIR, 'index.xml')),
       'the feed is not served at the /index.xml the old site used',
     );
+  });
+
+  it('publishes the whole of every post in the feed', () => {
+    const xml = readFileSync(path.join(DIST_DIR, 'rss.xml'), 'utf8');
+    const items = [...xml.matchAll(/<item>([\s\S]*?)<\/item>/g)].map(
+      (match) => match[1],
+    );
+
+    for (const post of posts) {
+      const item = items.find((entry) =>
+        entry.includes(`<link>${SITE}/post/${post.slug}/</link>`),
+      );
+
+      assert.ok(item, `the feed has no item for ${post.slug}`);
+
+      const description = decodeXml(
+        /<description>([\s\S]*?)<\/description>/.exec(item)?.[1] ?? '',
+      );
+      const article = articleOf(readPage(`/post/${post.slug}/`));
+
+      assert.ok(article, `the page of ${post.slug} has no body`);
+
+      assert.ok(
+        description.length > String(post.description ?? '').length,
+        `the item of ${post.slug} holds no more than its summary`,
+      );
+
+      assert.equal(
+        compact(description),
+        compact(article),
+        `the item of ${post.slug} holds no more than its summary`,
+      );
+    }
   });
 
   it('lists the routes of the site in the sitemap', () => {

@@ -289,6 +289,26 @@ const OUTPUT = {
 };
 
 /**
+ * The output of a build that also holds a feed and a sitemap.
+ *
+ * The feed holds the body of the article as escaped HTML, the way a reader of
+ * the old feed read it, and it names the route of the article as well.
+ */
+const OUTPUT_WITH_FEEDS = {
+  ...OUTPUT,
+  'dist/rss.xml':
+    '<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel>' +
+    '<title>Site</title><link>https://example.com/</link>' +
+    '<item><title>Alpha</title>' +
+    '<link>https://example.com/post/alpha/</link>' +
+    '<description>&lt;img src=&quot;/_astro/pic.def.webp&quot; /&gt;</description>' +
+    '</item></channel></rss>',
+  'dist/sitemap-0.xml':
+    '<?xml version="1.0" encoding="UTF-8"?><urlset><url>' +
+    '<loc>https://example.com/post/alpha/</loc></url></urlset>',
+};
+
+/**
  * Audit the built output of the small site.
  *
  * The fixture is written to a throwaway directory, so the checks read a site
@@ -374,6 +394,39 @@ describe('the built output', () => {
         assert.equal(detectBase(path.join(root, 'dist')), '/blog/');
       },
     );
+  });
+
+  it('decodes the entities of a feed so its references can be read', async () => {
+    const { decodeXmlEntities } = await loadVerifier();
+
+    const description =
+      '&lt;img src=&quot;/_astro/pic.webp&quot; alt=&quot;a &amp; b&quot; /&gt;';
+
+    assert.equal(
+      decodeXmlEntities(description),
+      '<img src="/_astro/pic.webp" alt="a & b" />',
+    );
+  });
+
+  it('collects the routes a feed and a sitemap name', async () => {
+    const { collectAbsoluteReferences } = await loadVerifier();
+
+    const feed =
+      '<rss><channel><link>https://example.com/</link>' +
+      '<item><link>https://example.com/post/alpha/</link>' +
+      '<guid isPermaLink="true">https://example.com/post/alpha/</guid>' +
+      '<description>&lt;a href=&quot;https://other.example/page/&quot;&gt;x&lt;/a&gt;</description>' +
+      '</item></channel></rss>';
+    const sitemap =
+      '<urlset><url><loc>https://example.com/post/alpha/</loc></url></urlset>';
+
+    assert.deepEqual(collectAbsoluteReferences(feed), [
+      'https://example.com/',
+      'https://example.com/post/alpha/',
+    ]);
+    assert.deepEqual(collectAbsoluteReferences(sitemap), [
+      'https://example.com/post/alpha/',
+    ]);
   });
 });
 
@@ -515,6 +568,83 @@ describe('the verification of the built output', () => {
     assert.ok(
       result.problems.some((problem) => problem.code === 'post-count-mismatch'),
       `expected a post-count-mismatch problem, got ${JSON.stringify(result.problems)}`,
+    );
+  });
+
+  it('passes when the feed and the sitemap name the routes the site serves', async () => {
+    const result = await auditBuiltOutput(OUTPUT_WITH_FEEDS);
+
+    assert.deepEqual(result.problems, []);
+    assert.equal(result.ok, true);
+  });
+
+  it('reports an image of a feed that the output does not hold', async () => {
+    const result = await auditBuiltOutput({
+      ...OUTPUT_WITH_FEEDS,
+      'dist/rss.xml': OUTPUT_WITH_FEEDS['dist/rss.xml'].replace(
+        '/_astro/pic.def.webp',
+        '/_astro/gone.webp',
+      ),
+    });
+
+    assert.ok(
+      result.problems.some(
+        (problem) =>
+          problem.code === 'broken-link' &&
+          problem.detail.includes('/_astro/gone.webp'),
+      ),
+      `expected a broken-link problem, got ${JSON.stringify(result.problems)}`,
+    );
+  });
+
+  it('reports a route of a feed that the site does not serve', async () => {
+    const result = await auditBuiltOutput({
+      ...OUTPUT_WITH_FEEDS,
+      'dist/rss.xml': OUTPUT_WITH_FEEDS['dist/rss.xml'].replace(
+        'https://example.com/post/alpha/',
+        'https://example.com/post/ghost/',
+      ),
+    });
+
+    assert.ok(
+      result.problems.some(
+        (problem) =>
+          problem.code === 'broken-link' &&
+          problem.detail.includes('/post/ghost/'),
+      ),
+      `expected a broken-link problem, got ${JSON.stringify(result.problems)}`,
+    );
+  });
+
+  it('reports a route of a sitemap that the site does not serve', async () => {
+    const result = await auditBuiltOutput({
+      ...OUTPUT_WITH_FEEDS,
+      'dist/sitemap-0.xml':
+        '<urlset><url><loc>https://example.com/post/ghost/</loc></url></urlset>',
+    });
+
+    assert.ok(
+      result.problems.some(
+        (problem) =>
+          problem.code === 'broken-link' &&
+          problem.detail.includes('/post/ghost/'),
+      ),
+      `expected a broken-link problem, got ${JSON.stringify(result.problems)}`,
+    );
+  });
+
+  it('reports a route of a feed that points outside of the base path', async () => {
+    const result = await auditBuiltOutput(OUTPUT_WITH_FEEDS, {
+      base: '/blog/',
+    });
+
+    assert.ok(
+      result.problems.some(
+        (problem) =>
+          problem.code === 'link-outside-base' &&
+          problem.document === 'dist/rss.xml',
+      ),
+      `expected a link-outside-base problem, got ${JSON.stringify(result.problems)}`,
     );
   });
 });
