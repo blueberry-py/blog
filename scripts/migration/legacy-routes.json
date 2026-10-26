@@ -1,0 +1,389 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "source": "content/about/index.md",
+      "collection": "page",
+      "slug": "about",
+      "route": "/about/",
+      "bodyHash": "sha256:50bbdc3dd69d759e6896b52860f257ca8e73ff509ffaad10e2e77c79a5f17f44",
+      "assets": []
+    },
+    {
+      "source": "content/post/github-remote-host-identification.md",
+      "collection": "post",
+      "slug": "github-remote-host-identification",
+      "route": "/post/github-remote-host-identification/",
+      "bodyHash": "sha256:453e40c8c87af4443c31bb6b045a34a24a4e2e16d3d0792af15184bf58b0d84e",
+      "assets": []
+    },
+    {
+      "source": "content/post/mojo-series-01-sdk-zhcn.md",
+      "collection": "post",
+      "slug": "mojo-series-01-sdk-zhcn",
+      "route": "/post/mojo-series-01-sdk-zhcn/",
+      "bodyHash": "sha256:89f2cacead682fc5dfbfd541a93edc7c37f45c876c40e75a387a7e2f448e99ba",
+      "assets": []
+    },
+    {
+      "source": "content/post/mojo-series-01-sdk.md",
+      "collection": "post",
+      "slug": "mojo-series-01-sdk",
+      "route": "/post/mojo-series-01-sdk/",
+      "bodyHash": "sha256:e5e4d4f9cc44cee19d2711707cb329951357ecf08e1c940144ed8e99bdeb789c",
+      "assets": []
+    },
+    {
+      "source": "content/post/my-first-post.md",
+      "collection": "post",
+      "slug": "my-first-hugo-blog",
+      "route": "/post/my-first-hugo-blog/",
+      "bodyHash": "sha256:95c98432fe710ff56b4857c49a3c14511a0c6ee08917735a5b16a99d575bae01",
+      "assets": []
+    },
+    {
+      "source": "content/post/my-vs-code-extensions.md",
+      "collection": "post",
+      "slug": "my-vs-code-extensions",
+      "route": "/post/my-vs-code-extensions/",
+      "bodyHash": "sha256:185463f35c208f56fd513975db750438acbb851a3d4c5955e454d4c0f9dfe0a1",
+      "assets": []
+    },
+    {
+      "source": "content/post/one-liner-bun.md",
+      "collection": "post",
+      "slug": "one-liner-bun",
+      "route": "/post/one-liner-bun/",
+      "bodyHash": "sha256:5c8d483b6297371e2bccf41573145889af284ba938c77710e2a8f4540e45aea1",
+      "assets": []
+    },
+    {
+      "source": "content/post/one-liner-claude-code.md",
+      "collection": "post",
+      "slug": "one-liner-claude-code",
+      "route": "/post/one-liner-claude-code/",
+      "bodyHash": "sha256:8360011f16a0aab3f88a926b07b4cf29176e71439a65260dfb80eaac6c91b8e0",
+      "assets": []
+    },
+    {
+      "source": "content/post/one-liner-docker-engine.md",
+      "collection": "post",
+      "slug": "one-liner-docker-engine",
+      "route": "/post/one-liner-docker-engine/",
+      "bodyHash": "sha256:1f02642b9755b7406bf3fa37dd94efe8162d39da389a93a9a668c0a796c00207",
+      "assets": []
+    },
+    {
+      "source": "content/post/one-liner-julia.md",
+      "collection": "post",
+      "slug": "one-liner-julia",
+      "route": "/post/one-liner-julia/",
+      "bodyHash": "sha256:8ce1ade5db43dc1a6846867a5d76ee78207422ccbca86dfa21adbf86d44fcfd0",
+      "assets": []
+    },
+    {
+      "source": "content/post/one-liner-kiro-cli.md",
+      "collection": "post",
+      "slug": "one-liner-kiro-cli",
+      "route": "/post/one-liner-kiro-cli/",
+      "bodyHash": "sha256:0c810d2d4654df9ac78963e365fa4a8a85983e8a8e58f1c2166d9f5abf172fc2",
+      "assets": []
+    },
+    {
+      "source": "content/post/one-liner-kubernetes.md",
+      "collection": "post",
+      "slug": "one-liner-kubernetes",
+      "route": "/post/one-liner-kubernetes/",
+      "bodyHash": "sha256:97b09545b51ea69496a12ce2de8c18c6a7f439703b1717361b6530b750d53fcc",
+      "assets": []
+    },
+    {
+      "source": "content/post/one-liner-nodejs.md",
+      "collection": "post",
+      "slug": "one-liner-nodejs",
+      "route": "/post/one-liner-nodejs/",
+      "bodyHash": "sha256:eaff499b6105289529f0e78f09b510520a616691c316685bf2c8c10084e298e5",
+      "assets": []
+    },
+    {
+      "source": "content/post/one-liner-ollama.md",
+      "collection": "post",
+      "slug": "one-liner-ollama",
+      "route": "/post/one-liner-ollama/",
+      "bodyHash": "sha256:72093eec3637a3d5bdfc2cdea78d3835be4e4e1f7fae9efd20e1a595cfd991e4",
+      "assets": []
+    },
+    {
+      "source": "content/post/one-liner-opencode.md",
+      "collection": "post",
+      "slug": "one-liner-opencode",
+      "route": "/post/one-liner-opencode/",
+      "bodyHash": "sha256:0d7ea425f0490cfd5fe718202f0bdab84981558250f82c88bfc4262bdd5d1bfa",
+      "assets": []
+    },
+    {
+      "source": "content/post/one-liner-pnpm.md",
+      "collection": "post",
+      "slug": "one-liner-pnpm",
+      "route": "/post/one-liner-pnpm/",
+      "bodyHash": "sha256:c01d440d054e26ac58c19d60eb91c4c1e0db6b3acc160878bc6a434754e0c0f7",
+      "assets": []
+    },
+    {
+      "source": "content/post/one-liner-rust.md",
+      "collection": "post",
+      "slug": "one-liner-rust",
+      "route": "/post/one-liner-rust/",
+      "bodyHash": "sha256:6da69ac9fcb50efe9e804254b6093a3091dbc61507b89378e3aebd55606ab2a3",
+      "assets": []
+    },
+    {
+      "source": "content/post/pycon-china-2026-lightning-talk/index.md",
+      "collection": "post",
+      "slug": "pycon-china-2026-lightning-talk",
+      "route": "/post/pycon-china-2026-lightning-talk/",
+      "bodyHash": "sha256:341b18c1faa96d03fcadefa319e078cee35335869852a92f6c40989e6ef22af8",
+      "assets": [
+        "content/post/pycon-china-2026-lightning-talk/rust_for_cpython.png",
+        "content/post/pycon-china-2026-lightning-talk/page_04.jpeg",
+        "content/post/pycon-china-2026-lightning-talk/page_05.png",
+        "content/post/pycon-china-2026-lightning-talk/page_06.png",
+        "content/post/pycon-china-2026-lightning-talk/page_07.png",
+        "content/post/pycon-china-2026-lightning-talk/page_08.png",
+        "content/post/pycon-china-2026-lightning-talk/page_09_1.png",
+        "content/post/pycon-china-2026-lightning-talk/page_09_2.png",
+        "content/post/pycon-china-2026-lightning-talk/page_10_1.png",
+        "content/post/pycon-china-2026-lightning-talk/page_10_2.png",
+        "content/post/pycon-china-2026-lightning-talk/page_11_1.png",
+        "content/post/pycon-china-2026-lightning-talk/page_14_1.png",
+        "content/post/pycon-china-2026-lightning-talk/page_14_2.jpeg",
+        "content/post/pycon-china-2026-lightning-talk/page_17.jpg",
+        "content/post/pycon-china-2026-lightning-talk/title.jpg"
+      ]
+    },
+    {
+      "source": "content/post/this-month-for-pythonistas-2025-03/index.md",
+      "collection": "post",
+      "slug": "this-month-for-pythonistas-2025-03",
+      "route": "/post/this-month-for-pythonistas-2025-03/",
+      "bodyHash": "sha256:7d7f94703f40a1a83184fe0d30b784e2d542dc7b8d11f4f55dd85f1c05752b30",
+      "assets": [
+        "content/post/this-month-for-pythonistas-2025-03/splash.webp",
+        "content/post/this-month-for-pythonistas-2025-03/title.webp"
+      ]
+    },
+    {
+      "source": "content/post/this-month-for-pythonistas-2025-04/index.md",
+      "collection": "post",
+      "slug": "this-month-for-pythonistas-2025-04",
+      "route": "/post/this-month-for-pythonistas-2025-04/",
+      "bodyHash": "sha256:ea2224d857372f3a4fa8fb56b9f6f88dbee9f3ab0841fb4783c6f3aa77a18beb",
+      "assets": [
+        "content/post/this-month-for-pythonistas-2025-04/splash.webp",
+        "content/post/this-month-for-pythonistas-2025-04/gvr_bdfl.jpg",
+        "content/post/this-month-for-pythonistas-2025-04/title.webp"
+      ]
+    },
+    {
+      "source": "content/post/this-month-for-pythonistas-2025-05/index.md",
+      "collection": "post",
+      "slug": "this-month-for-pythonistas-2025-05",
+      "route": "/post/this-month-for-pythonistas-2025-05/",
+      "bodyHash": "sha256:10c647b69e24f2e0fce5469927e68d86b8905395dfae41e375e575414a7381aa",
+      "assets": [
+        "content/post/this-month-for-pythonistas-2025-05/splash.webp",
+        "content/post/this-month-for-pythonistas-2025-05/bsky_post_py_docu.jpeg",
+        "content/post/this-month-for-pythonistas-2025-05/title.webp"
+      ]
+    },
+    {
+      "source": "content/post/this-month-for-pythonistas-2025-06/index.md",
+      "collection": "post",
+      "slug": "this-month-for-pythonistas-2025-06",
+      "route": "/post/this-month-for-pythonistas-2025-06/",
+      "bodyHash": "sha256:81049e2816f0e06848ddb17ed440751d8a39d838fa278acfa2df5579b7f1d268",
+      "assets": [
+        "content/post/this-month-for-pythonistas-2025-06/splash.webp",
+        "content/post/this-month-for-pythonistas-2025-06/title.jpg"
+      ]
+    },
+    {
+      "source": "content/post/this-month-for-pythonistas-2025-07/index.md",
+      "collection": "post",
+      "slug": "this-month-for-pythonistas-2025-07",
+      "route": "/post/this-month-for-pythonistas-2025-07/",
+      "bodyHash": "sha256:b1521251b066aa76a74fbc684841d2dc88a9bcaa768df78fd1db1c2fc0253924",
+      "assets": [
+        "content/post/this-month-for-pythonistas-2025-07/splash.jpg",
+        "content/post/this-month-for-pythonistas-2025-07/title.jpg"
+      ]
+    },
+    {
+      "source": "content/post/this-month-for-pythonistas-2025-08/index.md",
+      "collection": "post",
+      "slug": "this-month-for-pythonistas-2025-08",
+      "route": "/post/this-month-for-pythonistas-2025-08/",
+      "bodyHash": "sha256:62d40ffa28dc1dc3ea2af62f2b0e86c04a0edea40ee30dc56c1cce9465b36a69",
+      "assets": [
+        "content/post/this-month-for-pythonistas-2025-08/splash.jpg",
+        "content/post/this-month-for-pythonistas-2025-08/title.jpg"
+      ]
+    },
+    {
+      "source": "content/post/this-month-for-pythonistas-2025-09/index.md",
+      "collection": "post",
+      "slug": "this-month-for-pythonistas-2025-09",
+      "route": "/post/this-month-for-pythonistas-2025-09/",
+      "bodyHash": "sha256:8040bf4526dadcaf49334f14a22822b3c3066692c928dd19de7fcf029f74c818",
+      "assets": [
+        "content/post/this-month-for-pythonistas-2025-09/splash.jpg",
+        "content/post/this-month-for-pythonistas-2025-09/title.jpg"
+      ]
+    },
+    {
+      "source": "content/post/this-month-for-pythonistas-2025-10/index.md",
+      "collection": "post",
+      "slug": "this-month-for-pythonistas-2025-10",
+      "route": "/post/this-month-for-pythonistas-2025-10/",
+      "bodyHash": "sha256:7fe05d57c6947aa29fa5ab85ce661fdc7fc0d207d15af40521e1e4287c8379f3",
+      "assets": [
+        "content/post/this-month-for-pythonistas-2025-10/splash.jpg",
+        "content/post/this-month-for-pythonistas-2025-10/title.jpg"
+      ]
+    },
+    {
+      "source": "content/post/this-month-for-pythonistas-2025-11/index.md",
+      "collection": "post",
+      "slug": "this-month-for-pythonistas-2025-11",
+      "route": "/post/this-month-for-pythonistas-2025-11/",
+      "bodyHash": "sha256:7160a6337724c09f318f9c828b810d930952a975a7934f3f313a0376e026426e",
+      "assets": [
+        "content/post/this-month-for-pythonistas-2025-11/splash.jpg",
+        "content/post/this-month-for-pythonistas-2025-11/pyconus2026.jpg",
+        "content/post/this-month-for-pythonistas-2025-11/title.jpg"
+      ]
+    },
+    {
+      "source": "content/post/this-month-for-pythonistas-2025-12/index.md",
+      "collection": "post",
+      "slug": "this-month-for-pythonistas-2025-12",
+      "route": "/post/this-month-for-pythonistas-2025-12/",
+      "bodyHash": "sha256:b0c68692d32e02d50abd4386bf7e86e25e79b88de956f2c8850892b7c575bba3",
+      "assets": [
+        "content/post/this-month-for-pythonistas-2025-12/splash.jpg",
+        "content/post/this-month-for-pythonistas-2025-12/title.jpg"
+      ]
+    },
+    {
+      "source": "content/post/this-month-for-pythonistas-2026-01/index.md",
+      "collection": "post",
+      "slug": "this-month-for-pythonistas-2026-01",
+      "route": "/post/this-month-for-pythonistas-2026-01/",
+      "bodyHash": "sha256:e5ef8829a02e1b528062fa54bf3fd35bc11653e1e0352dbe2ae6e34fe912917b",
+      "assets": [
+        "content/post/this-month-for-pythonistas-2026-01/splash.jpg",
+        "content/post/this-month-for-pythonistas-2026-01/title.jpg"
+      ]
+    },
+    {
+      "source": "content/post/this-month-for-pythonistas-2026-02/index.md",
+      "collection": "post",
+      "slug": "this-month-for-pythonistas-2026-02",
+      "route": "/post/this-month-for-pythonistas-2026-02/",
+      "bodyHash": "sha256:a9554417438357d40e1c61ee91c080ffa4280b35fb908bcd30b1b846aacd3f9b",
+      "assets": [
+        "content/post/this-month-for-pythonistas-2026-02/splash.jpg",
+        "content/post/this-month-for-pythonistas-2026-02/title.jpg"
+      ]
+    },
+    {
+      "source": "content/post/this-month-for-pythonistas-2026-03/index.md",
+      "collection": "post",
+      "slug": "this-month-for-pythonistas-2026-03",
+      "route": "/post/this-month-for-pythonistas-2026-03/",
+      "bodyHash": "sha256:abe99e9cc27a76022b80de44a952a92305657750e12c3cbe20ebf1513a80f7b9",
+      "assets": [
+        "content/post/this-month-for-pythonistas-2026-03/splash.jpg",
+        "content/post/this-month-for-pythonistas-2026-03/title.jpg"
+      ]
+    },
+    {
+      "source": "content/post/this-month-for-pythonistas-2026-04/index.md",
+      "collection": "post",
+      "slug": "this-month-for-pythonistas-2026-04",
+      "route": "/post/this-month-for-pythonistas-2026-04/",
+      "bodyHash": "sha256:dbcfd85e3b638aa42b04340d7df4dc08ad04975e386fe3a00a40b52cbd0a6e29",
+      "assets": [
+        "content/post/this-month-for-pythonistas-2026-04/splash.jpg",
+        "content/post/this-month-for-pythonistas-2026-04/title.jpg"
+      ]
+    },
+    {
+      "source": "content/post/this-month-for-pythonistas-2026-05/index.md",
+      "collection": "post",
+      "slug": "this-month-for-pythonistas-2026-05",
+      "route": "/post/this-month-for-pythonistas-2026-05/",
+      "bodyHash": "sha256:634841a69ca36ac9a6001fe95ea2e4e335c7e616e9a618175bd3997538909a53",
+      "assets": [
+        "content/post/this-month-for-pythonistas-2026-05/splash.jpg",
+        "content/post/this-month-for-pythonistas-2026-05/title.jpg"
+      ]
+    },
+    {
+      "source": "content/post/this-month-for-pythonistas-2026-06/index.md",
+      "collection": "post",
+      "slug": "this-month-for-pythonistas-2026-06",
+      "route": "/post/this-month-for-pythonistas-2026-06/",
+      "bodyHash": "sha256:011ab6b24149e145c891c8d13d837126750700154e8fb2c7b0b0fb089c117049",
+      "assets": [
+        "content/post/this-month-for-pythonistas-2026-06/splash.jpg",
+        "content/post/this-month-for-pythonistas-2026-06/title.jpg"
+      ]
+    },
+    {
+      "source": "content/post/this-month-for-pythonistas-2026-07/index.md",
+      "collection": "post",
+      "slug": "this-month-for-pythonistas-2026-07",
+      "route": "/post/this-month-for-pythonistas-2026-07/",
+      "bodyHash": "sha256:475924b24bc952046e9eadf284d9d57240ed4ed8e46b3de7a9003d3969031555",
+      "assets": [
+        "content/post/this-month-for-pythonistas-2026-07/splash.jpg",
+        "content/post/this-month-for-pythonistas-2026-07/title.jpg"
+      ]
+    },
+    {
+      "source": "content/post/this-month-for-pythonistas-2026-08/index.md",
+      "collection": "post",
+      "slug": "this-month-for-pythonistas-2026-08",
+      "route": "/post/this-month-for-pythonistas-2026-08/",
+      "bodyHash": "sha256:386c1f1a43ff8629bc46c62c7dc704fe7da159daa4f8a94f1629ed0816e757ab",
+      "assets": [
+        "content/post/this-month-for-pythonistas-2026-08/splash.jpg",
+        "content/post/this-month-for-pythonistas-2026-08/title.jpg"
+      ]
+    },
+    {
+      "source": "content/post/this-month-for-pythonistas-2026-09/index.md",
+      "collection": "post",
+      "slug": "this-month-for-pythonistas-2026-09",
+      "route": "/post/this-month-for-pythonistas-2026-09/",
+      "bodyHash": "sha256:87954b70dc971ff3b60b50c0f59d258c80284519686982f00e3c369a2809f641",
+      "assets": [
+        "content/post/this-month-for-pythonistas-2026-09/splash.jpg",
+        "content/post/this-month-for-pythonistas-2026-09/title.jpg"
+      ]
+    },
+    {
+      "source": "content/post/uv-is-latest-attempt-to-rule-them-all/index.md",
+      "collection": "post",
+      "slug": "uv-is-latest-attempt-to-rule-them-all",
+      "route": "/post/uv-is-latest-attempt-to-rule-them-all/",
+      "bodyHash": "sha256:192b5c72b5b1a09ff306dc1a51f3074a3eb5f32e8ae1accf6c64b195e1c9b90d",
+      "assets": [
+        "content/post/uv-is-latest-attempt-to-rule-them-all/image-01.png",
+        "content/post/uv-is-latest-attempt-to-rule-them-all/image-02.png",
+        "content/post/uv-is-latest-attempt-to-rule-them-all/UV.svg"
+      ]
+    }
+  ]
+}
