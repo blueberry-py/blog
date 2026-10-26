@@ -14,7 +14,7 @@
       "collection": "post",
       "slug": "github-remote-host-identification",
       "route": "/post/github-remote-host-identification/",
-      "bodyHash": "sha256:4e3253e769f0b048c0a9190e1a4197d418c329319893db3b9ff2e6051713e9fd",
+      "bodyHash": "sha256:57d33eec42ece4b7ea2c7cd78bb44a6f3abdbcbb0ce99c4b3c9313be284a7aa0",
       "assets": []
     },
     {
@@ -22,7 +22,7 @@
       "collection": "post",
       "slug": "mojo-series-01-sdk-zhcn",
       "route": "/post/mojo-series-01-sdk-zhcn/",
-      "bodyHash": "sha256:0d425a280668905c8630c71d38b4902dc0a92f3d50b7985bdb2af766723ab11b",
+      "bodyHash": "sha256:a9f8ed1733773449e8b11f689a8f898c0c700ac4b18e8659a4447e64b2f26cac",
       "assets": []
     },
     {
@@ -30,7 +30,7 @@
       "collection": "post",
       "slug": "mojo-series-01-sdk",
       "route": "/post/mojo-series-01-sdk/",
-      "bodyHash": "sha256:1399a079af0f810bd942c8332ef4ba542097aeb65aac08a629614d4bbffb449e",
+      "bodyHash": "sha256:9796c2b038aafc53b643265c363ab3392dd3f82851d59ceeb67635fd267e7fc8",
       "assets": []
     },
     {
@@ -46,7 +46,7 @@
       "collection": "post",
       "slug": "my-vs-code-extensions",
       "route": "/post/my-vs-code-extensions/",
-      "bodyHash": "sha256:6d2c3be830216ef7ea396bad4b4ed4ff9d86ef3b5166715c1e7820c198d3c09b",
+      "bodyHash": "sha256:5ddc7f017ec727a5d4332c3bbfce23fd386c65210c2138e057cfe4343c4686ff",
       "assets": []
     },
     {
@@ -70,7 +70,7 @@
       "collection": "post",
       "slug": "one-liner-docker-engine",
       "route": "/post/one-liner-docker-engine/",
-      "bodyHash": "sha256:50cc2f496dc46186ab9b71fc37927392384893986b80239a26d12020ebba8b7d",
+      "bodyHash": "sha256:f7eb1f2d0c643550410f6909205bff55cfa1b96288b0bc925f86c9681e1bae54",
       "assets": []
     },
     {
@@ -94,7 +94,7 @@
       "collection": "post",
       "slug": "one-liner-kubernetes",
       "route": "/post/one-liner-kubernetes/",
-      "bodyHash": "sha256:167c1680a7eb59038bfda496c7be1d96edd0fa3c6c35971b1899e21974dceb48",
+      "bodyHash": "sha256:ed746ce7cce7b740b7cc6b68e71a88144569e02b0f7ea00ba5265663728d93a0",
       "assets": []
     },
     {
@@ -166,7 +166,7 @@
       "collection": "post",
       "slug": "this-month-for-pythonistas-2025-03",
       "route": "/post/this-month-for-pythonistas-2025-03/",
-      "bodyHash": "sha256:a9862d576ec32b228c32e02b28617ec104ccef83f4294c2d53c7f0daaa8d8282",
+      "bodyHash": "sha256:8204aedc233dc5f228991e50c5342f76917ed1608c1e09e0e5768b277df6dbec",
       "assets": [
         "content/post/this-month-for-pythonistas-2025-03/splash.webp",
         "content/post/this-month-for-pythonistas-2025-03/title.webp"
@@ -177,7 +177,7 @@
       "collection": "post",
       "slug": "this-month-for-pythonistas-2025-04",
       "route": "/post/this-month-for-pythonistas-2025-04/",
-      "bodyHash": "sha256:e00dbfd64f78f718f4f904445862ec56c20a9479a905a924e998e937c2d608ef",
+      "bodyHash": "sha256:34a80df1f5b68f89d24bdcaed18fdc7212f7d011fd78f63524bdce86102a2316",
       "assets": [
         "content/post/this-month-for-pythonistas-2025-04/splash.webp",
         "content/post/this-month-for-pythonistas-2025-04/gvr_bdfl.jpg",
@@ -223,7 +223,7 @@
       "collection": "post",
       "slug": "this-month-for-pythonistas-2025-08",
       "route": "/post/this-month-for-pythonistas-2025-08/",
-      "bodyHash": "sha256:bd8689b8060e184cb8d4ddcddf9dbe01bb65d40ea86ccb25a099c3a81c7d1112",
+      "bodyHash": "sha256:2b3d1b981822ee53991c3075c579a541cd9b9ed6ab2def32ed7a9cd442e6647a",
       "assets": [
         "content/post/this-month-for-pythonistas-2025-08/splash.jpg",
         "content/post/this-month-for-pythonistas-2025-08/title.jpg"
@@ -378,7 +378,7 @@
       "collection": "post",
       "slug": "uv-is-latest-attempt-to-rule-them-all",
       "route": "/post/uv-is-latest-attempt-to-rule-them-all/",
-      "bodyHash": "sha256:4af25cb28a8a56df995804f630e3444828ffe01c1334e1faac79b745b9eee38a",
+      "bodyHash": "sha256:04393b85d4ab2e7bfdbad61c73f26483fcb1e1b181498bd952a6aa0b35253f3e",
       "assets": [
         "content/post/uv-is-latest-attempt-to-rule-them-all/image-01.png",
         "content/post/uv-is-latest-attempt-to-rule-them-all/image-02.png",

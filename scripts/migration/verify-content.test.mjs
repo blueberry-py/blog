@@ -47,7 +47,10 @@ describe('content inventory', () => {
   it('derives the slug from front matter and falls back to the file path', async () => {
     const { deriveSlug } = await loadVerifier();
 
-    assert.equal(deriveSlug('content/post/alpha.md', { slug: 'custom-slug' }), 'custom-slug');
+    assert.equal(
+      deriveSlug('content/post/alpha.md', { slug: 'custom-slug' }),
+      'custom-slug',
+    );
     assert.equal(deriveSlug('content/post/dir/index.md', {}), 'dir');
     assert.equal(deriveSlug('content/post/dir/nested.md', {}), 'dir/nested');
   });
@@ -94,7 +97,10 @@ describe('content inventory', () => {
     const raw = TOML_POST.replace(/\n/g, '\r\n');
     const { frontMatter, body } = splitFrontMatter(raw);
 
-    assert.ok(!frontMatter.includes('\r'), 'the front matter carries no carriage returns');
+    assert.ok(
+      !frontMatter.includes('\r'),
+      'the front matter carries no carriage returns',
+    );
     assert.ok(body.includes('\r'), 'the body keeps its carriage returns');
   });
 
@@ -121,9 +127,16 @@ describe('content inventory', () => {
       '[mailto](mailto:someone@example.com)',
     ].join('\n');
 
-    const assets = collectLocalAssetRefs('content/post/dir/index.md', { image: 'title.jpg' }, body);
+    const assets = collectLocalAssetRefs(
+      'content/post/dir/index.md',
+      { image: 'title.jpg' },
+      body,
+    );
 
-    assert.deepEqual(assets, ['content/post/dir/pic.png', 'content/post/dir/title.jpg']);
+    assert.deepEqual(assets, [
+      'content/post/dir/pic.png',
+      'content/post/dir/title.jpg',
+    ]);
   });
 });
 
@@ -166,7 +179,9 @@ describe('manifest verification', () => {
       assert.equal(result.ok, false);
       assert.ok(
         result.problems.some(
-          (problem) => problem.code === 'missing-source' && problem.source === 'content/post/alpha.md',
+          (problem) =>
+            problem.code === 'missing-source' &&
+            problem.source === 'content/post/alpha.md',
         ),
         `expected a missing-source problem, got ${JSON.stringify(result.problems)}`,
       );
@@ -186,7 +201,8 @@ describe('manifest verification', () => {
       assert.ok(
         result.problems.some(
           (problem) =>
-            problem.code === 'missing-asset' && problem.source === 'content/post/alpha.md',
+            problem.code === 'missing-asset' &&
+            problem.source === 'content/post/alpha.md',
         ),
         `expected a missing-asset problem, got ${JSON.stringify(result.problems)}`,
       );
@@ -210,7 +226,8 @@ describe('manifest verification', () => {
       assert.ok(
         result.problems.some(
           (problem) =>
-            problem.code === 'body-changed' && problem.source === 'content/post/alpha.md',
+            problem.code === 'body-changed' &&
+            problem.source === 'content/post/alpha.md',
         ),
         `expected a body-changed problem, got ${JSON.stringify(result.problems)}`,
       );

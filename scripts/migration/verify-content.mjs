@@ -19,7 +19,9 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const REPO_ROOT = path.resolve(fileURLToPath(new URL('../..', import.meta.url)));
+const REPO_ROOT = path.resolve(
+  fileURLToPath(new URL('../..', import.meta.url)),
+);
 const MANIFEST_PATH = 'scripts/migration/legacy-routes.json';
 
 const POST_ROOT = 'content/post';
@@ -119,7 +121,9 @@ export function deriveSlug(sourcePath, fields = {}) {
   const explicit = typeof fields.slug === 'string' ? fields.slug.trim() : '';
   if (explicit) return explicit;
 
-  return sourcePath.startsWith(`${POST_ROOT}/`) ? postPath(sourcePath) : contentPath(sourcePath);
+  return sourcePath.startsWith(`${POST_ROOT}/`)
+    ? postPath(sourcePath)
+    : contentPath(sourcePath);
 }
 
 /**
@@ -215,7 +219,9 @@ export function buildEntry(rootDir, sourcePath) {
 
 /** Build a complete inventory from an explicit list of content files. */
 export function buildManifest(rootDir, sourcePaths) {
-  const entries = [...sourcePaths].sort().map((sourcePath) => buildEntry(rootDir, sourcePath));
+  const entries = [...sourcePaths]
+    .sort()
+    .map((sourcePath) => buildEntry(rootDir, sourcePath));
 
   return { version: 1, entries };
 }
@@ -325,7 +331,9 @@ function main(argv) {
   const result = verifyManifest(manifest, rootDir);
 
   if (result.ok) {
-    console.log(`content inventory OK: ${manifest.entries.length} entries verified`);
+    console.log(
+      `content inventory OK: ${manifest.entries.length} entries verified`,
+    );
     return 0;
   }
 
@@ -337,6 +345,9 @@ function main(argv) {
   return 1;
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+if (
+  process.argv[1] &&
+  path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)
+) {
   process.exit(main(process.argv.slice(2)));
 }

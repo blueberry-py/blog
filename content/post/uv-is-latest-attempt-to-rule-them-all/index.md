@@ -27,7 +27,7 @@ image: UV.svg
 draft: false
 ---
 
-In short, [`uv`](https://github.com/astral-sh/uv) is a command line tool written in [`Rust`](https://www.rust-lang.org/) for `Python` developers, which aims to be *"a comprehensive project and package manager that is extremely fast, reliable, and easy to use"*.
+In short, [`uv`](https://github.com/astral-sh/uv) is a command line tool written in [`Rust`](https://www.rust-lang.org/) for `Python` developers, which aims to be _"a comprehensive project and package manager that is extremely fast, reliable, and easy to use"_.
 
 If you are still interested, I hope you can spend a couple of minutes so that I can give you a quick tour of it.
 

@@ -1,5 +1,11 @@
 import assert from 'node:assert/strict';
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import {
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { describe, it } from 'node:test';
@@ -38,7 +44,10 @@ describe('front matter conversion', () => {
     const { output, changed } = convertContent(TOML_FRONT_MATTER);
 
     assert.equal(changed, true);
-    assert.ok(output.startsWith('---\n'), 'the front matter uses YAML delimiters');
+    assert.ok(
+      output.startsWith('---\n'),
+      'the front matter uses YAML delimiters',
+    );
     assert.match(output, /^title: Alpha$/m);
     assert.match(output, /^description: A post about alpha$/m);
     assert.match(output, /^slug: alpha$/m);
@@ -83,7 +92,8 @@ describe('front matter conversion', () => {
   it('keeps single-quoted TOML strings', async () => {
     const { convertContent } = await loadConverter();
 
-    const raw = "+++\ntitle = 'About'\ndate = 2024-01-31T16:11:57+08:00\n+++\n\nAbout text.\n";
+    const raw =
+      "+++\ntitle = 'About'\ndate = 2024-01-31T16:11:57+08:00\n+++\n\nAbout text.\n";
 
     const { output, changed } = convertContent(raw);
 
@@ -94,7 +104,8 @@ describe('front matter conversion', () => {
   it('leaves missing optional metadata out instead of inventing it', async () => {
     const { convertContent } = await loadConverter();
 
-    const raw = '+++\ntitle = "About"\ndate = 2024-01-31T16:11:57+08:00\n+++\n\nAbout text.\n';
+    const raw =
+      '+++\ntitle = "About"\ndate = 2024-01-31T16:11:57+08:00\n+++\n\nAbout text.\n';
 
     const { output } = convertContent(raw);
 
@@ -176,10 +187,16 @@ describe('front matter conversion on disk', () => {
       mkdirSync(path.dirname(source), { recursive: true });
       writeFileSync(source, TOML_FRONT_MATTER, 'utf8');
 
-      const result = convertFile(root, 'content/post/alpha.md', { write: false });
+      const result = convertFile(root, 'content/post/alpha.md', {
+        write: false,
+      });
 
       assert.equal(result.changed, true);
-      assert.equal(readFileSync(source, 'utf8'), TOML_FRONT_MATTER, 'the file is untouched');
+      assert.equal(
+        readFileSync(source, 'utf8'),
+        TOML_FRONT_MATTER,
+        'the file is untouched',
+      );
     } finally {
       rmSync(root, { recursive: true, force: true });
     }
@@ -194,7 +211,9 @@ describe('front matter conversion on disk', () => {
       mkdirSync(path.dirname(source), { recursive: true });
       writeFileSync(source, TOML_FRONT_MATTER, 'utf8');
 
-      const result = convertFile(root, 'content/post/alpha.md', { write: true });
+      const result = convertFile(root, 'content/post/alpha.md', {
+        write: true,
+      });
 
       assert.equal(result.changed, true);
       const written = readFileSync(source, 'utf8');
@@ -215,7 +234,10 @@ describe('front matter conversion on disk', () => {
       const raw = '+++\ntitle = "Broken\n+++\n\nBody.\n';
       writeFileSync(source, raw, 'utf8');
 
-      assert.throws(() => convertFile(root, 'content/post/broken.md', { write: true }), /cannot parse/i);
+      assert.throws(
+        () => convertFile(root, 'content/post/broken.md', { write: true }),
+        /cannot parse/i,
+      );
       assert.equal(readFileSync(source, 'utf8'), raw, 'the file is untouched');
     } finally {
       rmSync(root, { recursive: true, force: true });

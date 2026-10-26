@@ -38,7 +38,7 @@ print(date.today().year, date.today().month)
 
 Welcome and thank you for reading **This Month for Pythonistas**, a monthly update dedicated to Python developers, professionals, and hobbyists.
 
-In this *inaugural* issue, I would like to compile a list of news, articles, repositories, and tools worth noting in March 2025, as well as other fun stuff that may not necessarily be bound to Python community.
+In this _inaugural_ issue, I would like to compile a list of news, articles, repositories, and tools worth noting in March 2025, as well as other fun stuff that may not necessarily be bound to Python community.
 
 Before we continue, please note that this blog is synced across several platforms:
 
@@ -204,7 +204,7 @@ The is an updated version of V3, released just this March. The weights can be fo
 
 ### `Qwen2.5-Omni-7B`
 
-Qwen team has released *their* version of "omni" model on [HuggingFace](https://huggingface.co/Qwen/Qwen2.5-Omni-7B).
+Qwen team has released _their_ version of "omni" model on [HuggingFace](https://huggingface.co/Qwen/Qwen2.5-Omni-7B).
 
 ## Have time for some fun?
 

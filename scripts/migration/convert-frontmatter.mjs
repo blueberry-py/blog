@@ -20,7 +20,9 @@ import { stringify as stringifyYaml } from 'yaml';
 
 import { deriveSlug, splitFrontMatter } from './verify-content.mjs';
 
-const REPO_ROOT = path.resolve(fileURLToPath(new URL('../..', import.meta.url)));
+const REPO_ROOT = path.resolve(
+  fileURLToPath(new URL('../..', import.meta.url)),
+);
 const MANIFEST_PATH = 'scripts/migration/legacy-routes.json';
 
 /**
@@ -76,7 +78,9 @@ export function convertContent(raw, options = {}) {
 
     parsed = parseToml(tomlText);
   } catch (error) {
-    throw new Error(`cannot parse the TOML front matter: ${error.message}`);
+    throw new Error(`cannot parse the TOML front matter: ${error.message}`, {
+      cause: error,
+    });
   }
 
   const data = normalizeDates(parsed);
@@ -90,7 +94,10 @@ export function convertContent(raw, options = {}) {
   // Keep the line endings the file already uses, so converting a file does
   // not turn it into a mixed-line-ending file.
   const eol = raw.includes('\r\n') ? '\r\n' : '\n';
-  const front = `---\n${stringifyYaml(data, { lineWidth: 0 })}---\n`.replace(/\n/g, eol);
+  const front = `---\n${stringifyYaml(data, { lineWidth: 0 })}---\n`.replace(
+    /\n/g,
+    eol,
+  );
   const output = `${front}${body}`;
 
   return { output, changed: output !== raw };
@@ -110,7 +117,7 @@ export function convertFile(rootDir, sourcePath, options = {}) {
   try {
     result = convertContent(raw, { sourcePath });
   } catch (error) {
-    throw new Error(`${sourcePath}: ${error.message}`);
+    throw new Error(`${sourcePath}: ${error.message}`, { cause: error });
   }
 
   if (options.write && result.changed) {
@@ -122,7 +129,9 @@ export function convertFile(rootDir, sourcePath, options = {}) {
 
 /** The content files the migration owns, as recorded by the baseline manifest. */
 export function listInventoriedFiles(rootDir = REPO_ROOT) {
-  const manifest = JSON.parse(readFileSync(path.join(rootDir, MANIFEST_PATH), 'utf8'));
+  const manifest = JSON.parse(
+    readFileSync(path.join(rootDir, MANIFEST_PATH), 'utf8'),
+  );
 
   return manifest.entries.map((entry) => entry.source);
 }
@@ -146,12 +155,17 @@ function main(argv) {
     return changed.length === 0 ? 0 : 1;
   }
 
-  console.log(`converted ${changed.length} of ${sources.length} files to YAML front matter`);
+  console.log(
+    `converted ${changed.length} of ${sources.length} files to YAML front matter`,
+  );
 
   return 0;
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+if (
+  process.argv[1] &&
+  path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)
+) {
   try {
     process.exit(main(process.argv.slice(2)));
   } catch (error) {

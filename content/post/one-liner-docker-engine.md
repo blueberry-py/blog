@@ -19,9 +19,9 @@ series:
 
 ## One-Liner series: Docker and docker-compose
 
-|OS| Shell |
-|--|--|
-| Ubuntu Server 22.04 Jammy | Bash |
+| OS                        | Shell |
+| ------------------------- | ----- |
+| Ubuntu Server 22.04 Jammy | Bash  |
 
 ### Install Docker Engine community
 

@@ -140,8 +140,8 @@ mojo
 ```
 
 > Welcome to Mojo! 🔥
-Expressions are delimited by a blank line.
-Type `:mojo help` for further assistance.
+> Expressions are delimited by a blank line.
+> Type `:mojo help` for further assistance.
 
 # Bonus Round: directory structure
 

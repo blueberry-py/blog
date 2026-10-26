@@ -86,6 +86,7 @@ It's another month for Python version updates.
 Python 3.14 Alpha 7 is out, and the first beta release is expected soon.
 
 Python 3.13 and 3.12 receive bugfix updates:
+
 - [Python 3.13.3 Downloads and Release Notes](https://www.python.org/downloads/release/python-3133/)
 - [Python 3.12.10 Downloads and Release Notes](https://www.python.org/downloads/release/python-31210/)
 
@@ -110,6 +111,7 @@ This LTS version introduces new features (Automatic model imports in the shell, 
 ### Ubuntu 25.04, Fedora 42, MX 23.6 and Manjaro 25.0
 
 It seems like a big month for Linux distros since several popular distro have major/minor updates:
+
 - [Ubuntu 25.04 "Plucky Puffin"](https://lists.ubuntu.com/archives/ubuntu-announce/2025-April/000311.html) introduces Linux 6.14 kernel, GNOME 48, and offers 9 months of support.
 - [Fedora 42](https://fedoramagazine.org/announcing-fedora-linux-42/) promotes KDE Plasma variation to "Full Edition".
 - [MX Linux](https://mxlinux.org/blog/mx-23-6-now-available/) is a regular refresh containing bugfixes, kernel updates, and application updates.
@@ -151,7 +153,7 @@ A series of tutorials introducing various aspects of AI Agents.
 
 - [Python's new t-strings](https://davepeck.org/2025/04/11/pythons-new-t-strings/)
 
-[PEP 750 – Template Strings](https://peps.python.org/pep-0750/) is **accepted**. This PEP introduces *template strings* which are a generalization of *f-strings*. Putting a `t` before a string *template* would keep it from being evaluated as a normal string but make it an instance of a new type `Template`.
+[PEP 750 – Template Strings](https://peps.python.org/pep-0750/) is **accepted**. This PEP introduces _template strings_ which are a generalization of _f-strings_. Putting a `t` before a string _template_ would keep it from being evaluated as a normal string but make it an instance of a new type `Template`.
 
 In his blog, Dave introduces the motivation behind this PEP and shows how to play with it.
 

@@ -23,21 +23,21 @@ draft: false
 今天在 git bash 命令行往 github push 代码的时候突然收到大大的警告信息，如下：
 
 > @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
-Someone could be eavesdropping on you right now (man-in-the-middle attack)!
-It is also possible that a host key has just been changed.
-The fingerprint for the RSA key sent by the remote host is
-SHA256:uNiVztksCsDhcc0u9e8BujQXVUpKZIDTMczCvj3tD2s.
-Please contact your system administrator.
-Add correct host key in **************************** to get rid of this message.
-Offending RSA key in ****************************:2
-Host key for github.com has changed and you have requested strict checking.
-Host key verification failed.
-fatal: Could not read from remote repository.
-Please make sure you have the correct access rights
-and the repository exists.
+> @ WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED! @
+> @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+> IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+> Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+> It is also possible that a host key has just been changed.
+> The fingerprint for the RSA key sent by the remote host is
+> SHA256:uNiVztksCsDhcc0u9e8BujQXVUpKZIDTMczCvj3tD2s.
+> Please contact your system administrator.
+> Add correct host key in **************************** to get rid of this message.
+> Offending RSA key in ****************************:2
+> Host key for github.com has changed and you have requested strict checking.
+> Host key verification failed.
+> fatal: Could not read from remote repository.
+> Please make sure you have the correct access rights
+> and the repository exists.
 
 这个仓库是用 ssh 连接作为 remote 的。
 
@@ -64,10 +64,10 @@ Original contents retained as **********/.ssh/known_hosts.old
 然后进行任意一项连接到 remote 的操作，比如 git fetch，就会提示把新的公钥添加到我的 `known_hosts` 里，当然选 yes：
 
 > The authenticity of host 'github.com (140.82.121.4)' can't be established.
-ED25519 key fingerprint is SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU.
-This key is not known by any other names.
-Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-Warning: Permanently added 'github.com' (ED25519) to the list of known hosts.
+> ED25519 key fingerprint is SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU.
+> This key is not known by any other names.
+> Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+> Warning: Permanently added 'github.com' (ED25519) to the list of known hosts.
 
 问题解决。
 

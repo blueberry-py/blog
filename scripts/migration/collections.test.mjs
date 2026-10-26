@@ -44,7 +44,10 @@ describe('post schema', () => {
     assert.equal(result.success, false);
     const paths = result.error.issues.map((issue) => issue.path.join('.'));
     assert.ok(paths.includes('title'), `expected a title issue, got ${paths}`);
-    assert.ok(paths.includes('description'), `expected a description issue, got ${paths}`);
+    assert.ok(
+      paths.includes('description'),
+      `expected a description issue, got ${paths}`,
+    );
   });
 
   it('coerces the front matter date into a Date', async () => {
@@ -81,7 +84,11 @@ describe('post schema', () => {
   it('keeps metadata the schema does not know about', async () => {
     const { postSchema } = await loadSchemas();
 
-    const data = postSchema.parse({ ...POST, cover: 'cover.png', aliases: ['old-url'] });
+    const data = postSchema.parse({
+      ...POST,
+      cover: 'cover.png',
+      aliases: ['old-url'],
+    });
 
     assert.equal(data.cover, 'cover.png');
     assert.deepEqual(data.aliases, ['old-url']);

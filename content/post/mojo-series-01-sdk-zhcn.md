@@ -173,8 +173,8 @@ mojo
 就进到了 mojo 的互动编程环境。熟悉 Python 或其它类似语言的小伙伴对这个一定不陌生。
 
 > Welcome to Mojo! 🔥
-Expressions are delimited by a blank line.
-Type `:mojo help` for further assistance.
+> Expressions are delimited by a blank line.
+> Type `:mojo help` for further assistance.
 
 那么至此 mojo 的基础开发环境就已经搭建好了，在下一篇文章中我会记录如何运行最基础的 “Hello world” 程序。
 

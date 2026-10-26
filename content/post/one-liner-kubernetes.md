@@ -19,9 +19,9 @@ series:
 
 ## One-liner series: minikube, kubectl and kustomize
 
-|OS| Shell |
-|--|--|
-| Ubuntu 20.04 amd64 | Bash |
+| OS                 | Shell |
+| ------------------ | ----- |
+| Ubuntu 20.04 amd64 | Bash  |
 
 ### Install minikube
 
@@ -53,8 +53,8 @@ curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stabl
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 ```
 
->To download a specific version, replace the $(curl -L -s <https://dl.k8s.io/release/stable.txt>) portion of the command with the specific version.
->eg. v1.30.0: `curl -LO https://dl.k8s.io/release/v1.30.0/bin/linux/amd64/kubectl`
+> To download a specific version, replace the $(curl -L -s <https://dl.k8s.io/release/stable.txt>) portion of the command with the specific version.
+> eg. v1.30.0: `curl -LO https://dl.k8s.io/release/v1.30.0/bin/linux/amd64/kubectl`
 
 ### Install kustomize
 
@@ -66,7 +66,7 @@ curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack
 sudo install -o root -g root -m 0755 kustomize /usr/local/bin/kustomize
 ```
 
--------------
+---
 
 ### Setup command-line completion for minikube
 

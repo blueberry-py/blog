@@ -1,0 +1,25 @@
+# Dependencies and generated output.
+node_modules/
+dist/
+.astro/
+public/
+resources/_gen/
+themes/
+.superpowers/
+
+# The lockfile is written by pnpm, not by hand.
+pnpm-lock.yaml
+
+# The migration plans are working documents, not site content.
+docs/
+
+# Binary assets.
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.webp
+*.avif
+*.ico
+*.pdf
+*.zip

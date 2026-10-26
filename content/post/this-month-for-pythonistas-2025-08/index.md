@@ -58,6 +58,7 @@ Ready? Let's get started!
 ### Python 3.13.7
 
 Python 3.13.7 is an expedited release which aims to fix a significant issue with the 3.13.6 release:
+
 > `gh-137583`: Regression in ssl module between 3.13.5 and 3.13.6: reading from a TLS-encrypted connection blocks
 
 The official downloads are available [here](https://www.python.org/downloads/release/python-3137/).

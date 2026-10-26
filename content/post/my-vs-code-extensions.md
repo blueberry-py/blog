@@ -70,14 +70,14 @@ series: []
 
 `kevinrose.vsc-python-indent`
 
-------------------
+---
 
 ### Sublime Text Keymap and Settings Importer
 
 `ms-vscode.sublime-keybindings`
 **note that** it automatically imports sublime key bindings after installation, although it also prompts you to explicitly import a sublime settings file (while could be ignored).
 
-------------------
+---
 
 ### Docker
 
@@ -95,13 +95,13 @@ series: []
 
 `ms-vscode-remote.remote-containers`
 
-------------------
+---
 
 ### GitLens
 
 `eamodio.gitlens`
 
-------------------
+---
 
 ### vscode-json
 
@@ -119,7 +119,7 @@ series: []
 
 `mechatroner.rainbow-csv`
 
-------------------
+---
 
 ### Prettier - Code formatter
 
@@ -133,13 +133,13 @@ series: []
 
 `adpyke.vscode-sql-formatter`
 
-------------------
+---
 
 ### Mojo
 
 `modular-mojotools.vscode-mojo`
 
-------------------
+---
 
 ### Amazon Q
 
@@ -189,9 +189,9 @@ series: []
 
 `marscode.marscode-extension`
 
-------------------
+---
 
-------------------
+---
 
 ### GitHub Theme
 

@@ -1,0 +1,42 @@
+# The articles were written before a linter existed. Every rule that is turned
+# off below is a convention the articles were written with: the articles are
+# kept as they are instead of being rewritten, so each exception is documented
+# here instead of being silently ignored.
+config:
+  # MD001: an article may start at the third heading level.
+  MD001: false
+  # MD013: the prose and the console output of an article are long lines.
+  MD013: false
+  # MD025: an article may have more than one top-level heading.
+  MD025: false
+  # MD032: a list is not always surrounded by blank lines.
+  MD032: false
+  # MD033: inline HTML is written on purpose.
+  MD033: false
+  # MD034: a bare URL is used as a link.
+  MD034: false
+  # MD041: the heading of a post comes after its front matter.
+  MD041:
+    front_matter_title: '^\s*title\s*[:=]'
+  # MD059: a link is named after its destination.
+  MD059: false
+  # MD060: a table row may have fewer cells than the header.
+  MD060: false
+
+globs:
+  - '**/*.md'
+
+ignores:
+  # Dependencies and generated output.
+  - 'node_modules/**'
+  - 'dist/**'
+  - 'public/**'
+  - 'themes/**'
+  - 'resources/**'
+  - '.astro/**'
+  # The migration plans and the ledger of the migration are working
+  # documents, not site content.
+  - 'docs/**'
+  - '.superpowers/**'
+  # The Hugo archetype is removed together with Hugo.
+  - 'archetypes/**'
