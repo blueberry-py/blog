@@ -11,7 +11,7 @@
  */
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { existsSync, readFileSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { before, describe, it } from 'node:test';
 import { fileURLToPath } from 'node:url';
@@ -44,6 +44,22 @@ const PAGES_SITE = 'https://blueberry-py.github.io';
 const PAGES_BASE = '/blog/';
 
 const manifest = readManifest(REPO_ROOT);
+
+/**
+ * The routes of the old Hugo site that the new site answers with an alias.
+ *
+ * The old site served a page of articles at `/post/` and a page of ten
+ * articles per list; the new site serves every list in full, so every one of
+ * those routes leads to the route that holds the same articles now.
+ */
+const aliases = JSON.parse(
+  readFileSync(
+    path.join(REPO_ROOT, 'scripts/migration/legacy-aliases.json'),
+    'utf8',
+  ),
+).aliases;
+
+const aliasRoutes = new Set(Object.keys(aliases));
 const postEntries = manifest.entries.filter(
   (entry) => entry.collection === 'post',
 );
@@ -221,11 +237,11 @@ describe('the built site', () => {
   });
 
   it('serves no page outside the content routes', () => {
-    const built = readdirSync(path.join(DIST_DIR, 'post'), {
-      withFileTypes: true,
-    })
-      .filter((entry) => entry.isDirectory())
-      .map((entry) => entry.name)
+    const built = listBuiltPages(DIST_DIR)
+      .map((page) => page.route)
+      .filter((route) => !aliasRoutes.has(route))
+      .filter((route) => route.startsWith('/post/'))
+      .map((route) => route.replace(/^\/post\//, '').replace(/\/$/, ''))
       .sort();
 
     const expected = postEntries
@@ -234,6 +250,31 @@ describe('the built site', () => {
       .sort();
 
     assert.deepEqual(built, expected);
+  });
+
+  it('serves the routes of the old site', () => {
+    for (const [from, to] of Object.entries(aliases)) {
+      const file = pageFile(from);
+
+      assert.ok(
+        existsSync(file),
+        `the old route ${from} is not served (expected ${file})`,
+      );
+
+      const html = readFileSync(file, 'utf8');
+      const destination =
+        /<meta http-equiv="refresh" content="0;url=([^"]+)"/.exec(html)?.[1];
+
+      assert.equal(
+        destination,
+        to,
+        `the old route ${from} does not lead to ${to}`,
+      );
+      assert.ok(
+        existsSync(pageFile(to)),
+        `the old route ${from} leads to ${to}, which is not served`,
+      );
+    }
   });
 
   it('serves a 404 page', () => {
@@ -385,5 +426,30 @@ describe('the site built for the project site of GitHub Pages', () => {
 
   it('serves the same routes and the same assets as a build for a root host', () => {
     assert.deepEqual(outputInventory(), rootInventory);
+  });
+
+  it('serves the routes of the old site under the base path', () => {
+    for (const [from, to] of Object.entries(aliases)) {
+      const file = pageFile(from);
+
+      assert.ok(
+        existsSync(file),
+        `the old route ${from} is not served (expected ${file})`,
+      );
+
+      const html = readFileSync(file, 'utf8');
+      const destination =
+        /<meta http-equiv="refresh" content="0;url=([^"]+)"/.exec(html)?.[1];
+
+      assert.equal(
+        destination,
+        `${PAGES_BASE}${to.replace(/^\//, '')}`,
+        `the old route ${from} does not lead to ${to}`,
+      );
+      assert.ok(
+        existsSync(pageFile(to)),
+        `the old route ${from} leads to ${to}, which is not served`,
+      );
+    }
   });
 });

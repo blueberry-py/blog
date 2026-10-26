@@ -7,6 +7,7 @@ import sitemap from '@astrojs/sitemap';
 import { defineConfig } from 'astro/config';
 
 import { publicGuard } from './scripts/public-guard.mjs';
+import { legacyRedirects } from './scripts/migration/legacy-aliases.mjs';
 
 /**
  * The sitemap of the site at the URL the old Hugo site served it at.
@@ -53,6 +54,9 @@ const site = process.env.SITE_URL ?? 'https://blueberrypy.netlify.app';
 const base = process.env.BASE_PATH ?? '/';
 const basePath = base.endsWith('/') ? base : `${base}/`;
 
+/** The root of the repository, where the baseline of the aliases lies. */
+const repoRoot = path.resolve(fileURLToPath(new URL('.', import.meta.url)));
+
 export default defineConfig({
   site,
   base: basePath,
@@ -65,4 +69,7 @@ export default defineConfig({
     format: 'directory',
   },
   integrations: [sitemap(), legacySitemap(), publicGuard()],
+  // The routes of the old Hugo site answer with a page that sends the reader
+  // to the route that holds the same articles now.
+  redirects: legacyRedirects(repoRoot, basePath),
 });

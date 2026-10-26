@@ -25,6 +25,8 @@ import {
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { readLegacyAliases } from './legacy-aliases.mjs';
+
 const REPO_ROOT = path.resolve(
   fileURLToPath(new URL('../..', import.meta.url)),
 );
@@ -658,14 +660,29 @@ export function verifyBuiltOutput(manifest, rootDir, options = {}) {
   const posts = manifest.entries.filter(
     (entry) => entry.collection === 'post',
   ).length;
-  const builtPosts = pages.filter((page) =>
-    page.route.startsWith('/post/'),
+
+  // The aliases of the routes of the old site are pages of the output as
+  // well, but they hold no article: they send the reader to the route that
+  // holds the articles.
+  const aliasRoutes = new Set(Object.keys(readLegacyAliases(rootDir)));
+  const builtPosts = pages.filter(
+    (page) => page.route.startsWith('/post/') && !aliasRoutes.has(page.route),
   ).length;
 
   if (posts !== builtPosts) {
     problems.push({
       code: 'post-count-mismatch',
       detail: `the manifest holds ${posts} articles, the output holds ${builtPosts}`,
+    });
+  }
+
+  for (const route of aliasRoutes) {
+    if (routes.has(route)) continue;
+
+    problems.push({
+      code: 'missing-alias',
+      route,
+      detail: `the old route ${route} is not served`,
     });
   }
 

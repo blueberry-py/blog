@@ -70,6 +70,14 @@ pnpm test
 `pnpm verify:content` checks that every article still exists at the route it
 had, with the body and the local images it refers to.
 
+Hugo served a page of articles at `/post/` and a page of ten articles per
+list. The site serves every list in full, so the old routes answer with a page
+that leads to the route that holds the same articles: `/post/` leads to
+`/archives/`, `/page/2/` to the home page and `/tags/python/page/2/` to
+`/tags/python/`. The routes are written down in
+`scripts/migration/legacy-aliases.json`, and the build answers every one of
+them.
+
 ## Deployment
 
 Every host builds the same static output and publishes the `dist` directory.
