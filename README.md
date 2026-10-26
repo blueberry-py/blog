@@ -78,6 +78,18 @@ that leads to the route that holds the same articles: `/post/` leads to
 `scripts/migration/legacy-aliases.json`, and the build answers every one of
 them.
 
+### The cover of an article
+
+The cover of an article is a file next to the article, the way Hugo served it.
+An article that names a cover it does not have is published without a cover,
+and the build says which cover is missing:
+
+```text
+[WARN] [glob-loader-without-missing-covers] The article pycon-us-2026-recap
+names a cover that is not there: title.jpg (content/post/title.jpg). It is
+published without a cover.
+```
+
 ## Deployment
 
 Every host builds the same static output and publishes the `dist` directory.

@@ -32,6 +32,10 @@ export const postSchema = z.looseObject({
  * `image` helper of the collection: the posts name the cover relative to the
  * folder of the post, the same way Hugo did, and Astro turns it into the
  * metadata of the image it optimizes.
+ *
+ * A cover image that is not there does not reach this schema: the loader of
+ * the collection drops it and says which cover is missing, because Astro turns
+ * the cover of an article into an import before the schema is read.
  */
 export function postCollectionSchema({ image }: SchemaContext) {
   return postSchema.extend({ image: image().optional() });

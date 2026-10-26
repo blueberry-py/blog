@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
+import { z } from 'astro/zod';
+
 /**
  * The collection schemas live in a TypeScript module of their own so that they
  * can be checked without starting Astro: `src/content.config.ts` only wires
@@ -8,6 +10,21 @@ import { describe, it } from 'node:test';
  */
 async function loadSchemas() {
   return import('../../src/lib/content-schema.ts');
+}
+
+/**
+ * The helper of Astro that reads the cover image of an article.
+ *
+ * Astro reads the image of the cover and turns it into the metadata of the
+ * image it optimizes. A cover that is not there is dropped by the loader of
+ * the collection before the schema is read (see `src/lib/cover.ts`), so the
+ * schema never sees one.
+ */
+function astroImage() {
+  return () =>
+    z.string().transform(async (imagePath) => ({
+      src: `/_astro/${imagePath}`,
+    }));
 }
 
 const POST = {
@@ -109,6 +126,26 @@ describe('post schema', () => {
     assert.deepEqual(data.keywords, ['python', 'astro']);
     assert.deepEqual(data.series, ['one liner']);
     assert.equal(data.externalLink, 'https://example.com');
+  });
+});
+
+describe('the schema of the collection', () => {
+  it('keeps the cover image of an article', async () => {
+    const { postCollectionSchema } = await loadSchemas();
+
+    const schema = postCollectionSchema({ image: astroImage() });
+    const data = await schema.parseAsync({ ...POST, image: 'cover.png' });
+
+    assert.equal(data.image.src, '/_astro/cover.png');
+  });
+
+  it('keeps an article that has no cover', async () => {
+    const { postCollectionSchema } = await loadSchemas();
+
+    const schema = postCollectionSchema({ image: astroImage() });
+    const data = await schema.parseAsync(POST);
+
+    assert.equal(data.image, undefined);
   });
 });
 
