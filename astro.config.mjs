@@ -6,6 +6,8 @@ import { fileURLToPath } from 'node:url';
 import sitemap from '@astrojs/sitemap';
 import { defineConfig } from 'astro/config';
 
+import { publicGuard } from './scripts/public-guard.mjs';
+
 /**
  * The sitemap of the site at the URL the old Hugo site served it at.
  *
@@ -62,5 +64,5 @@ export default defineConfig({
   build: {
     format: 'directory',
   },
-  integrations: [sitemap(), legacySitemap()],
+  integrations: [sitemap(), legacySitemap(), publicGuard()],
 });

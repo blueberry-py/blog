@@ -27,6 +27,14 @@ pnpm dev
 The articles live in `content/post` and `content/about`; they are read through
 the content collections of `src/content.config.ts`.
 
+The `public` directory holds the files that are published as they are. It holds
+the favicon and nothing else: Astro copies the public tree into the output of
+the build after it has written the pages, so a page left there would overwrite
+the page of the site. The build stops while the public tree holds a `.html` or
+a `.xml` file. A file the site needs and that is not the favicon is added with
+`git add -f public/<file>`, because the public tree is ignored apart from the
+favicon.
+
 ### Formatting and linting
 
 | Command             | What it does                                                                                            |

@@ -15,7 +15,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint . && markdownlint-cli2 \"**/*.md\"",
-    "test": "node --test --test-concurrency=1 scripts/tooling.test.mjs scripts/migration/*.test.mjs scripts/routes.test.mjs scripts/taxonomy.test.mjs scripts/deployment.test.mjs scripts/repository.test.mjs",
+    "test": "node --test --test-concurrency=1 scripts/tooling.test.mjs scripts/migration/*.test.mjs scripts/routes.test.mjs scripts/taxonomy.test.mjs scripts/deployment.test.mjs scripts/repository.test.mjs scripts/public-guard.test.mjs",
     "test:migration": "node --test scripts/migration/*.test.mjs",
     "verify:content": "node scripts/migration/verify-content.mjs",
     "convert:frontmatter": "node scripts/migration/convert-frontmatter.mjs",

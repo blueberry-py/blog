@@ -10,3 +10,7 @@ node_modules/
 
 # The state of the Netlify CLI
 /.netlify/
+
+# The public tree holds the favicon; the pages of another site must not come back
+/public/*
+!/public/favicon-32x32.png

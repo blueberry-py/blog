@@ -248,6 +248,21 @@ describe('the ignore files of the repository', () => {
     );
   });
 
+  it('ignores the public tree but keeps the favicon', () => {
+    const gitignore = read('.gitignore');
+
+    assert.match(
+      gitignore,
+      /^\/public\/\*$/m,
+      'the .gitignore does not ignore the public tree',
+    );
+    assert.match(
+      gitignore,
+      /^!\/public\/favicon-32x32\.png$/m,
+      'the .gitignore does not keep the favicon of the public tree',
+    );
+  });
+
   it('ignores no theme in the formatter and in the Markdown linter', () => {
     for (const file of ['.prettierignore', '.markdownlint-cli2.yaml']) {
       assert.doesNotMatch(
@@ -299,6 +314,21 @@ describe('the README of the repository', () => {
         `the README does not document ${command}`,
       );
     }
+  });
+
+  it('documents the rule of the public tree', () => {
+    const readme = read('README.md');
+
+    assert.match(
+      readme,
+      /`public`/,
+      'the README does not name the public tree',
+    );
+    assert.match(
+      readme,
+      /favicon/,
+      'the README does not say what the public tree holds',
+    );
   });
 
   it('badges the workflow of the deployment', () => {
