@@ -35,7 +35,7 @@ export const RELATED_LIMIT = 5;
  * The terms are compared the way Hugo compared them: as they are written, so
  * `AI` and `ai` are two terms.
  *
- * @param {string[] | undefined} terms The terms of an article.
+ * @param {string[] | undefined} values The terms of an article.
  * @returns {Set<string>} The terms, each of them once.
  */
 function terms(values: string[] | undefined): Set<string> {
@@ -94,7 +94,7 @@ export function relatedScore(
 export function relatedPosts(
   post: CollectionEntry<'posts'>,
   posts: CollectionEntry<'posts'>[],
-  limit = RELATED_LIMIT,
+  limit: number = RELATED_LIMIT,
 ): CollectionEntry<'posts'>[] {
   const scored = posts
     .filter(
