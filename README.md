@@ -48,10 +48,16 @@ favicon.
 The configuration of the tools lives in `.prettierrc.json`, `.prettierignore`,
 `eslint.config.js` and `.markdownlint-cli2.yaml`.
 
-The articles keep the shape they were written in: the prose is never re-wrapped
-(`proseWrap: "preserve"`) and the code blocks of the articles are not
-reformatted. The Markdown rules the articles do not follow are listed, with the
-reason, in `.markdownlint-cli2.yaml`.
+The prose of the articles is never re-wrapped (`proseWrap: "preserve"`) and the
+code blocks of the articles are not reformatted, so the words of an article are
+the words that were written. The markup of an article is not left alone: when
+the tools were added, Prettier changed the markup of ten of the thirty-eight
+articles, by aligning their tables, by writing their block quotes and their
+rules with its own marks and by spacing their lists from the text above them.
+The baseline of `pnpm verify:content` follows the articles as they are
+formatted, so it reports the change of an article and not the change of the
+words of an article. The Markdown rules the articles do not follow are listed,
+with the reason, in `.markdownlint-cli2.yaml`.
 
 ### Before a commit
 

@@ -363,4 +363,24 @@ describe('the README of the repository', () => {
   it('documents the deployment to Cloudflare Workers', () => {
     assert.match(read('README.md'), /pnpm deploy:cloudflare/);
   });
+
+  it('tells what the formatter does to the articles', () => {
+    const readme = read('README.md');
+
+    assert.doesNotMatch(
+      readme,
+      /The articles keep the shape they were written in/,
+      'the README still says that the articles keep the shape they were written in',
+    );
+    assert.match(
+      readme,
+      /changed the markup of ten of the thirty-eight\s+articles/,
+      'the README does not say that the formatter changed the markup of ten articles',
+    );
+    assert.match(
+      readme,
+      /baseline of `pnpm verify:content`/,
+      'the README does not say what the baseline of the verification follows',
+    );
+  });
 });
