@@ -8,9 +8,6 @@ favicon = "favicon-32x32.png"
 [Params.Article]
 toc = true
 
-[Params.Article.List]
-showTags = true
-
 [Params.Article.License]
 enabled = true
 default = "Licensed under CC BY-NC-SA 4.0"
@@ -21,7 +18,11 @@ lastUpdated = "Mon Jan 2 2006 15:04:05 MST"
 
 [Params.Sidebar]
 subtitle = "Python & Fun"
-avatar = "avatar.jpg"
+
+[Params.Sidebar.Avatar]
+enable = true
+local = true
+src = "avatar.jpg"
 
 [Params.Opengraph.twitter]
 site = "linzeyang"
