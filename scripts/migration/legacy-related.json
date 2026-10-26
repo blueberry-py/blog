@@ -1,0 +1,226 @@
+{
+  "version": 1,
+  "note": "The articles the Hugo site showed as belonging to an article, captured from the block 'Related content' of the Hugo build (public/post/*/index.html). The Astro site shows the same articles in the same order.",
+  "related": {
+    "github-remote-host-identification": ["my-vs-code-extensions"],
+    "mojo-series-01-sdk": [
+      "mojo-series-01-sdk-zhcn",
+      "one-liner-julia",
+      "one-liner-rust",
+      "one-liner-nodejs",
+      "one-liner-kubernetes"
+    ],
+    "mojo-series-01-sdk-zhcn": [
+      "mojo-series-01-sdk",
+      "one-liner-julia",
+      "one-liner-rust",
+      "one-liner-nodejs",
+      "one-liner-kubernetes"
+    ],
+    "my-first-hugo-blog": [],
+    "my-vs-code-extensions": [],
+    "one-liner-bun": [
+      "one-liner-pnpm",
+      "one-liner-claude-code",
+      "one-liner-kiro-cli",
+      "one-liner-nodejs",
+      "this-month-for-pythonistas-2025-04"
+    ],
+    "one-liner-claude-code": [
+      "this-month-for-pythonistas-2025-04",
+      "this-month-for-pythonistas-2025-03",
+      "one-liner-ollama",
+      "uv-is-latest-attempt-to-rule-them-all",
+      "mojo-series-01-sdk"
+    ],
+    "one-liner-docker-engine": [],
+    "one-liner-julia": [
+      "one-liner-rust",
+      "one-liner-nodejs",
+      "one-liner-kubernetes",
+      "one-liner-docker-engine"
+    ],
+    "one-liner-kiro-cli": [
+      "one-liner-claude-code",
+      "this-month-for-pythonistas-2025-10",
+      "this-month-for-pythonistas-2025-09",
+      "this-month-for-pythonistas-2025-08",
+      "this-month-for-pythonistas-2025-07"
+    ],
+    "one-liner-kubernetes": ["one-liner-docker-engine"],
+    "one-liner-nodejs": ["one-liner-kubernetes", "one-liner-docker-engine"],
+    "one-liner-ollama": [
+      "mojo-series-01-sdk",
+      "mojo-series-01-sdk-zhcn",
+      "one-liner-julia",
+      "one-liner-rust",
+      "one-liner-nodejs"
+    ],
+    "one-liner-opencode": [
+      "one-liner-bun",
+      "one-liner-pnpm",
+      "one-liner-kiro-cli",
+      "one-liner-claude-code",
+      "this-month-for-pythonistas-2025-11"
+    ],
+    "one-liner-pnpm": [
+      "one-liner-claude-code",
+      "one-liner-kiro-cli",
+      "one-liner-nodejs",
+      "this-month-for-pythonistas-2025-04",
+      "this-month-for-pythonistas-2025-03"
+    ],
+    "one-liner-rust": [
+      "one-liner-nodejs",
+      "one-liner-kubernetes",
+      "one-liner-docker-engine"
+    ],
+    "pycon-china-2026-lightning-talk": [
+      "this-month-for-pythonistas-2026-05",
+      "this-month-for-pythonistas-2026-06",
+      "uv-is-latest-attempt-to-rule-them-all",
+      "this-month-for-pythonistas-2026-04",
+      "this-month-for-pythonistas-2026-03"
+    ],
+    "this-month-for-pythonistas-2025-03": [
+      "uv-is-latest-attempt-to-rule-them-all",
+      "mojo-series-01-sdk",
+      "mojo-series-01-sdk-zhcn",
+      "github-remote-host-identification",
+      "one-liner-ollama"
+    ],
+    "this-month-for-pythonistas-2025-04": [
+      "this-month-for-pythonistas-2025-03",
+      "uv-is-latest-attempt-to-rule-them-all",
+      "mojo-series-01-sdk",
+      "mojo-series-01-sdk-zhcn",
+      "github-remote-host-identification"
+    ],
+    "this-month-for-pythonistas-2025-05": [
+      "this-month-for-pythonistas-2025-04",
+      "this-month-for-pythonistas-2025-03",
+      "uv-is-latest-attempt-to-rule-them-all",
+      "mojo-series-01-sdk",
+      "mojo-series-01-sdk-zhcn"
+    ],
+    "this-month-for-pythonistas-2025-06": [
+      "this-month-for-pythonistas-2025-05",
+      "this-month-for-pythonistas-2025-04",
+      "this-month-for-pythonistas-2025-03",
+      "uv-is-latest-attempt-to-rule-them-all",
+      "mojo-series-01-sdk"
+    ],
+    "this-month-for-pythonistas-2025-07": [
+      "this-month-for-pythonistas-2025-06",
+      "this-month-for-pythonistas-2025-05",
+      "this-month-for-pythonistas-2025-04",
+      "this-month-for-pythonistas-2025-03",
+      "uv-is-latest-attempt-to-rule-them-all"
+    ],
+    "this-month-for-pythonistas-2025-08": [
+      "this-month-for-pythonistas-2025-07",
+      "this-month-for-pythonistas-2025-06",
+      "this-month-for-pythonistas-2025-05",
+      "this-month-for-pythonistas-2025-04",
+      "this-month-for-pythonistas-2025-03"
+    ],
+    "this-month-for-pythonistas-2025-09": [
+      "this-month-for-pythonistas-2025-08",
+      "this-month-for-pythonistas-2025-07",
+      "this-month-for-pythonistas-2025-06",
+      "this-month-for-pythonistas-2025-05",
+      "this-month-for-pythonistas-2025-04"
+    ],
+    "this-month-for-pythonistas-2025-10": [
+      "this-month-for-pythonistas-2025-09",
+      "this-month-for-pythonistas-2025-08",
+      "this-month-for-pythonistas-2025-07",
+      "this-month-for-pythonistas-2025-06",
+      "this-month-for-pythonistas-2025-05"
+    ],
+    "this-month-for-pythonistas-2025-11": [
+      "this-month-for-pythonistas-2025-08",
+      "this-month-for-pythonistas-2025-06",
+      "this-month-for-pythonistas-2025-10",
+      "this-month-for-pythonistas-2025-09",
+      "this-month-for-pythonistas-2025-07"
+    ],
+    "this-month-for-pythonistas-2025-12": [
+      "this-month-for-pythonistas-2025-11",
+      "this-month-for-pythonistas-2025-10",
+      "this-month-for-pythonistas-2025-08",
+      "this-month-for-pythonistas-2025-06",
+      "this-month-for-pythonistas-2025-09"
+    ],
+    "this-month-for-pythonistas-2026-01": [
+      "this-month-for-pythonistas-2025-11",
+      "this-month-for-pythonistas-2025-12",
+      "this-month-for-pythonistas-2025-08",
+      "this-month-for-pythonistas-2025-10",
+      "this-month-for-pythonistas-2025-09"
+    ],
+    "this-month-for-pythonistas-2026-02": [
+      "this-month-for-pythonistas-2026-01",
+      "this-month-for-pythonistas-2025-11",
+      "this-month-for-pythonistas-2025-08",
+      "this-month-for-pythonistas-2025-10",
+      "this-month-for-pythonistas-2025-09"
+    ],
+    "this-month-for-pythonistas-2026-03": [
+      "this-month-for-pythonistas-2025-11",
+      "this-month-for-pythonistas-2026-01",
+      "this-month-for-pythonistas-2025-08",
+      "this-month-for-pythonistas-2025-06",
+      "this-month-for-pythonistas-2025-12"
+    ],
+    "this-month-for-pythonistas-2026-04": [
+      "this-month-for-pythonistas-2026-02",
+      "this-month-for-pythonistas-2026-03",
+      "this-month-for-pythonistas-2026-01",
+      "this-month-for-pythonistas-2025-11",
+      "this-month-for-pythonistas-2025-08"
+    ],
+    "this-month-for-pythonistas-2026-05": [
+      "this-month-for-pythonistas-2026-04",
+      "this-month-for-pythonistas-2026-03",
+      "this-month-for-pythonistas-2026-02",
+      "this-month-for-pythonistas-2026-01",
+      "this-month-for-pythonistas-2025-11"
+    ],
+    "this-month-for-pythonistas-2026-06": [
+      "this-month-for-pythonistas-2026-05",
+      "this-month-for-pythonistas-2026-02",
+      "this-month-for-pythonistas-2025-05",
+      "this-month-for-pythonistas-2026-04",
+      "this-month-for-pythonistas-2025-04"
+    ],
+    "this-month-for-pythonistas-2026-07": [
+      "this-month-for-pythonistas-2026-06",
+      "this-month-for-pythonistas-2026-05",
+      "this-month-for-pythonistas-2026-02",
+      "this-month-for-pythonistas-2026-04",
+      "this-month-for-pythonistas-2025-11"
+    ],
+    "this-month-for-pythonistas-2026-08": [
+      "this-month-for-pythonistas-2026-07",
+      "this-month-for-pythonistas-2026-06",
+      "this-month-for-pythonistas-2026-05",
+      "this-month-for-pythonistas-2025-11",
+      "this-month-for-pythonistas-2025-06"
+    ],
+    "this-month-for-pythonistas-2026-09": [
+      "this-month-for-pythonistas-2026-06",
+      "this-month-for-pythonistas-2026-07",
+      "this-month-for-pythonistas-2026-05",
+      "this-month-for-pythonistas-2026-08",
+      "this-month-for-pythonistas-2026-02"
+    ],
+    "uv-is-latest-attempt-to-rule-them-all": [
+      "mojo-series-01-sdk",
+      "mojo-series-01-sdk-zhcn",
+      "one-liner-rust",
+      "github-remote-host-identification",
+      "one-liner-julia"
+    ]
+  }
+}

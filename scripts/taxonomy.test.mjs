@@ -67,6 +67,21 @@ function readSource(entry) {
   return { fields: YAML.parse(frontMatter) ?? {}, body };
 }
 
+/**
+ * The articles the old Hugo site showed as belonging to an article.
+ *
+ * The old theme showed the five articles that shared the most keywords and
+ * tags with an article, in the block it titled "Related content". The
+ * baseline holds the block of every article of the old site, so the new site
+ * can be compared with the old one.
+ */
+const legacyRelated = JSON.parse(
+  readFileSync(
+    path.join(REPO_ROOT, 'scripts/migration/legacy-related.json'),
+    'utf8',
+  ),
+).related;
+
 /** The posts of the corpus, with the front matter the site reads. */
 const posts = postEntries.map((entry) => {
   const { fields } = readSource(entry);
@@ -243,6 +258,24 @@ function linkedPosts(html) {
     .filter((slug) => slug !== undefined);
 }
 
+/**
+ * The articles the page of an article shows as belonging to it.
+ *
+ * The block of the old site was an `aside` that held the articles; the new
+ * site keeps the name of the block, so the articles are read from it.
+ *
+ * @param {string} html The page of an article.
+ * @returns {string[]} The slugs of the articles, in the order they appear.
+ */
+function relatedOf(html) {
+  const block =
+    html.match(
+      /<aside\b[^>]*class="[^"]*\brelated-content\b[^"]*"[\s\S]*?<\/aside>/,
+    )?.[0] ?? '';
+
+  return linkedPosts(block);
+}
+
 /** The escaping a text gets when it is written into a page. */
 function unescapeHtml(text) {
   return text
@@ -397,6 +430,26 @@ describe('the taxonomies of the built site', () => {
       expected,
       'the archive does not list the posts from the newest to the oldest',
     );
+  });
+
+  it('shows the articles that belong to an article', () => {
+    for (const post of posts) {
+      const html = readPage(`/post/${post.slug}/`);
+      const expected = legacyRelated[post.slug] ?? [];
+
+      assert.deepEqual(
+        relatedOf(html),
+        expected,
+        `the page of ${post.slug} does not show the articles the old site showed`,
+      );
+
+      if (expected.length === 0) continue;
+
+      assert.ok(
+        headingTexts(html).includes('Related content'),
+        `the page of ${post.slug} has no block of related articles`,
+      );
+    }
   });
 
   it('publishes the posts in the feed', () => {

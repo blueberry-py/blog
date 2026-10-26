@@ -1,9 +1,11 @@
 ---
 import { Image } from 'astro:assets';
 import type { MarkdownHeading } from 'astro';
-import type { CollectionEntry } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import RelatedContent from '../components/RelatedContent.astro';
 import TableOfContents from '../components/TableOfContents.astro';
 import TaxonomyLinks from '../components/TaxonomyLinks.astro';
+import { relatedPosts } from '../lib/related.ts';
 import { formatDate, formatDateTime, SITE_LICENSE } from '../lib/site.ts';
 import BaseLayout from './BaseLayout.astro';
 
@@ -18,6 +20,11 @@ const published = formatDateTime(post.data.date);
 const cover = post.data.image
   ? new URL(post.data.image.src, Astro.site).href
   : undefined;
+
+const related = relatedPosts(
+  post,
+  await getCollection('posts', ({ data }) => data.draft !== true),
+);
 ---
 
 <BaseLayout
@@ -70,4 +77,6 @@ const cover = post.data.image
       <p class="post-license">{SITE_LICENSE}</p>
     </footer>
   </article>
+
+  <RelatedContent posts={related} />
 </BaseLayout>
