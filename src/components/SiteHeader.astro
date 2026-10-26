@@ -1,0 +1,47 @@
+---
+import { Image } from 'astro:assets';
+import avatar from '../../assets/avatar.jpg';
+import {
+  currentPath,
+  SITE_SUBTITLE,
+  SITE_TITLE,
+  withBase,
+} from '../lib/site.ts';
+
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/about/', label: 'About' },
+];
+
+const path = currentPath(Astro.url);
+const isCurrent = (href: string) =>
+  path === href.replace(/\/+$/, '') || path === href;
+---
+
+<aside class="sidebar">
+  <a class="site-avatar" href={withBase('/')}>
+    <Image src={avatar} alt="" width={192} height={192} />
+  </a>
+
+  <div>
+    <p class="site-name">
+      <a href={withBase('/')}>{SITE_TITLE}</a>
+    </p>
+    <p class="site-subtitle">{SITE_SUBTITLE}</p>
+  </div>
+
+  <nav class="site-nav" aria-label="Main navigation">
+    <ul>
+      {links.map((link) => (
+        <li>
+          <a
+            href={withBase(link.href)}
+            aria-current={isCurrent(link.href) ? 'page' : undefined}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</aside>

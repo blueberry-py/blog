@@ -1,3 +1,4 @@
+import type { SchemaContext } from 'astro:content';
 import { z } from 'astro/zod';
 
 /**
@@ -23,6 +24,18 @@ export const postSchema = z.looseObject({
   series: z.array(z.string()).optional(),
   externalLink: z.string().optional(),
 });
+
+/**
+ * The schema of the posts collection.
+ *
+ * It is the schema of the front matter with the cover image read by the
+ * `image` helper of the collection: the posts name the cover relative to the
+ * folder of the post, the same way Hugo did, and Astro turns it into the
+ * metadata of the image it optimizes.
+ */
+export function postCollectionSchema({ image }: SchemaContext) {
+  return postSchema.extend({ image: image().optional() });
+}
 
 /** The front matter of a standalone page, currently only the about page. */
 export const pageSchema = z.looseObject({

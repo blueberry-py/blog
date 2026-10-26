@@ -1,0 +1,58 @@
+---
+import { Image } from 'astro:assets';
+import type { MarkdownHeading } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import TableOfContents from '../components/TableOfContents.astro';
+import TaxonomyLinks from '../components/TaxonomyLinks.astro';
+import { formatDate, formatDateTime } from '../lib/site.ts';
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+  headings: MarkdownHeading[];
+}
+
+const { post, headings } = Astro.props;
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  path={`/post/${post.id}/`}
+>
+  <article class="post">
+    <header class="post-header">
+      {post.data.image && (
+        <Image
+          class="post-cover"
+          src={post.data.image}
+          alt={`Featured image of post ${post.data.title}`}
+          width={800}
+        />
+      )}
+      <h1 class="post-title">{post.data.title}</h1>
+      {post.data.description && (
+        <p class="post-description">{post.data.description}</p>
+      )}
+      <p class="post-meta">
+        <time datetime={formatDateTime(post.data.date)}>
+          {formatDate(post.data.date)}
+        </time>
+        {post.data.authors.length > 0 && (
+          <span class="post-authors">
+            {' · '}
+            {post.data.authors.join(', ')}
+          </span>
+        )}
+      </p>
+    </header>
+
+    <TableOfContents headings={headings} />
+
+    <div class="post-content">
+      <slot />
+    </div>
+
+    <TaxonomyLinks tags={post.data.tags} categories={post.data.categories} />
+  </article>
+</BaseLayout>

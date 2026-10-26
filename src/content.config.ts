@@ -1,7 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 
-import { pageSchema, postSchema } from './lib/content-schema.ts';
+import { pageSchema, postCollectionSchema } from './lib/content-schema.ts';
 
 /**
  * Blog posts. The front matter is the Hugo front matter of the same name:
@@ -10,7 +10,7 @@ import { pageSchema, postSchema } from './lib/content-schema.ts';
  */
 const posts = defineCollection({
   loader: glob({ base: './content/post', pattern: '**/*.md' }),
-  schema: postSchema,
+  schema: postCollectionSchema,
 });
 
 /** Standalone pages, currently only the about page. */

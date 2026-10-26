@@ -1,0 +1,28 @@
+---
+import { getEntry, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const about = await getEntry('pages', 'about');
+
+if (!about) {
+  throw new Error('the about page is missing from the pages collection');
+}
+
+const { Content } = await render(about);
+---
+
+<BaseLayout
+  title={about.data.title}
+  description={about.data.description}
+  path="/about/"
+>
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">{about.data.title}</h1>
+    </header>
+
+    <div class="post-content">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,27 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { formatDate, formatDateTime } from '../lib/site.ts';
+import TaxonomyLinks from './TaxonomyLinks.astro';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+  href: string;
+}
+
+const { post, href } = Astro.props;
+---
+
+<article class="post-card">
+  <h2 class="post-card-title">
+    <a href={href}>{post.data.title}</a>
+  </h2>
+  <p class="post-card-meta">
+    <time datetime={formatDateTime(post.data.date)}>
+      {formatDate(post.data.date)}
+    </time>
+  </p>
+  {post.data.description && (
+    <p class="post-card-description">{post.data.description}</p>
+  )}
+  <TaxonomyLinks tags={post.data.tags} categories={post.data.categories} />
+</article>

@@ -1,0 +1,43 @@
+---
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import { SITE_SUBTITLE, SITE_TITLE, withBase } from '../lib/site.ts';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  path?: string;
+}
+
+const {
+  title = SITE_TITLE,
+  description = SITE_SUBTITLE,
+  path = '/',
+} = Astro.props;
+
+const canonical = Astro.site
+  ? new URL(withBase(path), Astro.site).href
+  : undefined;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
+  </head>
+  <body>
+    <div class="container">
+      <SiteHeader />
+      <main class="main">
+        <slot />
+      </main>
+    </div>
+    <SiteFooter />
+  </body>
+</html>

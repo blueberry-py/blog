@@ -1,0 +1,19 @@
+---
+interface Props {
+  tags?: string[];
+  categories?: string[];
+}
+
+const { tags = [], categories = [] } = Astro.props;
+---
+
+{(tags.length > 0 || categories.length > 0) && (
+  <ul class="taxonomy-links">
+    {categories.map((category) => (
+      <li class="taxonomy-category">{category}</li>
+    ))}
+    {tags.map((tag) => (
+      <li class="taxonomy-tag">{tag}</li>
+    ))}
+  </ul>
+)}
