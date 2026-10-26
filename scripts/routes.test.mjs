@@ -32,6 +32,9 @@ const ASTRO_BIN = path.join(
   'astro.mjs',
 );
 
+/** The canonical URL of the build the checks read. */
+const SITE = 'https://blueberrypy.netlify.app';
+
 const manifest = readManifest(REPO_ROOT);
 const postEntries = manifest.entries.filter(
   (entry) => entry.collection === 'post',
@@ -46,7 +49,12 @@ function buildSite() {
     execFileSync(process.execPath, [ASTRO_BIN, 'build'], {
       cwd: REPO_ROOT,
       encoding: 'utf8',
-      env: { ...process.env, ASTRO_TELEMETRY_DISABLED: '1' },
+      env: {
+        ...process.env,
+        ASTRO_TELEMETRY_DISABLED: '1',
+        SITE_URL: SITE,
+        BASE_PATH: '/',
+      },
     });
   } catch (error) {
     const output = [error.stdout, error.stderr].filter(Boolean).join('\n');
