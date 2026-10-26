@@ -295,7 +295,7 @@ describe('the README of the repository', () => {
     for (const command of [
       'pnpm install --frozen-lockfile',
       'pnpm dev',
-      'pnpm build',
+      'pnpm build:root',
       'pnpm check',
     ]) {
       assert.ok(

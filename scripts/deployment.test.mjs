@@ -162,8 +162,12 @@ describe('the deployment to Netlify', () => {
     assert.equal(netlify().build?.publish, 'dist');
   });
 
-  it('builds the site with pnpm', () => {
-    assert.match(netlify().build?.command ?? '', /pnpm\s+build/);
+  it('builds the site for the root of the host', () => {
+    assert.equal(
+      netlify().build?.command,
+      'pnpm build:root',
+      'the build of Netlify takes the shape of the site from the environment',
+    );
   });
 
   it('pins the version of Node and the timezone of the site', () => {
@@ -207,10 +211,14 @@ describe('the deployment to Cloudflare Workers', () => {
 });
 
 describe('the deployment to Vercel', () => {
-  it('builds the site with pnpm and publishes the static output', () => {
+  it('builds the site for the root of the host', () => {
     const vercel = readJson('vercel.json');
 
-    assert.match(vercel.buildCommand ?? '', /pnpm\s+build/);
+    assert.equal(
+      vercel.buildCommand,
+      'pnpm build:root',
+      'the build of Vercel takes the shape of the site from the environment',
+    );
     assert.equal(vercel.outputDirectory, 'dist');
   });
 
@@ -218,6 +226,38 @@ describe('the deployment to Vercel', () => {
     const text = read('vercel.json');
 
     assert.doesNotMatch(text, /hugo|build\.sh/i);
+  });
+});
+
+describe('the deployment the README documents', () => {
+  it('tells every host to build the site for the root of its domain', () => {
+    const readme = read('README.md');
+
+    assert.doesNotMatch(
+      readme,
+      /`pnpm build`/,
+      'the README tells a host to build the site with the plain build',
+    );
+    assert.match(
+      readme,
+      /Build command: `pnpm build:root`/,
+      'the README does not tell Render to build the site for its host',
+    );
+    assert.match(
+      readme,
+      /build\s+command `pnpm build:root`/,
+      'the README does not tell the dashboard of Cloudflare to build the site for its host',
+    );
+  });
+
+  it('tells the reader how the Worker is served locally', () => {
+    const readme = read('README.md');
+
+    assert.match(
+      readme,
+      /pnpm build:root && pnpm exec wrangler dev/,
+      'the README does not serve the Worker from a build for its host',
+    );
   });
 });
 

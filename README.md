@@ -72,9 +72,9 @@ had, with the body and the local images it refers to.
 
 ## Deployment
 
-Every host builds the same static output with `pnpm build` and publishes the
-`dist` directory. Two environment variables tell the build where the site
-lives; `astro.config.mjs` reads them:
+Every host builds the same static output and publishes the `dist` directory.
+Two environment variables tell the build where the site lives; `astro.config.mjs`
+reads them:
 
 | Variable    | Meaning                                                                |
 | ----------- | ---------------------------------------------------------------------- |
@@ -93,16 +93,17 @@ the shell cannot shape it:
 | `pnpm build:root`  | Netlify, Render, Vercel and Cloudflare Workers |
 | `pnpm build:pages` | the project site of GitHub Pages               |
 
-The plain `pnpm build` reads the two values from the environment, which is
-what the hosts do.
+Every host runs the build of its own row: a build that takes the two values
+from the environment would publish a site shaped for another host, and every
+link of it would answer with a 404.
 
 | Host               | Settings                       | Publish | Build                                                                               |
 | ------------------ | ------------------------------ | ------- | ----------------------------------------------------------------------------------- |
 | GitHub Pages       | `.github/workflows/deploy.yml` | `dist`  | `withastro/action@v6`, `SITE_URL=https://blueberry-py.github.io`, `BASE_PATH=/blog` |
-| Netlify            | `netlify.toml`                 | `dist`  | `pnpm build`                                                                        |
-| Render             | the dashboard of the site      | `dist`  | `pnpm build`                                                                        |
-| Vercel             | `vercel.json`                  | `dist`  | `pnpm build`                                                                        |
-| Cloudflare Workers | `wrangler.toml`                | `dist`  | `pnpm build`, published by `pnpm deploy:cloudflare`                                 |
+| Netlify            | `netlify.toml`                 | `dist`  | `pnpm build:root`                                                                   |
+| Render             | the dashboard of the site      | `dist`  | `pnpm build:root`                                                                   |
+| Vercel             | `vercel.json`                  | `dist`  | `pnpm build:root`                                                                   |
+| Cloudflare Workers | `wrangler.toml`                | `dist`  | `pnpm build:root`, published by `pnpm deploy:cloudflare`                            |
 
 The repository has to be set to "GitHub Actions" as the source of the GitHub
 Pages site, otherwise the workflow has no site to deploy to.
@@ -136,7 +137,7 @@ The Worker is previewed locally against the built output, as described in
 Render reads no configuration file from the repository, so the settings of the
 static site are made in its dashboard:
 
-- Build command: `pnpm build`
+- Build command: `pnpm build:root`
 - Publish path: `dist`
 - Environment: `TZ=Asia/Shanghai`; `SITE_URL` is not needed, because the
   canonical URL of the site is the one of the default build.
@@ -151,10 +152,10 @@ pnpm deploy:cloudflare
 ```
 
 A deployment from the Cloudflare dashboard (Workers Builds) uses the build
-command `pnpm build` and the deploy command `pnpm deploy:cloudflare`.
+command `pnpm build:root` and the deploy command `pnpm deploy:cloudflare`.
 
 The Worker can be served locally, against the built output:
 
 ```sh
-pnpm build && pnpm exec wrangler dev
+pnpm build:root && pnpm exec wrangler dev
 ```
