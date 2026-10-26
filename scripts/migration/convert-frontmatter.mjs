@@ -8,8 +8,9 @@
  * file whose front matter cannot be parsed is never overwritten.
  *
  * Usage:
- *   node scripts/migration/convert-frontmatter.mjs --check   report what would change
- *   node scripts/migration/convert-frontmatter.mjs           convert the inventoried files
+ *   node scripts/migration/convert-frontmatter.mjs --check       report what would change
+ *   node scripts/migration/convert-frontmatter.mjs               convert the inventoried files
+ *   node scripts/migration/convert-frontmatter.mjs --path <file> convert one article of the site
  */
 import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
@@ -136,10 +137,65 @@ export function listInventoriedFiles(rootDir = REPO_ROOT) {
   return manifest.entries.map((entry) => entry.source);
 }
 
+/**
+ * Refuse a path that is not an article of the site.
+ *
+ * The command writes to the files it is given, so it writes only to the
+ * articles of the site.
+ *
+ * @param {string} source The path of the file, relative to the root of the site.
+ * @returns {string} The path, written the way the site writes its paths.
+ */
+export function assertContentPath(source) {
+  const normalized = source.split(path.sep).join('/');
+
+  if (!normalized.startsWith('content/')) {
+    throw new Error(
+      `${source}: only a file of the content tree of the site can be converted`,
+    );
+  }
+
+  return normalized;
+}
+
+/**
+ * The files the command was asked to convert.
+ *
+ * The command converts the articles of the baseline of the migration, and the
+ * articles that are named with `--path`: an article of the working tree that
+ * the baseline does not hold is converted when its author asks for it, and not
+ * before.
+ *
+ * @param {string[]} argv The arguments of the command.
+ * @param {string} rootDir The root of the site.
+ * @returns {string[]} The paths of the files, relative to the root of the site.
+ */
+export function selectSources(argv, rootDir = REPO_ROOT) {
+  const named = [];
+
+  for (let index = 0; index < argv.length; index += 1) {
+    if (argv[index] !== '--path') continue;
+
+    const value = argv[index + 1];
+    if (!value) {
+      throw new Error('--path needs the path of an article of the site');
+    }
+
+    named.push(assertContentPath(value));
+    index += 1;
+  }
+
+  if (named.length === 0) {
+    return listInventoriedFiles(rootDir);
+  }
+
+  return named;
+}
+
 function main(argv) {
   const check = argv.includes('--check');
   const rootDir = REPO_ROOT;
-  const sources = listInventoriedFiles(rootDir);
+  const sources = selectSources(argv, rootDir);
   const changed = [];
 
   for (const sourcePath of sources) {

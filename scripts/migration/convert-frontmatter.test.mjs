@@ -177,6 +177,83 @@ describe('front matter conversion', () => {
   });
 });
 
+describe('the files the converter is asked for', () => {
+  /** A tree with an article that the baseline of the migration does not hold. */
+  function withFixture(fn) {
+    const root = mkdtempSync(path.join(tmpdir(), 'blog-convert-sources-'));
+    try {
+      const source = path.join(root, 'content/post/new.md');
+      mkdirSync(path.dirname(source), { recursive: true });
+      writeFileSync(source, TOML_FRONT_MATTER, 'utf8');
+      return fn(root, source);
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+    }
+  }
+
+  it('converts the articles of the baseline when no file is named', async () => {
+    const { selectSources } = await loadConverter();
+
+    await withFixture(async (root) => {
+      mkdirSync(path.join(root, 'scripts/migration'), { recursive: true });
+      writeFileSync(
+        path.join(root, 'scripts/migration/legacy-routes.json'),
+        JSON.stringify({
+          entries: [{ source: 'content/post/alpha.md' }],
+        }),
+        'utf8',
+      );
+
+      assert.deepEqual(selectSources([], root), ['content/post/alpha.md']);
+    });
+  });
+
+  it('converts a file the baseline does not hold', async () => {
+    const { selectSources } = await loadConverter();
+
+    await withFixture((root) => {
+      assert.deepEqual(selectSources(['--path', 'content/post/new.md'], root), [
+        'content/post/new.md',
+      ]);
+    });
+  });
+
+  it('writes the front matter of a file the baseline does not hold', async () => {
+    const { convertFile, selectSources } = await loadConverter();
+
+    await withFixture((root, source) => {
+      const sources = selectSources(['--path', 'content/post/new.md'], root);
+
+      for (const one of sources) {
+        convertFile(root, one, { write: true });
+      }
+
+      const written = readFileSync(source, 'utf8');
+      assert.ok(written.startsWith('---\n'), 'the front matter uses YAML');
+      assert.match(written, /^title: Alpha$/m);
+    });
+  });
+
+  it('refuses a path that is not an article of the site', async () => {
+    const { selectSources } = await loadConverter();
+
+    await withFixture((root) => {
+      assert.throws(
+        () => selectSources(['--path', 'README.md'], root),
+        /content/,
+      );
+    });
+  });
+
+  it('refuses a path that names no file', async () => {
+    const { selectSources } = await loadConverter();
+
+    await withFixture((root) => {
+      assert.throws(() => selectSources(['--path'], root), /--path/);
+    });
+  });
+});
+
 describe('front matter conversion on disk', () => {
   it('reports a change without writing it in check mode', async () => {
     const { convertFile } = await loadConverter();

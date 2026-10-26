@@ -408,4 +408,19 @@ describe('the README of the repository', () => {
       'the README does not say what the baseline of the verification follows',
     );
   });
+
+  it('tells how the articles outside the baseline are reconciled', () => {
+    const readme = read('README.md');
+
+    assert.match(
+      readme,
+      /pnpm convert:frontmatter -- --path/,
+      'the README does not tell how an article outside the baseline is converted',
+    );
+    assert.match(
+      readme,
+      /`draft: false`/,
+      'the README does not tell that an article that is not a draft is published',
+    );
+  });
 });

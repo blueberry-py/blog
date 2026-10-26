@@ -90,6 +90,39 @@ names a cover that is not there: title.jpg (content/post/title.jpg). It is
 published without a cover.
 ```
 
+### The articles of the working tree
+
+The migration converted the thirty-eight articles the repository held at the
+commit it started from. The working tree of the blog holds three more articles
+that Git does not track, and two of the tracked ones carry changes that were
+never committed:
+
+| Path                                                       | State     |
+| ---------------------------------------------------------- | --------- |
+| `content/post/blog-migrated-to-astro.md`                   | untracked |
+| `content/post/pycon-us-2026-recap.md`                      | untracked |
+| `content/post/this-month-for-pythonistas-2026-10/`         | untracked |
+| `content/post/this-month-for-pythonistas-2026-08/index.md` | modified  |
+| `content/post/this-month-for-pythonistas-2026-09/index.md` | modified  |
+
+The migration leaves them alone: they are the writing of the author, and an
+article that has not been read is not published by a migration. Each of them is
+converted on its own, when the author asks for it:
+
+```sh
+pnpm convert:frontmatter -- --path content/post/pycon-us-2026-recap.md
+```
+
+The command rewrites the front matter of that one file and leaves the body of
+the article as it is. The site publishes the articles that are not drafts, so
+an article that carries `draft: false` is published by the next build: mark it
+as a draft until it has been read.
+
+The two modified articles are changed on both sides — the branch writes their
+front matter as YAML and the working tree still writes it as TOML — so Git
+asks for the change to be settled before the branch is merged. Convert them
+with the same command once the branch is merged.
+
 ## Deployment
 
 Every host builds the same static output and publishes the `dist` directory.
