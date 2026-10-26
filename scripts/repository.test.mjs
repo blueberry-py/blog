@@ -274,6 +274,31 @@ describe('the ignore files of the repository', () => {
   });
 });
 
+describe('the line endings of the repository', () => {
+  it('pins the line endings of the files of the repository', () => {
+    assert.ok(
+      existsSync(path.join(REPO_ROOT, '.gitattributes')),
+      'the repository has no .gitattributes',
+    );
+
+    assert.match(
+      read('.gitattributes'),
+      /^\* text=auto eol=lf$/m,
+      'the line endings of the files are not pinned',
+    );
+  });
+
+  it('tells the formatter which line endings it writes', () => {
+    const prettier = JSON.parse(read('.prettierrc.json'));
+
+    assert.equal(
+      prettier.endOfLine,
+      'lf',
+      'the formatter is not told which line endings it writes',
+    );
+  });
+});
+
 describe('the sources of the site', () => {
   it('name no path of Hugo', () => {
     const found = siteSources().filter((file) =>

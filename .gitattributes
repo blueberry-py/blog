@@ -1,0 +1,14 @@
+# The files of the repository are written with the line endings of Unix, on
+# every machine: the formatter and the linter read the same bytes in a working
+# tree of Windows and in a working tree of Linux, so a checkout that rewrites
+# the line endings does not turn every file of the repository into a file that
+# is not formatted.
+* text=auto eol=lf
+
+# The images are not text.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.gif binary
+*.ico binary

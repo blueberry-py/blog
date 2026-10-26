@@ -3,6 +3,7 @@
   "singleQuote": true,
   "proseWrap": "preserve",
   "embeddedLanguageFormatting": "off",
+  "endOfLine": "lf",
   "overrides": [
     {
       "files": "*.astro",
