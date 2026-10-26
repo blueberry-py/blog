@@ -4,7 +4,7 @@ import type { MarkdownHeading } from 'astro';
 import type { CollectionEntry } from 'astro:content';
 import TableOfContents from '../components/TableOfContents.astro';
 import TaxonomyLinks from '../components/TaxonomyLinks.astro';
-import { formatDate, formatDateTime } from '../lib/site.ts';
+import { formatDate, formatDateTime, SITE_LICENSE } from '../lib/site.ts';
 import BaseLayout from './BaseLayout.astro';
 
 interface Props {
@@ -13,12 +13,23 @@ interface Props {
 }
 
 const { post, headings } = Astro.props;
+
+const published = formatDateTime(post.data.date);
+const cover = post.data.image
+  ? new URL(post.data.image.src, Astro.site).href
+  : undefined;
 ---
 
 <BaseLayout
   title={post.data.title}
   description={post.data.description}
   path={`/post/${post.id}/`}
+  type="article"
+  section="Post"
+  tags={post.data.tags}
+  publishedTime={published}
+  modifiedTime={published}
+  image={cover}
 >
   <article class="post">
     <header class="post-header">
@@ -54,5 +65,9 @@ const { post, headings } = Astro.props;
     </div>
 
     <TaxonomyLinks tags={post.data.tags} categories={post.data.categories} />
+
+    <footer class="post-footer">
+      <p class="post-license">{SITE_LICENSE}</p>
+    </footer>
   </article>
 </BaseLayout>

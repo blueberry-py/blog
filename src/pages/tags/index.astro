@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { collectTerms, sortTerms } from '../../lib/taxonomy.ts';
+import { withBase } from '../../lib/site.ts';
+
+const posts = await getCollection('posts', ({ data }) => data.draft !== true);
+const terms = sortTerms(collectTerms(posts, 'tags'));
+---
+
+<BaseLayout
+  title="Tags"
+  description="The tags of the posts of BlueberryPy"
+  path="/tags/"
+>
+  <h1 class="page-title">Tags</h1>
+
+  <ul class="term-list">
+    {terms.map((term) => (
+      <li>
+        <a href={withBase(`/tags/${term.slug}/`)}>{term.name}</a>
+        <span class="term-count">{term.posts.length} posts</span>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>

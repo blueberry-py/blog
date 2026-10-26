@@ -12,6 +12,15 @@ export const SITE_TITLE = 'BlueberryPy';
 /** The subtitle of the site, shown under the name. */
 export const SITE_SUBTITLE = 'Python & Fun';
 
+/** The handle of the site on the social network the old site linked to. */
+export const SITE_TWITTER_HANDLE = '@linzeyang';
+
+/** The license the articles of the site are published under. */
+export const SITE_LICENSE = 'Licensed under CC BY-NC-SA 4.0';
+
+/** The year the site started publishing its articles. */
+export const SITE_START_YEAR = 2024;
+
 /** The timezone the articles are dated in. */
 export const SITE_TIMEZONE = 'Asia/Shanghai';
 

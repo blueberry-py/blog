@@ -1,19 +1,55 @@
 ---
+import { getCollection } from 'astro:content';
+import { collectTerms, termSlug } from '../lib/taxonomy.ts';
+import { withBase } from '../lib/site.ts';
+
 interface Props {
   tags?: string[];
   categories?: string[];
 }
 
 const { tags = [], categories = [] } = Astro.props;
+
+let names: { tags: Map<string, string>; categories: Map<string, string> };
+
+async function termNames() {
+  if (!names) {
+    const posts = await getCollection(
+      'posts',
+      ({ data }) => data.draft !== true,
+    );
+
+    names = {
+      tags: new Map(
+        collectTerms(posts, 'tags').map((term) => [term.slug, term.name]),
+      ),
+      categories: new Map(
+        collectTerms(posts, 'categories').map((term) => [term.slug, term.name]),
+      ),
+    };
+  }
+
+  return names;
+}
+
+const { tags: tagNames, categories: categoryNames } = await termNames();
 ---
 
 {(tags.length > 0 || categories.length > 0) && (
   <ul class="taxonomy-links">
     {categories.map((category) => (
-      <li class="taxonomy-category">{category}</li>
+      <li class="taxonomy-category">
+        <a href={withBase(`/categories/${termSlug(category)}/`)}>
+          {categoryNames.get(termSlug(category)) ?? category}
+        </a>
+      </li>
     ))}
     {tags.map((tag) => (
-      <li class="taxonomy-tag">{tag}</li>
+      <li class="taxonomy-tag">
+        <a href={withBase(`/tags/${termSlug(tag)}/`)}>
+          {tagNames.get(termSlug(tag)) ?? tag}
+        </a>
+      </li>
     ))}
   </ul>
 )}

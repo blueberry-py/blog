@@ -1,11 +1,11 @@
 ---
-import { SITE_TITLE } from '../lib/site.ts';
+import { SITE_START_YEAR, SITE_TITLE } from '../lib/site.ts';
 
 const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
   <p>
-    © {year} {SITE_TITLE}
+    © {SITE_START_YEAR} - {year} {SITE_TITLE}
   </p>
 </footer>

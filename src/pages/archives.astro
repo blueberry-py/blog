@@ -1,0 +1,25 @@
+---
+import { getCollection } from 'astro:content';
+import PostCard from '../components/PostCard.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { sortPosts } from '../lib/posts.ts';
+import { withBase } from '../lib/site.ts';
+
+const posts = sortPosts(
+  await getCollection('posts', ({ data }) => data.draft !== true),
+);
+---
+
+<BaseLayout
+  title="Archives"
+  description="Every post of BlueberryPy, from the newest to the oldest"
+  path="/archives/"
+>
+  <h1 class="page-title">Archives</h1>
+
+  <div class="post-list">
+    {posts.map((post) => (
+      <PostCard post={post} href={withBase(`/post/${post.id}/`)} />
+    ))}
+  </div>
+</BaseLayout>

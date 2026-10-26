@@ -1,0 +1,27 @@
+---
+import type { Term } from '../lib/taxonomy.ts';
+import { withBase } from '../lib/site.ts';
+
+interface Props {
+  title: string;
+  indexHref: string;
+  terms: Term[];
+  limit?: number;
+}
+
+const { title, indexHref, terms, limit = 10 } = Astro.props;
+const shown = terms.slice(0, limit);
+---
+
+<section class="widget">
+  <h2 class="widget-title">
+    <a href={withBase(indexHref)}>{title}</a>
+  </h2>
+  <ul class="widget-terms">
+    {shown.map((term) => (
+      <li>
+        <a href={withBase(`${indexHref}${term.slug}/`)}>{term.name}</a>
+      </li>
+    ))}
+  </ul>
+</section>

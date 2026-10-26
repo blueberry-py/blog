@@ -1,12 +1,18 @@
 ---
 import { getCollection } from 'astro:content';
 import PostCard from '../components/PostCard.astro';
+import TaxonomyWidget from '../components/TaxonomyWidget.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE_SUBTITLE, SITE_TITLE, withBase } from '../lib/site.ts';
+import { sortPosts } from '../lib/posts.ts';
+import { collectTerms, sortTerms } from '../lib/taxonomy.ts';
 
-const posts = (
-  await getCollection('posts', ({ data }) => data.draft !== true)
-).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const posts = sortPosts(
+  await getCollection('posts', ({ data }) => data.draft !== true),
+);
+
+const categories = sortTerms(collectTerms(posts, 'categories'));
+const tags = sortTerms(collectTerms(posts, 'tags'));
 ---
 
 <BaseLayout title={SITE_TITLE} description={SITE_SUBTITLE} path="/">
@@ -17,5 +23,14 @@ const posts = (
     {posts.map((post) => (
       <PostCard post={post} href={withBase(`/post/${post.id}/`)} />
     ))}
+  </div>
+
+  <div class="widgets">
+    <TaxonomyWidget
+      title="Categories"
+      indexHref="/categories/"
+      terms={categories}
+    />
+    <TaxonomyWidget title="Tags" indexHref="/tags/" terms={tags} />
   </div>
 </BaseLayout>
