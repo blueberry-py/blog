@@ -1,16 +1,32 @@
-+++
-title = "This Month for Pythonistas - February 2026"
-description = "New Python releases, upcoming `frozendict`, Claude 4.6, GPT-5.3, GLM-5, Agent Skills and more fun stuff"
-slug = "this-month-for-pythonistas-2026-02"
-date = 2026-02-28T21:00:00+08:00
-authors = ["Zeyang Lin"]
-tags = ["python", "news", "podcast", "llm", "linux"]
-categories = ["python"]
-series = ["this month for pythonistas"]
-keywords = ["python", "2026", "AI", "agentic", "llm", "openai", "anthropic", "claude"]
-image = "title.jpg"
-draft = false
-+++
+---
+title: This Month for Pythonistas - February 2026
+description: New Python releases, upcoming `frozendict`, Claude 4.6, GPT-5.3, GLM-5, Agent Skills and more fun stuff
+slug: this-month-for-pythonistas-2026-02
+date: 2026-02-28T21:00:00+08:00
+authors:
+  - Zeyang Lin
+tags:
+  - python
+  - news
+  - podcast
+  - llm
+  - linux
+categories:
+  - python
+series:
+  - this month for pythonistas
+keywords:
+  - python
+  - "2026"
+  - AI
+  - agentic
+  - llm
+  - openai
+  - anthropic
+  - claude
+image: title.jpg
+draft: false
+---
 
 ```python
 from datetime import date

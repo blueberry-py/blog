@@ -1,16 +1,32 @@
-+++
-title = "This Month for Pythonistas - August 2025"
-description = "Python 3.14 RC2 & 3.13.7, OpenAI open models, Agentic AI and other fun stuff"
-slug = "this-month-for-pythonistas-2025-08"
-date = 2025-08-31T21:00:00+08:00
-authors = ["Zeyang Lin"]
-tags = ["python", "cli", "linux", "podcast", "news"]
-categories = ["python"]
-series = ["this month for pythonistas"]
-keywords = ["python", "linux", "podcast", "AI", "LLM", "agent", "mcp", "openai"]
-image = "title.jpg"
-draft = false
-+++
+---
+title: This Month for Pythonistas - August 2025
+description: Python 3.14 RC2 & 3.13.7, OpenAI open models, Agentic AI and other fun stuff
+slug: this-month-for-pythonistas-2025-08
+date: 2025-08-31T21:00:00+08:00
+authors:
+  - Zeyang Lin
+tags:
+  - python
+  - cli
+  - linux
+  - podcast
+  - news
+categories:
+  - python
+series:
+  - this month for pythonistas
+keywords:
+  - python
+  - linux
+  - podcast
+  - AI
+  - LLM
+  - agent
+  - mcp
+  - openai
+image: title.jpg
+draft: false
+---
 
 ```python
 from datetime import date

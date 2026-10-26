@@ -1,16 +1,37 @@
-+++
-title = "This Month for Pythonistas - April 2026"
-description = "New Python versions, DjangoCon Europe, GPT-5.5, Claude Opus 4.7, GLM-5.1, Kimi K2.6, Harness, opinions on Agentic AI and other fun stuff"
-slug = "this-month-for-pythonistas-2026-04"
-date = 2026-04-30T21:00:00+08:00
-authors = ["Zeyang Lin"]
-tags = ["python", "news", "podcast", "AI", "llm", "linux", "blog"]
-categories = ["python"]
-series = ["this month for pythonistas"]
-keywords = ["python", "news", "2026", "djangocon", "gpt", "claude", "openai", "moonshot", "AI", "agentic", "harness"]
-image = "title.jpg"
-draft = false
-+++
+---
+title: This Month for Pythonistas - April 2026
+description: New Python versions, DjangoCon Europe, GPT-5.5, Claude Opus 4.7, GLM-5.1, Kimi K2.6, Harness, opinions on Agentic AI and other fun stuff
+slug: this-month-for-pythonistas-2026-04
+date: 2026-04-30T21:00:00+08:00
+authors:
+  - Zeyang Lin
+tags:
+  - python
+  - news
+  - podcast
+  - AI
+  - llm
+  - linux
+  - blog
+categories:
+  - python
+series:
+  - this month for pythonistas
+keywords:
+  - python
+  - news
+  - "2026"
+  - djangocon
+  - gpt
+  - claude
+  - openai
+  - moonshot
+  - AI
+  - agentic
+  - harness
+image: title.jpg
+draft: false
+---
 
 ```python
 from datetime import date

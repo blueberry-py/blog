@@ -1,16 +1,28 @@
-+++
-title = "[PyCon China 2026] It's Time to Learn (Some) Rust — Starting from a Faster pip install"
-description = "PyCon China 2026 (Shanghai) Lightning Talk"
-slug = "pycon-china-2026-lightning-talk"
-date = 2026-09-05T15:10:00+08:00
-authors = ["Zeyang Lin"]
-tags = ["python", "rust", "pycon"]
-categories = ["python", "rust"]
-series = []
-keywords = ["python", "pycon", "rust", "social", "China", "2026"]
-image = "title.jpg"
-draft = false
-+++
+---
+title: "[PyCon China 2026] It's Time to Learn (Some) Rust — Starting from a Faster pip install"
+description: PyCon China 2026 (Shanghai) Lightning Talk
+slug: pycon-china-2026-lightning-talk
+date: 2026-09-05T15:10:00+08:00
+authors:
+  - Zeyang Lin
+tags:
+  - python
+  - rust
+  - pycon
+categories:
+  - python
+  - rust
+series: []
+keywords:
+  - python
+  - pycon
+  - rust
+  - social
+  - China
+  - "2026"
+image: title.jpg
+draft: false
+---
 
 # It's Time to Learn (Some) Rust — Starting from a Faster pip install
 

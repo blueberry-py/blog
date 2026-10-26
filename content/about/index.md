@@ -1,7 +1,8 @@
-+++
-title = 'About'
-date = 2024-01-31T16:11:57+08:00
-+++
+---
+title: About
+date: 2024-01-31T16:11:57+08:00
+slug: about
+---
 
 BlueberryPy is a place to share Python and other fun stuff :)
 

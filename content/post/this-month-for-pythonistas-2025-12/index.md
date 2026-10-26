@@ -1,16 +1,31 @@
-+++
-title = "This Month for Pythonistas - December 2025"
-description = "Python 3.15 Alpha, Django 6.0, Vercel on Python, GPT 5.2 and more holiday coding fun"
-slug = "this-month-for-pythonistas-2025-12"
-date = 2025-12-31T16:00:00+08:00
-authors = ["Zeyang Lin"]
-tags = ["python", "news", "podcast", "ai"]
-categories = ["python"]
-series = ["this month for pythonistas"]
-keywords = ["python", "news", "ai", "django", "vercel", "podcast", "openai", "gemini"]
-image = "title.jpg"
-draft = false
-+++
+---
+title: This Month for Pythonistas - December 2025
+description: Python 3.15 Alpha, Django 6.0, Vercel on Python, GPT 5.2 and more holiday coding fun
+slug: this-month-for-pythonistas-2025-12
+date: 2025-12-31T16:00:00+08:00
+authors:
+  - Zeyang Lin
+tags:
+  - python
+  - news
+  - podcast
+  - ai
+categories:
+  - python
+series:
+  - this month for pythonistas
+keywords:
+  - python
+  - news
+  - ai
+  - django
+  - vercel
+  - podcast
+  - openai
+  - gemini
+image: title.jpg
+draft: false
+---
 
 ```python
 from datetime import date

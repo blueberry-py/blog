@@ -1,16 +1,33 @@
-+++
-title = "This Month for Pythonistas - June 2026"
-description = "New Python 🐍 versions, JIT, free-threading internals, Claude Fable/Mythos drama, MiniMax M3, Qwen 3.7 Plus, more thoughts on Agentic AI 🤖 and vibe coding, as well as other fun stuff"
-slug = "this-month-for-pythonistas-2026-06"
-date = 2026-06-30T21:00:00+08:00
-authors = ["Zeyang Lin"]
-tags = ["python", "news", "podcast", "AI", "pycon"]
-categories = ["python"]
-series = ["this month for pythonistas"]
-keywords = ["python", "AI", "agentic", "microsoft", "podcast", "pycon", "linux", "claude", "anthropic"]
-image = "title.jpg"
-draft = false
-+++
+---
+title: This Month for Pythonistas - June 2026
+description: New Python 🐍 versions, JIT, free-threading internals, Claude Fable/Mythos drama, MiniMax M3, Qwen 3.7 Plus, more thoughts on Agentic AI 🤖 and vibe coding, as well as other fun stuff
+slug: this-month-for-pythonistas-2026-06
+date: 2026-06-30T21:00:00+08:00
+authors:
+  - Zeyang Lin
+tags:
+  - python
+  - news
+  - podcast
+  - AI
+  - pycon
+categories:
+  - python
+series:
+  - this month for pythonistas
+keywords:
+  - python
+  - AI
+  - agentic
+  - microsoft
+  - podcast
+  - pycon
+  - linux
+  - claude
+  - anthropic
+image: title.jpg
+draft: false
+---
 
 ```python
 from datetime import date

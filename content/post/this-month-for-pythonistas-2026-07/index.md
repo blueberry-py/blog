@@ -1,16 +1,33 @@
-+++
-title = "This Month for Pythonistas - July 2026"
-description = "Python 3.15 beta 4, EuroPython, package namespace, Claude Opus 5, GPT-5.6, more thoughts on Agentic AI 🤖 and vibe coding, as well as other fun stuff"
-slug = "this-month-for-pythonistas-2026-07"
-date = 2026-07-31T21:00:00+08:00
-authors = ["Zeyang Lin"]
-tags = ["python", "news", "podcast", "AI", "pycon"]
-categories = ["python"]
-series = ["this month for pythonistas"]
-keywords = ["python", "AI", "agentic", "podcast", "europython", "linux", "claude", "anthropic", "openai"]
-image = "title.jpg"
-draft = false
-+++
+---
+title: This Month for Pythonistas - July 2026
+description: Python 3.15 beta 4, EuroPython, package namespace, Claude Opus 5, GPT-5.6, more thoughts on Agentic AI 🤖 and vibe coding, as well as other fun stuff
+slug: this-month-for-pythonistas-2026-07
+date: 2026-07-31T21:00:00+08:00
+authors:
+  - Zeyang Lin
+tags:
+  - python
+  - news
+  - podcast
+  - AI
+  - pycon
+categories:
+  - python
+series:
+  - this month for pythonistas
+keywords:
+  - python
+  - AI
+  - agentic
+  - podcast
+  - europython
+  - linux
+  - claude
+  - anthropic
+  - openai
+image: title.jpg
+draft: false
+---
 
 ```python
 from datetime import date

@@ -1,16 +1,31 @@
-+++
-title = "This Month for Pythonistas - July 2025"
-description = "Python 3.14 RC1, Agentic AI, context engineering and other fun stuff"
-slug = "this-month-for-pythonistas-2025-07"
-date = 2025-07-31T21:00:00+08:00
-authors = ["Zeyang Lin"]
-tags = ["python", "cli", "linux", "podcast", "news"]
-categories = ["python"]
-series = ["this month for pythonistas"]
-keywords = ["python", "linux", "podcast", "AI", "LLM", "agent", "mcp"]
-image = "title.jpg"
-draft = false
-+++
+---
+title: This Month for Pythonistas - July 2025
+description: Python 3.14 RC1, Agentic AI, context engineering and other fun stuff
+slug: this-month-for-pythonistas-2025-07
+date: 2025-07-31T21:00:00+08:00
+authors:
+  - Zeyang Lin
+tags:
+  - python
+  - cli
+  - linux
+  - podcast
+  - news
+categories:
+  - python
+series:
+  - this month for pythonistas
+keywords:
+  - python
+  - linux
+  - podcast
+  - AI
+  - LLM
+  - agent
+  - mcp
+image: title.jpg
+draft: false
+---
 
 ```python
 from datetime import date

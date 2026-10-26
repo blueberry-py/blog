@@ -1,14 +1,24 @@
-+++
-title = "[one-liner] Install Claude Code (Native Build)"
-date = 2025-11-02T16:09:00+08:00
-description = "Install Claude Code native build using one line of command"
-slug = "one-liner-claude-code"
-authors = ["Zeyang Lin"]
-tags = ["claude", "anthropic", "windows", "linux", "ubuntu", "macos"]
-categories = ["cli", "linux"]
-externalLink = ""
-series = ["one liner"]
-+++
+---
+title: "[one-liner] Install Claude Code (Native Build)"
+date: 2025-11-02T16:09:00+08:00
+description: Install Claude Code native build using one line of command
+slug: one-liner-claude-code
+authors:
+  - Zeyang Lin
+tags:
+  - claude
+  - anthropic
+  - windows
+  - linux
+  - ubuntu
+  - macos
+categories:
+  - cli
+  - linux
+externalLink: ""
+series:
+  - one liner
+---
 
 ## One-Liner series: Claude Code (Native Build)
 

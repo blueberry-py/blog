@@ -1,14 +1,23 @@
-+++
-title = "MOJO Series #1: Install SDK on UBUNTU"
-date = 2023-09-08T18:00:00+08:00
-description = "Install mojo sdk on Ubuntu"
-slug = "mojo-series-01-sdk"
-authors = ["Zeyang Lin"]
-tags = ["mojo", "python", "AI", "ubuntu", "linux", "2023"]
-categories = ["mojo"]
-externalLink = ""
-series = ["Mojo"]
-+++
+---
+title: "MOJO Series #1: Install SDK on UBUNTU"
+date: 2023-09-08T18:00:00+08:00
+description: Install mojo sdk on Ubuntu
+slug: mojo-series-01-sdk
+authors:
+  - Zeyang Lin
+tags:
+  - mojo
+  - python
+  - AI
+  - ubuntu
+  - linux
+  - "2023"
+categories:
+  - mojo
+externalLink: ""
+series:
+  - Mojo
+---
 
 So, THAT 35000-times-faster-than-python language, mojo, released its SDK today. This means you can install Mojo
 in your own environment and run mojo programs.

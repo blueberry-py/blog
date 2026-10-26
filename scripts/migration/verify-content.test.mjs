@@ -88,6 +88,27 @@ describe('content inventory', () => {
     });
   });
 
+  it('strips carriage returns from the front matter but not from the body', async () => {
+    const { splitFrontMatter } = await loadVerifier();
+
+    const raw = TOML_POST.replace(/\n/g, '\r\n');
+    const { frontMatter, body } = splitFrontMatter(raw);
+
+    assert.ok(!frontMatter.includes('\r'), 'the front matter carries no carriage returns');
+    assert.ok(body.includes('\r'), 'the body keeps its carriage returns');
+  });
+
+  it('hashes a body the same way whatever line endings it uses', async () => {
+    const { hashBody } = await loadVerifier();
+
+    assert.equal(
+      hashBody('one\r\ntwo\r\n'),
+      hashBody('one\ntwo\n'),
+      'the hash does not depend on the checkout line endings',
+    );
+    assert.notEqual(hashBody('one\r\ntwo\r\n'), hashBody('one\nthree\n'));
+  });
+
   it('collects only local assets referenced by the body or the front matter', async () => {
     const { collectLocalAssetRefs } = await loadVerifier();
 

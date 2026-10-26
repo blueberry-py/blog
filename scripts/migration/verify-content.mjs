@@ -57,7 +57,10 @@ export function splitFrontMatter(raw) {
   }
 
   return {
-    frontMatter: lines.slice(1, closing).join('\n'),
+    frontMatter: lines
+      .slice(1, closing)
+      .map((line) => line.replace(/\r$/, ''))
+      .join('\n'),
     body: lines.slice(closing + 1).join('\n'),
     delimiter,
   };
@@ -180,9 +183,17 @@ export function collectLocalAssetRefs(sourcePath, fields = {}, body = '') {
   return refs;
 }
 
-/** A stable hash of a Markdown body. */
+/**
+ * A stable hash of a Markdown body.
+ *
+ * The line endings are normalized first: git stores the blobs with LF endings
+ * and checks them out with CRLF on Windows, so the hash has to describe the
+ * article text rather than the checkout of the machine that generated it.
+ */
 export function hashBody(body) {
-  return `sha256:${createHash('sha256').update(body, 'utf8').digest('hex')}`;
+  const normalized = body.replace(/\r\n/g, '\n');
+
+  return `sha256:${createHash('sha256').update(normalized, 'utf8').digest('hex')}`;
 }
 
 /** Build the inventory entry of a single content file. */

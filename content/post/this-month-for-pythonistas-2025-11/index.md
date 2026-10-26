@@ -1,16 +1,36 @@
-+++
-title = "This Month for Pythonistas - November 2025"
-description = "Python 3.15 alpha, Gemini 3, GPT 5.1, more Agentic AI, cloud outages and other fun stuff"
-slug = "this-month-for-pythonistas-2025-11"
-date = 2025-11-30T21:00:00+08:00
-authors = ["Zeyang Lin"]
-tags = ["python", "cli", "linux", "podcast", "news", "agentic", "llm", "ai"]
-categories = ["python"]
-series = ["this month for pythonistas"]
-keywords = ["python", "linux", "podcast", "AI", "LLM", "agent", "mcp", "openai", "gemini"]
-image = "title.jpg"
-draft = false
-+++
+---
+title: This Month for Pythonistas - November 2025
+description: Python 3.15 alpha, Gemini 3, GPT 5.1, more Agentic AI, cloud outages and other fun stuff
+slug: this-month-for-pythonistas-2025-11
+date: 2025-11-30T21:00:00+08:00
+authors:
+  - Zeyang Lin
+tags:
+  - python
+  - cli
+  - linux
+  - podcast
+  - news
+  - agentic
+  - llm
+  - ai
+categories:
+  - python
+series:
+  - this month for pythonistas
+keywords:
+  - python
+  - linux
+  - podcast
+  - AI
+  - LLM
+  - agent
+  - mcp
+  - openai
+  - gemini
+image: title.jpg
+draft: false
+---
 
 ```python
 from datetime import date

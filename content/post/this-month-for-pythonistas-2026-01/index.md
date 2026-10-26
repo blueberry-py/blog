@@ -1,16 +1,33 @@
-+++
-title = "This Month for Pythonistas - January 2026"
-description = "Pandas 3.0, Anthropic Investment, EuroPython 2026, Agentic AI and more fun stuff"
-slug = "this-month-for-pythonistas-2026-01"
-date = 2026-01-31T12:00:00+08:00
-authors = ["Zeyang Lin"]
-tags = ["python", "news", "podcast", "ai", "agentic", "llm", "linux"]
-categories = ["python"]
-series = ["this month for pythonistas"]
-keywords = ["python", "news", "AI", "2026", "llm", "openai", "anthropic"]
-image = "title.jpg"
-draft = false
-+++
+---
+title: This Month for Pythonistas - January 2026
+description: Pandas 3.0, Anthropic Investment, EuroPython 2026, Agentic AI and more fun stuff
+slug: this-month-for-pythonistas-2026-01
+date: 2026-01-31T12:00:00+08:00
+authors:
+  - Zeyang Lin
+tags:
+  - python
+  - news
+  - podcast
+  - ai
+  - agentic
+  - llm
+  - linux
+categories:
+  - python
+series:
+  - this month for pythonistas
+keywords:
+  - python
+  - news
+  - AI
+  - "2026"
+  - llm
+  - openai
+  - anthropic
+image: title.jpg
+draft: false
+---
 
 ```python
 from datetime import date

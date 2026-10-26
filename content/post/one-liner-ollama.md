@@ -1,13 +1,24 @@
-+++
-title = "[one-liner] Install Ollama"
-description = "Install Ollama on Ubuntu using one line of command"
-slug = "one-liner-ollama"
-date = 2024-07-17T13:33:41+08:00
-authors = ["Zeyang Lin"]
-tags = ["ollama", "AI", "Llama", "llm", "linux", "ubuntu"]
-categories = ["llm", "AI", "linux"]
-series = ["one liner"]
-+++
+---
+title: "[one-liner] Install Ollama"
+description: Install Ollama on Ubuntu using one line of command
+slug: one-liner-ollama
+date: 2024-07-17T13:33:41+08:00
+authors:
+  - Zeyang Lin
+tags:
+  - ollama
+  - AI
+  - Llama
+  - llm
+  - linux
+  - ubuntu
+categories:
+  - llm
+  - AI
+  - linux
+series:
+  - one liner
+---
 
 ## One-Liner series: Ollama
 

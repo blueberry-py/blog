@@ -1,16 +1,33 @@
-+++
-title = "This Month for Pythonistas - September 2026"
-description = "Monthly roundup for Pythonistas — September 2026"
-slug = "this-month-for-pythonistas-2026-09"
-date = 2026-09-30T21:00:00+08:00
-authors = ["Zeyang Lin"]
-tags = ["python", "news", "podcast", "AI", "pycon"]
-categories = ["python"]
-series = ["this month for pythonistas"]
-keywords = ["python", "AI", "agentic", "microsoft", "podcast", "pycon", "linux", "claude", "anthropic"]
-image = "title.jpg"
-draft = false
-+++
+---
+title: This Month for Pythonistas - September 2026
+description: Monthly roundup for Pythonistas — September 2026
+slug: this-month-for-pythonistas-2026-09
+date: 2026-09-30T21:00:00+08:00
+authors:
+  - Zeyang Lin
+tags:
+  - python
+  - news
+  - podcast
+  - AI
+  - pycon
+categories:
+  - python
+series:
+  - this month for pythonistas
+keywords:
+  - python
+  - AI
+  - agentic
+  - microsoft
+  - podcast
+  - pycon
+  - linux
+  - claude
+  - anthropic
+image: title.jpg
+draft: false
+---
 
 ```python
 from datetime import date

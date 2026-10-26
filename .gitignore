@@ -5,3 +5,8 @@ public/
 
 # Temporary lock file while hugo is building
 .hugo_build.lock
+
+# Astro
+node_modules/
+/.astro/
+/dist/

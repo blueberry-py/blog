@@ -1,14 +1,21 @@
-+++
-title = "[one-liner] Install Docker Engine community and docker-compose"
-date = 2021-06-23T16:11:39+08:00
-description = "Install docker on ubuntu using one line of command"
-slug = "one-liner-docker-engine"
-authors = ["Zeyang Lin"]
-tags = ["docker", "linux", "ubuntu"]
-categories = ["docker", "linux"]
-externalLink = ""
-series = ["one liner"]
-+++
+---
+title: "[one-liner] Install Docker Engine community and docker-compose"
+date: 2021-06-23T16:11:39+08:00
+description: Install docker on ubuntu using one line of command
+slug: one-liner-docker-engine
+authors:
+  - Zeyang Lin
+tags:
+  - docker
+  - linux
+  - ubuntu
+categories:
+  - docker
+  - linux
+externalLink: ""
+series:
+  - one liner
+---
 
 ## One-Liner series: Docker and docker-compose
 

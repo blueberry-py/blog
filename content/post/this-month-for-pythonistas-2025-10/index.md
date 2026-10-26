@@ -1,16 +1,35 @@
-+++
-title = "This Month for Pythonistas - October 2025"
-description = "Python 3.14 final, Ubuntu 25.10, LangChain v1, more Agentic AI and other fun stuff"
-slug = "this-month-for-pythonistas-2025-10"
-date = 2025-10-31T21:00:00+08:00
-authors = ["Zeyang Lin"]
-tags = ["python", "cli", "linux", "podcast", "news", "agentic"]
-categories = ["python"]
-series = ["this month for pythonistas"]
-keywords = ["python", "linux", "podcast", "AI", "LLM", "agent", "mcp", "langchain", "django", "pytorch"]
-image = "title.jpg"
-draft = false
-+++
+---
+title: This Month for Pythonistas - October 2025
+description: Python 3.14 final, Ubuntu 25.10, LangChain v1, more Agentic AI and other fun stuff
+slug: this-month-for-pythonistas-2025-10
+date: 2025-10-31T21:00:00+08:00
+authors:
+  - Zeyang Lin
+tags:
+  - python
+  - cli
+  - linux
+  - podcast
+  - news
+  - agentic
+categories:
+  - python
+series:
+  - this month for pythonistas
+keywords:
+  - python
+  - linux
+  - podcast
+  - AI
+  - LLM
+  - agent
+  - mcp
+  - langchain
+  - django
+  - pytorch
+image: title.jpg
+draft: false
+---
 
 ```python
 from datetime import date

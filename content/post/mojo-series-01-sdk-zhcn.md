@@ -1,14 +1,23 @@
-+++
-title = "MOJO 系列 第一篇: 在 Ubuntu 环境下安装本地 SDK"
-date = 2023-09-08T18:00:00+08:00
-description = "Install mojo sdk on Ubuntu (zh-cn)"
-slug = "mojo-series-01-sdk-zhcn"
-authors = ["Zeyang Lin"]
-tags = ["mojo", "python", "AI", "ubuntu", "linux", "2023"]
-categories = ["mojo"]
-externalLink = ""
-series = ["Mojo"]
-+++
+---
+title: "MOJO 系列 第一篇: 在 Ubuntu 环境下安装本地 SDK"
+date: 2023-09-08T18:00:00+08:00
+description: Install mojo sdk on Ubuntu (zh-cn)
+slug: mojo-series-01-sdk-zhcn
+authors:
+  - Zeyang Lin
+tags:
+  - mojo
+  - python
+  - AI
+  - ubuntu
+  - linux
+  - "2023"
+categories:
+  - mojo
+externalLink: ""
+series:
+  - Mojo
+---
 
 那个号称 **比 Python 快 35000倍** 的 Mojo 语言，今天终于开放了 SDK 的下载。就是说，你可以在自己的本地环境安装 Mojo 并运行 Mojo 程序了。
 

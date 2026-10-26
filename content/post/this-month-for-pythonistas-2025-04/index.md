@@ -1,16 +1,32 @@
-+++
-title = 'This Month for Pythonistas - April 2025'
-description = "More MCP, A2A, Vibe Coding, Llama 4 and other fun stuff"
-slug = "this-month-for-pythonistas-2025-04"
-date = 2025-04-30T15:00:00+08:00
-authors = ["Zeyang Lin"]
-tags = ["python", "cli", "linux", "windows", "news"]
-categories = ["python"]
-series = ["this month for pythonistas"]
-keywords = ["python", "pypi", "pycon", "linux", "github", "podcast", "AI", "LLM"]
-image = "title.webp"
-draft = false
-+++
+---
+title: This Month for Pythonistas - April 2025
+description: More MCP, A2A, Vibe Coding, Llama 4 and other fun stuff
+slug: this-month-for-pythonistas-2025-04
+date: 2025-04-30T15:00:00+08:00
+authors:
+  - Zeyang Lin
+tags:
+  - python
+  - cli
+  - linux
+  - windows
+  - news
+categories:
+  - python
+series:
+  - this month for pythonistas
+keywords:
+  - python
+  - pypi
+  - pycon
+  - linux
+  - github
+  - podcast
+  - AI
+  - LLM
+image: title.webp
+draft: false
+---
 
 ```python
 from datetime import date

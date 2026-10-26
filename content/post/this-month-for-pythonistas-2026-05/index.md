@@ -1,16 +1,34 @@
-+++
-title = "This Month for Pythonistas - May 2026"
-description = "Python 3.15 beta 1, PyCon US 2026, thoughts on Agentic AI and vibe coding, harness, and other fun stuff"
-slug = "this-month-for-pythonistas-2026-05"
-date = 2026-05-31T21:00:00+08:00
-authors = ["Zeyang Lin"]
-tags = ["python", "news", "podcast", "AI", "pycon"]
-categories = ["python"]
-series = ["this month for pythonistas"]
-keywords = ["python", "news", "2026", "AI", "agentic", "openai", "podcast", "pycon", "linux", "claude"]
-image = "title.jpg"
-draft = false
-+++
+---
+title: This Month for Pythonistas - May 2026
+description: Python 3.15 beta 1, PyCon US 2026, thoughts on Agentic AI and vibe coding, harness, and other fun stuff
+slug: this-month-for-pythonistas-2026-05
+date: 2026-05-31T21:00:00+08:00
+authors:
+  - Zeyang Lin
+tags:
+  - python
+  - news
+  - podcast
+  - AI
+  - pycon
+categories:
+  - python
+series:
+  - this month for pythonistas
+keywords:
+  - python
+  - news
+  - "2026"
+  - AI
+  - agentic
+  - openai
+  - podcast
+  - pycon
+  - linux
+  - claude
+image: title.jpg
+draft: false
+---
 
 ```python
 from datetime import date

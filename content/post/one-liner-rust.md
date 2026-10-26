@@ -1,14 +1,21 @@
-+++
-title = "[one-liner] Install Rust (Rustup)"
-date = 2023-05-16T22:24:06+08:00
-description = "Install rust on ubuntu using one line of command"
-slug = "one-liner-rust"
-authors = ["Zeyang Lin"]
-tags = ["rust", "linux", "ubuntu"]
-categories = ["rust", "linux"]
-externalLink = ""
-series = ["one liner"]
-+++
+---
+title: "[one-liner] Install Rust (Rustup)"
+date: 2023-05-16T22:24:06+08:00
+description: Install rust on ubuntu using one line of command
+slug: one-liner-rust
+authors:
+  - Zeyang Lin
+tags:
+  - rust
+  - linux
+  - ubuntu
+categories:
+  - rust
+  - linux
+externalLink: ""
+series:
+  - one liner
+---
 
 ## One-Liner series: Rustup
 

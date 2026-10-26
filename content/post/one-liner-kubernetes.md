@@ -1,14 +1,21 @@
-+++
-title = "[one-liner] Install minikube, kubectl and kustomize"
-date = 2021-06-23T17:33:22+08:00
-description = "Install kubernetes on ubuntu using one line of command"
-slug = "one-liner-kubernetes"
-authors = ["Zeyang Lin"]
-tags = ["kubernetes", "linux", "ubuntu"]
-categories = ["kubernetes", "linux"]
-externalLink = ""
-series = ["one liner"]
-+++
+---
+title: "[one-liner] Install minikube, kubectl and kustomize"
+date: 2021-06-23T17:33:22+08:00
+description: Install kubernetes on ubuntu using one line of command
+slug: one-liner-kubernetes
+authors:
+  - Zeyang Lin
+tags:
+  - kubernetes
+  - linux
+  - ubuntu
+categories:
+  - kubernetes
+  - linux
+externalLink: ""
+series:
+  - one liner
+---
 
 ## One-liner series: minikube, kubectl and kustomize
 

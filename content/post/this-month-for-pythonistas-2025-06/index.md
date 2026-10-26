@@ -1,16 +1,33 @@
-+++
-title = "This Month for Pythonistas - June 2025"
-description = "More Agentic AI, Python releases, new cli tools and other fun stuff"
-slug = "this-month-for-pythonistas-2025-06"
-date = 2025-06-30T21:00:00+08:00
-authors = ["Zeyang Lin"]
-tags = ["python", "cli", "linux", "podcast", "news"]
-categories = ["python"]
-series = ["this month for pythonistas"]
-keywords = ["python", "gemini", "numpy", "linux", "podcast", "AI", "LLM", "agent", "mcp"]
-image = "title.jpg"
-draft = false
-+++
+---
+title: This Month for Pythonistas - June 2025
+description: More Agentic AI, Python releases, new cli tools and other fun stuff
+slug: this-month-for-pythonistas-2025-06
+date: 2025-06-30T21:00:00+08:00
+authors:
+  - Zeyang Lin
+tags:
+  - python
+  - cli
+  - linux
+  - podcast
+  - news
+categories:
+  - python
+series:
+  - this month for pythonistas
+keywords:
+  - python
+  - gemini
+  - numpy
+  - linux
+  - podcast
+  - AI
+  - LLM
+  - agent
+  - mcp
+image: title.jpg
+draft: false
+---
 
 ```python
 from datetime import date

@@ -1,14 +1,23 @@
-+++
-title = "[one-liner] Install Node.js and NPM"
-date = 2022-05-07T22:06:58+08:00
-description = "Install nodejs and npm on ubuntu using one line of command"
-slug = "one-liner-nodejs"
-authors = ["Zeyang Lin"]
-tags = ["nodejs", "linux", "javascript", "ubuntu", "debian"]
-categories = ["nodejs", "linux"]
-externalLink = ""
-series = ["one liner"]
-+++
+---
+title: "[one-liner] Install Node.js and NPM"
+date: 2022-05-07T22:06:58+08:00
+description: Install nodejs and npm on ubuntu using one line of command
+slug: one-liner-nodejs
+authors:
+  - Zeyang Lin
+tags:
+  - nodejs
+  - linux
+  - javascript
+  - ubuntu
+  - debian
+categories:
+  - nodejs
+  - linux
+externalLink: ""
+series:
+  - one liner
+---
 
 ## One-Liner series: Node.js and NPM
 

@@ -6,7 +6,7 @@
       "collection": "page",
       "slug": "about",
       "route": "/about/",
-      "bodyHash": "sha256:50bbdc3dd69d759e6896b52860f257ca8e73ff509ffaad10e2e77c79a5f17f44",
+      "bodyHash": "sha256:08bdb5d6d2060acef37d60531622a1f0b0ce67f7cb803d151180167a83861f4c",
       "assets": []
     },
     {
@@ -14,7 +14,7 @@
       "collection": "post",
       "slug": "github-remote-host-identification",
       "route": "/post/github-remote-host-identification/",
-      "bodyHash": "sha256:453e40c8c87af4443c31bb6b045a34a24a4e2e16d3d0792af15184bf58b0d84e",
+      "bodyHash": "sha256:4e3253e769f0b048c0a9190e1a4197d418c329319893db3b9ff2e6051713e9fd",
       "assets": []
     },
     {
@@ -22,7 +22,7 @@
       "collection": "post",
       "slug": "mojo-series-01-sdk-zhcn",
       "route": "/post/mojo-series-01-sdk-zhcn/",
-      "bodyHash": "sha256:89f2cacead682fc5dfbfd541a93edc7c37f45c876c40e75a387a7e2f448e99ba",
+      "bodyHash": "sha256:0d425a280668905c8630c71d38b4902dc0a92f3d50b7985bdb2af766723ab11b",
       "assets": []
     },
     {
@@ -30,7 +30,7 @@
       "collection": "post",
       "slug": "mojo-series-01-sdk",
       "route": "/post/mojo-series-01-sdk/",
-      "bodyHash": "sha256:e5e4d4f9cc44cee19d2711707cb329951357ecf08e1c940144ed8e99bdeb789c",
+      "bodyHash": "sha256:1399a079af0f810bd942c8332ef4ba542097aeb65aac08a629614d4bbffb449e",
       "assets": []
     },
     {
@@ -38,7 +38,7 @@
       "collection": "post",
       "slug": "my-first-hugo-blog",
       "route": "/post/my-first-hugo-blog/",
-      "bodyHash": "sha256:95c98432fe710ff56b4857c49a3c14511a0c6ee08917735a5b16a99d575bae01",
+      "bodyHash": "sha256:534f584b2727271f683118442785113796531351eab2035f9ab38455e1ac6b53",
       "assets": []
     },
     {
@@ -46,7 +46,7 @@
       "collection": "post",
       "slug": "my-vs-code-extensions",
       "route": "/post/my-vs-code-extensions/",
-      "bodyHash": "sha256:185463f35c208f56fd513975db750438acbb851a3d4c5955e454d4c0f9dfe0a1",
+      "bodyHash": "sha256:6d2c3be830216ef7ea396bad4b4ed4ff9d86ef3b5166715c1e7820c198d3c09b",
       "assets": []
     },
     {
@@ -54,7 +54,7 @@
       "collection": "post",
       "slug": "one-liner-bun",
       "route": "/post/one-liner-bun/",
-      "bodyHash": "sha256:5c8d483b6297371e2bccf41573145889af284ba938c77710e2a8f4540e45aea1",
+      "bodyHash": "sha256:86b5e290111def3d13cfdf198a01ae1d74fa85fa35d207b5b0e0f3c489319518",
       "assets": []
     },
     {
@@ -62,7 +62,7 @@
       "collection": "post",
       "slug": "one-liner-claude-code",
       "route": "/post/one-liner-claude-code/",
-      "bodyHash": "sha256:8360011f16a0aab3f88a926b07b4cf29176e71439a65260dfb80eaac6c91b8e0",
+      "bodyHash": "sha256:a1bc41ef6f3fae246064c5471d48e17afaed9e1159687b16779e4e0c86839038",
       "assets": []
     },
     {
@@ -70,7 +70,7 @@
       "collection": "post",
       "slug": "one-liner-docker-engine",
       "route": "/post/one-liner-docker-engine/",
-      "bodyHash": "sha256:1f02642b9755b7406bf3fa37dd94efe8162d39da389a93a9a668c0a796c00207",
+      "bodyHash": "sha256:50cc2f496dc46186ab9b71fc37927392384893986b80239a26d12020ebba8b7d",
       "assets": []
     },
     {
@@ -78,7 +78,7 @@
       "collection": "post",
       "slug": "one-liner-julia",
       "route": "/post/one-liner-julia/",
-      "bodyHash": "sha256:8ce1ade5db43dc1a6846867a5d76ee78207422ccbca86dfa21adbf86d44fcfd0",
+      "bodyHash": "sha256:ac648ba4bd0f264687c4fb83c4ed2e13c271b2462b85b216727ed5ad2f47a575",
       "assets": []
     },
     {
@@ -86,7 +86,7 @@
       "collection": "post",
       "slug": "one-liner-kiro-cli",
       "route": "/post/one-liner-kiro-cli/",
-      "bodyHash": "sha256:0c810d2d4654df9ac78963e365fa4a8a85983e8a8e58f1c2166d9f5abf172fc2",
+      "bodyHash": "sha256:d3f15be6fd2975ddbb8983f800070678218372a2d0bccf5b00c0f2cb3ee5d326",
       "assets": []
     },
     {
@@ -94,7 +94,7 @@
       "collection": "post",
       "slug": "one-liner-kubernetes",
       "route": "/post/one-liner-kubernetes/",
-      "bodyHash": "sha256:97b09545b51ea69496a12ce2de8c18c6a7f439703b1717361b6530b750d53fcc",
+      "bodyHash": "sha256:167c1680a7eb59038bfda496c7be1d96edd0fa3c6c35971b1899e21974dceb48",
       "assets": []
     },
     {
@@ -102,7 +102,7 @@
       "collection": "post",
       "slug": "one-liner-nodejs",
       "route": "/post/one-liner-nodejs/",
-      "bodyHash": "sha256:eaff499b6105289529f0e78f09b510520a616691c316685bf2c8c10084e298e5",
+      "bodyHash": "sha256:aecc28747cfe0cd06cf4c94fc51b9025d9444670602bf1a6f224c067d2b2e01e",
       "assets": []
     },
     {
@@ -110,7 +110,7 @@
       "collection": "post",
       "slug": "one-liner-ollama",
       "route": "/post/one-liner-ollama/",
-      "bodyHash": "sha256:72093eec3637a3d5bdfc2cdea78d3835be4e4e1f7fae9efd20e1a595cfd991e4",
+      "bodyHash": "sha256:3f4a3d84465217d2d066cf9008a7c4ba4eb14b1184c0cca410083bd8edd58684",
       "assets": []
     },
     {
@@ -118,7 +118,7 @@
       "collection": "post",
       "slug": "one-liner-opencode",
       "route": "/post/one-liner-opencode/",
-      "bodyHash": "sha256:0d7ea425f0490cfd5fe718202f0bdab84981558250f82c88bfc4262bdd5d1bfa",
+      "bodyHash": "sha256:a608857326f822803ccb2ddb86f8202e3c0647f4e5565db06f7e23295c0736aa",
       "assets": []
     },
     {
@@ -126,7 +126,7 @@
       "collection": "post",
       "slug": "one-liner-pnpm",
       "route": "/post/one-liner-pnpm/",
-      "bodyHash": "sha256:c01d440d054e26ac58c19d60eb91c4c1e0db6b3acc160878bc6a434754e0c0f7",
+      "bodyHash": "sha256:ab09d8c497a07904bfc9bd1a6657cc525bb4849949d357492f418e7bd7c14dec",
       "assets": []
     },
     {
@@ -134,7 +134,7 @@
       "collection": "post",
       "slug": "one-liner-rust",
       "route": "/post/one-liner-rust/",
-      "bodyHash": "sha256:6da69ac9fcb50efe9e804254b6093a3091dbc61507b89378e3aebd55606ab2a3",
+      "bodyHash": "sha256:0187fc245cca22f350e1b863d3ec414b98a2fb9222af062fc93a756880c6886c",
       "assets": []
     },
     {
@@ -142,7 +142,7 @@
       "collection": "post",
       "slug": "pycon-china-2026-lightning-talk",
       "route": "/post/pycon-china-2026-lightning-talk/",
-      "bodyHash": "sha256:341b18c1faa96d03fcadefa319e078cee35335869852a92f6c40989e6ef22af8",
+      "bodyHash": "sha256:9f4c7be97c2c9d247867012aa2cf648bd712f4e89fbb1c17951974a1eaff7128",
       "assets": [
         "content/post/pycon-china-2026-lightning-talk/rust_for_cpython.png",
         "content/post/pycon-china-2026-lightning-talk/page_04.jpeg",
@@ -166,7 +166,7 @@
       "collection": "post",
       "slug": "this-month-for-pythonistas-2025-03",
       "route": "/post/this-month-for-pythonistas-2025-03/",
-      "bodyHash": "sha256:7d7f94703f40a1a83184fe0d30b784e2d542dc7b8d11f4f55dd85f1c05752b30",
+      "bodyHash": "sha256:a9862d576ec32b228c32e02b28617ec104ccef83f4294c2d53c7f0daaa8d8282",
       "assets": [
         "content/post/this-month-for-pythonistas-2025-03/splash.webp",
         "content/post/this-month-for-pythonistas-2025-03/title.webp"
@@ -177,7 +177,7 @@
       "collection": "post",
       "slug": "this-month-for-pythonistas-2025-04",
       "route": "/post/this-month-for-pythonistas-2025-04/",
-      "bodyHash": "sha256:ea2224d857372f3a4fa8fb56b9f6f88dbee9f3ab0841fb4783c6f3aa77a18beb",
+      "bodyHash": "sha256:e00dbfd64f78f718f4f904445862ec56c20a9479a905a924e998e937c2d608ef",
       "assets": [
         "content/post/this-month-for-pythonistas-2025-04/splash.webp",
         "content/post/this-month-for-pythonistas-2025-04/gvr_bdfl.jpg",
@@ -189,7 +189,7 @@
       "collection": "post",
       "slug": "this-month-for-pythonistas-2025-05",
       "route": "/post/this-month-for-pythonistas-2025-05/",
-      "bodyHash": "sha256:10c647b69e24f2e0fce5469927e68d86b8905395dfae41e375e575414a7381aa",
+      "bodyHash": "sha256:e4eb14e1d5cf17fd62014f7350e513486f3a42e449b1d9d3809806a92bb56c7f",
       "assets": [
         "content/post/this-month-for-pythonistas-2025-05/splash.webp",
         "content/post/this-month-for-pythonistas-2025-05/bsky_post_py_docu.jpeg",
@@ -201,7 +201,7 @@
       "collection": "post",
       "slug": "this-month-for-pythonistas-2025-06",
       "route": "/post/this-month-for-pythonistas-2025-06/",
-      "bodyHash": "sha256:81049e2816f0e06848ddb17ed440751d8a39d838fa278acfa2df5579b7f1d268",
+      "bodyHash": "sha256:f3953b885fcbd6b3c75ac2cf9c2f5197d84b7f56f05ed7cb95577e71527aae91",
       "assets": [
         "content/post/this-month-for-pythonistas-2025-06/splash.webp",
         "content/post/this-month-for-pythonistas-2025-06/title.jpg"
@@ -212,7 +212,7 @@
       "collection": "post",
       "slug": "this-month-for-pythonistas-2025-07",
       "route": "/post/this-month-for-pythonistas-2025-07/",
-      "bodyHash": "sha256:b1521251b066aa76a74fbc684841d2dc88a9bcaa768df78fd1db1c2fc0253924",
+      "bodyHash": "sha256:502863e99e3dbb482800e5bcbd7f5e68157d5408daa442a60f9cfb760fc258a0",
       "assets": [
         "content/post/this-month-for-pythonistas-2025-07/splash.jpg",
         "content/post/this-month-for-pythonistas-2025-07/title.jpg"
@@ -223,7 +223,7 @@
       "collection": "post",
       "slug": "this-month-for-pythonistas-2025-08",
       "route": "/post/this-month-for-pythonistas-2025-08/",
-      "bodyHash": "sha256:62d40ffa28dc1dc3ea2af62f2b0e86c04a0edea40ee30dc56c1cce9465b36a69",
+      "bodyHash": "sha256:bd8689b8060e184cb8d4ddcddf9dbe01bb65d40ea86ccb25a099c3a81c7d1112",
       "assets": [
         "content/post/this-month-for-pythonistas-2025-08/splash.jpg",
         "content/post/this-month-for-pythonistas-2025-08/title.jpg"
@@ -234,7 +234,7 @@
       "collection": "post",
       "slug": "this-month-for-pythonistas-2025-09",
       "route": "/post/this-month-for-pythonistas-2025-09/",
-      "bodyHash": "sha256:8040bf4526dadcaf49334f14a22822b3c3066692c928dd19de7fcf029f74c818",
+      "bodyHash": "sha256:a903ff4c173168c0c03bc53928b0b6239c30f0069d4f968745004c28eb134284",
       "assets": [
         "content/post/this-month-for-pythonistas-2025-09/splash.jpg",
         "content/post/this-month-for-pythonistas-2025-09/title.jpg"
@@ -245,7 +245,7 @@
       "collection": "post",
       "slug": "this-month-for-pythonistas-2025-10",
       "route": "/post/this-month-for-pythonistas-2025-10/",
-      "bodyHash": "sha256:7fe05d57c6947aa29fa5ab85ce661fdc7fc0d207d15af40521e1e4287c8379f3",
+      "bodyHash": "sha256:707440048476cebb11b4c128b0eb6d042a1fe04ea3cf5e074368cc73588cc60e",
       "assets": [
         "content/post/this-month-for-pythonistas-2025-10/splash.jpg",
         "content/post/this-month-for-pythonistas-2025-10/title.jpg"
@@ -256,7 +256,7 @@
       "collection": "post",
       "slug": "this-month-for-pythonistas-2025-11",
       "route": "/post/this-month-for-pythonistas-2025-11/",
-      "bodyHash": "sha256:7160a6337724c09f318f9c828b810d930952a975a7934f3f313a0376e026426e",
+      "bodyHash": "sha256:2d36df9648d00b1c50d34c9a602e8a18fb6acdee04431f37a7e8c9601aec65a1",
       "assets": [
         "content/post/this-month-for-pythonistas-2025-11/splash.jpg",
         "content/post/this-month-for-pythonistas-2025-11/pyconus2026.jpg",
@@ -268,7 +268,7 @@
       "collection": "post",
       "slug": "this-month-for-pythonistas-2025-12",
       "route": "/post/this-month-for-pythonistas-2025-12/",
-      "bodyHash": "sha256:b0c68692d32e02d50abd4386bf7e86e25e79b88de956f2c8850892b7c575bba3",
+      "bodyHash": "sha256:c5f7e6be115821c8641ff3aad0c74c6145c97c6f8124580deb7b24eec14c9dbf",
       "assets": [
         "content/post/this-month-for-pythonistas-2025-12/splash.jpg",
         "content/post/this-month-for-pythonistas-2025-12/title.jpg"
@@ -279,7 +279,7 @@
       "collection": "post",
       "slug": "this-month-for-pythonistas-2026-01",
       "route": "/post/this-month-for-pythonistas-2026-01/",
-      "bodyHash": "sha256:e5ef8829a02e1b528062fa54bf3fd35bc11653e1e0352dbe2ae6e34fe912917b",
+      "bodyHash": "sha256:326ceca8b25c0326362a0a61c7b7735d6c3689a7ca695ec82f5496cbbc3398d4",
       "assets": [
         "content/post/this-month-for-pythonistas-2026-01/splash.jpg",
         "content/post/this-month-for-pythonistas-2026-01/title.jpg"
@@ -290,7 +290,7 @@
       "collection": "post",
       "slug": "this-month-for-pythonistas-2026-02",
       "route": "/post/this-month-for-pythonistas-2026-02/",
-      "bodyHash": "sha256:a9554417438357d40e1c61ee91c080ffa4280b35fb908bcd30b1b846aacd3f9b",
+      "bodyHash": "sha256:fae1c6e6303375ca5f3e25cc48bd46e05caf7083c971385b064d482542c61224",
       "assets": [
         "content/post/this-month-for-pythonistas-2026-02/splash.jpg",
         "content/post/this-month-for-pythonistas-2026-02/title.jpg"
@@ -301,7 +301,7 @@
       "collection": "post",
       "slug": "this-month-for-pythonistas-2026-03",
       "route": "/post/this-month-for-pythonistas-2026-03/",
-      "bodyHash": "sha256:abe99e9cc27a76022b80de44a952a92305657750e12c3cbe20ebf1513a80f7b9",
+      "bodyHash": "sha256:7cb3a27d9050a88eba4a602bef9f9d1bb033b1630a85a1c5ca8db8b45ab34133",
       "assets": [
         "content/post/this-month-for-pythonistas-2026-03/splash.jpg",
         "content/post/this-month-for-pythonistas-2026-03/title.jpg"
@@ -312,7 +312,7 @@
       "collection": "post",
       "slug": "this-month-for-pythonistas-2026-04",
       "route": "/post/this-month-for-pythonistas-2026-04/",
-      "bodyHash": "sha256:dbcfd85e3b638aa42b04340d7df4dc08ad04975e386fe3a00a40b52cbd0a6e29",
+      "bodyHash": "sha256:033ff3b2aecbe6d13854787842c9627b617f9ddd81d0d036e7fda6471631033d",
       "assets": [
         "content/post/this-month-for-pythonistas-2026-04/splash.jpg",
         "content/post/this-month-for-pythonistas-2026-04/title.jpg"
@@ -323,7 +323,7 @@
       "collection": "post",
       "slug": "this-month-for-pythonistas-2026-05",
       "route": "/post/this-month-for-pythonistas-2026-05/",
-      "bodyHash": "sha256:634841a69ca36ac9a6001fe95ea2e4e335c7e616e9a618175bd3997538909a53",
+      "bodyHash": "sha256:1990e41547e830be4d216f3ef59d7fc99dccb43101fec3c62270e1938a8843e2",
       "assets": [
         "content/post/this-month-for-pythonistas-2026-05/splash.jpg",
         "content/post/this-month-for-pythonistas-2026-05/title.jpg"
@@ -334,7 +334,7 @@
       "collection": "post",
       "slug": "this-month-for-pythonistas-2026-06",
       "route": "/post/this-month-for-pythonistas-2026-06/",
-      "bodyHash": "sha256:011ab6b24149e145c891c8d13d837126750700154e8fb2c7b0b0fb089c117049",
+      "bodyHash": "sha256:90699f9b0547df5610984fcef817f98f3fd5ffda6bda4bc73ac6f1c5ed2527a9",
       "assets": [
         "content/post/this-month-for-pythonistas-2026-06/splash.jpg",
         "content/post/this-month-for-pythonistas-2026-06/title.jpg"
@@ -345,7 +345,7 @@
       "collection": "post",
       "slug": "this-month-for-pythonistas-2026-07",
       "route": "/post/this-month-for-pythonistas-2026-07/",
-      "bodyHash": "sha256:475924b24bc952046e9eadf284d9d57240ed4ed8e46b3de7a9003d3969031555",
+      "bodyHash": "sha256:41cf58107f82739c362e26c6e5102412a5799c1378d58fd7938b3148bd508ad7",
       "assets": [
         "content/post/this-month-for-pythonistas-2026-07/splash.jpg",
         "content/post/this-month-for-pythonistas-2026-07/title.jpg"
@@ -356,7 +356,7 @@
       "collection": "post",
       "slug": "this-month-for-pythonistas-2026-08",
       "route": "/post/this-month-for-pythonistas-2026-08/",
-      "bodyHash": "sha256:386c1f1a43ff8629bc46c62c7dc704fe7da159daa4f8a94f1629ed0816e757ab",
+      "bodyHash": "sha256:8e5ee4609a1f886ffefd17d2ae24da8d9d287ce52066a2ff09ea2f4dea3cb66a",
       "assets": [
         "content/post/this-month-for-pythonistas-2026-08/splash.jpg",
         "content/post/this-month-for-pythonistas-2026-08/title.jpg"
@@ -367,7 +367,7 @@
       "collection": "post",
       "slug": "this-month-for-pythonistas-2026-09",
       "route": "/post/this-month-for-pythonistas-2026-09/",
-      "bodyHash": "sha256:87954b70dc971ff3b60b50c0f59d258c80284519686982f00e3c369a2809f641",
+      "bodyHash": "sha256:eb752b258745f02ea7527000a230b2d19dfb3202f40c7b73f19b63c5e705b46a",
       "assets": [
         "content/post/this-month-for-pythonistas-2026-09/splash.jpg",
         "content/post/this-month-for-pythonistas-2026-09/title.jpg"
@@ -378,7 +378,7 @@
       "collection": "post",
       "slug": "uv-is-latest-attempt-to-rule-them-all",
       "route": "/post/uv-is-latest-attempt-to-rule-them-all/",
-      "bodyHash": "sha256:192b5c72b5b1a09ff306dc1a51f3074a3eb5f32e8ae1accf6c64b195e1c9b90d",
+      "bodyHash": "sha256:4af25cb28a8a56df995804f630e3444828ffe01c1334e1faac79b745b9eee38a",
       "assets": [
         "content/post/uv-is-latest-attempt-to-rule-them-all/image-01.png",
         "content/post/uv-is-latest-attempt-to-rule-them-all/image-02.png",

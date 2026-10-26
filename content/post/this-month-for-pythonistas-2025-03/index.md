@@ -1,16 +1,31 @@
-+++
-title = 'This Month for Pythonistas - March 2025'
-description = "MCP, OpenAI agents, dify, langgraph, Gemma 3, and other fun stuff"
-slug = "this-month-for-pythonistas-2025-03"
-date = 2025-03-31T15:00:00+08:00
-authors = ["Zeyang Lin"]
-tags = ["python", "cli", "linux", "windows", "news"]
-categories = ["python"]
-series = ["this month for pythonistas"]
-keywords = ["python", "pypi", "linux", "github", "podcast", "AI", "LLM"]
-image = "title.webp"
-draft = false
-+++
+---
+title: This Month for Pythonistas - March 2025
+description: MCP, OpenAI agents, dify, langgraph, Gemma 3, and other fun stuff
+slug: this-month-for-pythonistas-2025-03
+date: 2025-03-31T15:00:00+08:00
+authors:
+  - Zeyang Lin
+tags:
+  - python
+  - cli
+  - linux
+  - windows
+  - news
+categories:
+  - python
+series:
+  - this month for pythonistas
+keywords:
+  - python
+  - pypi
+  - linux
+  - github
+  - podcast
+  - AI
+  - LLM
+image: title.webp
+draft: false
+---
 
 ```python
 from datetime import date

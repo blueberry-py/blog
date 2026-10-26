@@ -1,14 +1,25 @@
-+++
-title = "[one-liner] Install Kiro Cli"
-date = 2025-11-18T16:20:00+08:00
-description = "Install Kiro Cli using one line of command"
-slug = "one-liner-kiro-cli"
-authors = ["Zeyang Lin"]
-tags = ["aws", "amazon", "kiro", "cli", "linux", "ubuntu", "macos"]
-categories = ["cli", "linux"]
-externalLink = ""
-series = ["one liner"]
-+++
+---
+title: "[one-liner] Install Kiro Cli"
+date: 2025-11-18T16:20:00+08:00
+description: Install Kiro Cli using one line of command
+slug: one-liner-kiro-cli
+authors:
+  - Zeyang Lin
+tags:
+  - aws
+  - amazon
+  - kiro
+  - cli
+  - linux
+  - ubuntu
+  - macos
+categories:
+  - cli
+  - linux
+externalLink: ""
+series:
+  - one liner
+---
 
 ## One-Liner series: Kiro Cli
 

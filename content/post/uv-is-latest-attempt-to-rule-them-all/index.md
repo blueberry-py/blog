@@ -1,16 +1,31 @@
-+++
-title = 'UV is the latest attempt to rule All Python tools'
-description = "... which is also backed by Rust"
-slug = "uv-is-latest-attempt-to-rule-them-all"
-date = 2024-02-21T15:23:13+08:00
-authors = ["Zeyang Lin"]
-tags = ["rust", "python", "pip", "cli", "linux", "windows"]
-categories = ["rust", "python"]
-series = ["uv"]
-keywords = ["python", "rust", "uv", "linux", "github"]
-image = "UV.svg"
-draft = false
-+++
+---
+title: UV is the latest attempt to rule All Python tools
+description: ... which is also backed by Rust
+slug: uv-is-latest-attempt-to-rule-them-all
+date: 2024-02-21T15:23:13+08:00
+authors:
+  - Zeyang Lin
+tags:
+  - rust
+  - python
+  - pip
+  - cli
+  - linux
+  - windows
+categories:
+  - rust
+  - python
+series:
+  - uv
+keywords:
+  - python
+  - rust
+  - uv
+  - linux
+  - github
+image: UV.svg
+draft: false
+---
 
 In short, [`uv`](https://github.com/astral-sh/uv) is a command line tool written in [`Rust`](https://www.rust-lang.org/) for `Python` developers, which aims to be *"a comprehensive project and package manager that is extremely fast, reliable, and easy to use"*.
 

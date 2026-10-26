@@ -1,14 +1,22 @@
-+++
-title = "My Visual Studio Code extensions for python & other development"
-date = 2021-05-31T09:47:01+08:00
-description = "A list of vs code extensions"
-slug = "my-vs-code-extensions"
-authors = ["Zeyang Lin"]
-tags = ["python", "vscode", "IDE", "git", "ssh", "AI"]
-categories = ["python"]
-externalLink = ""
-series = []
-+++
+---
+title: My Visual Studio Code extensions for python & other development
+date: 2021-05-31T09:47:01+08:00
+description: A list of vs code extensions
+slug: my-vs-code-extensions
+authors:
+  - Zeyang Lin
+tags:
+  - python
+  - vscode
+  - IDE
+  - git
+  - ssh
+  - AI
+categories:
+  - python
+externalLink: ""
+series: []
+---
 
 ### Python
 

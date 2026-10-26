@@ -1,16 +1,33 @@
-+++
-title = "This Month for Pythonistas - August 2026"
-description = "Python 3.15 RC1, Concurrency, Qwen3.8-Max, GLM-5.3, agent harness, agent memory as well as other fun stuff"
-slug = "this-month-for-pythonistas-2026-08"
-date = 2026-08-31T21:00:00+08:00
-authors = ["Zeyang Lin"]
-tags = ["python", "news", "podcast", "AI", "harness"]
-categories = ["python"]
-series = ["this month for pythonistas"]
-keywords = ["python", "AI", "agentic", "qwen", "podcast", "djangocon", "linux", "gemini", "glm"]
-image = "title.jpg"
-draft = false
-+++
+---
+title: This Month for Pythonistas - August 2026
+description: Python 3.15 RC1, Concurrency, Qwen3.8-Max, GLM-5.3, agent harness, agent memory as well as other fun stuff
+slug: this-month-for-pythonistas-2026-08
+date: 2026-08-31T21:00:00+08:00
+authors:
+  - Zeyang Lin
+tags:
+  - python
+  - news
+  - podcast
+  - AI
+  - harness
+categories:
+  - python
+series:
+  - this month for pythonistas
+keywords:
+  - python
+  - AI
+  - agentic
+  - qwen
+  - podcast
+  - djangocon
+  - linux
+  - gemini
+  - glm
+image: title.jpg
+draft: false
+---
 
 ```python
 from datetime import date

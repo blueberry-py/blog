@@ -1,0 +1,27 @@
+{
+  "name": "blueberry-py-blog",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.15.0",
+  "engines": {
+    "node": ">=22.23.4"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "test:migration": "node --test scripts/migration/*.test.mjs",
+    "verify:content": "node scripts/migration/verify-content.mjs",
+    "convert:frontmatter": "node scripts/migration/convert-frontmatter.mjs"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.12",
+    "@astrojs/markdown-remark": "7.3.0",
+    "astro": "7.4.2",
+    "smol-toml": "1.9.1",
+    "typescript": "6.0.3",
+    "yaml": "2.9.1"
+  }
+}

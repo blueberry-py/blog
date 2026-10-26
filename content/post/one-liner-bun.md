@@ -1,14 +1,24 @@
-+++
-title = "[one-liner] Install Bun"
-date = 2026-06-13T16:20:00+08:00
-description = "Install Bun using one line of command"
-slug = "one-liner-bun"
-authors = ["Zeyang Lin"]
-tags = ["bun", "javascript", "windows", "linux", "ubuntu", "macos"]
-categories = ["cli", "linux"]
-externalLink = ""
-series = ["one liner"]
-+++
+---
+title: "[one-liner] Install Bun"
+date: 2026-06-13T16:20:00+08:00
+description: Install Bun using one line of command
+slug: one-liner-bun
+authors:
+  - Zeyang Lin
+tags:
+  - bun
+  - javascript
+  - windows
+  - linux
+  - ubuntu
+  - macos
+categories:
+  - cli
+  - linux
+externalLink: ""
+series:
+  - one liner
+---
 
 ## One-Liner series: Bun
 

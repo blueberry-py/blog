@@ -1,14 +1,22 @@
-+++
-title = "Github 连接问题之 REMOTE HOST IDENTIFICATION HAS CHANGED!"
-description = "is someone really doing something nasty?"
-slug = "github-remote-host-identification"
-date = 2023-03-24T21:42:41+08:00
-authors = ["Zeyang Lin"]
-tags = ["github", "ssh", "git", "bash"]
-categories = ["git"]
-keywords = ["github", "git"]
-draft = false
-+++
+---
+title: Github 连接问题之 REMOTE HOST IDENTIFICATION HAS CHANGED!
+description: is someone really doing something nasty?
+slug: github-remote-host-identification
+date: 2023-03-24T21:42:41+08:00
+authors:
+  - Zeyang Lin
+tags:
+  - github
+  - ssh
+  - git
+  - bash
+categories:
+  - git
+keywords:
+  - github
+  - git
+draft: false
+---
 
 # 缘起
 

@@ -1,14 +1,21 @@
-+++
-title = "[one-liner] Install Julia (juliaup)"
-date = 2023-05-16T22:36:16+08:00
-description = "Install Julia on ubuntu using one line of command"
-slug = "one-liner-julia"
-authors = ["Zeyang Lin"]
-tags = ["julia", "linux", "ubuntu"]
-categories = ["julia", "linux"]
-externalLink = ""
-series = ["one liner"]
-+++
+---
+title: "[one-liner] Install Julia (juliaup)"
+date: 2023-05-16T22:36:16+08:00
+description: Install Julia on ubuntu using one line of command
+slug: one-liner-julia
+authors:
+  - Zeyang Lin
+tags:
+  - julia
+  - linux
+  - ubuntu
+categories:
+  - julia
+  - linux
+externalLink: ""
+series:
+  - one liner
+---
 
 ## One-Liner series: juliaup
 

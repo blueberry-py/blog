@@ -8,6 +8,8 @@ repos:
       - id: check-json
       - id: check-toml
       - id: check-yaml
+        # The pnpm lockfile is a stream of YAML documents, not one document.
+        exclude: ^pnpm-lock\.yaml$
       - id: detect-private-key
       - id: end-of-file-fixer
       - id: mixed-line-ending
@@ -23,4 +25,15 @@ repos:
     rev: v0.9.40
     hooks:
       - id: pymarkdown
-        args: ["-d", "MD013,MD025,MD037,MD041", "scan"]
+        args:
+          # The front matter extension is off by default: without it the YAML
+          # front matter of a post is parsed as Markdown.
+          - --enable-extensions
+          - front-matter
+          # MD001, MD032 and MD059 are the article conventions the posts were
+          # written with: the headings of an article start at the third level,
+          # some lists are not surrounded by blank lines, and some links are
+          # named after their destination. The articles are kept as they are.
+          - -d
+          - MD001,MD013,MD025,MD032,MD037,MD041,MD059
+          - scan
