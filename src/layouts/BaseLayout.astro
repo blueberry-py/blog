@@ -19,6 +19,7 @@ interface Props {
   publishedTime?: string;
   modifiedTime?: string;
   image?: string;
+  feed?: string;
 }
 
 const {
@@ -31,6 +32,7 @@ const {
   publishedTime,
   modifiedTime,
   image,
+  feed = '/rss.xml',
 } = Astro.props;
 
 const canonical = Astro.site
@@ -52,7 +54,7 @@ const canonical = Astro.site
       rel="alternate"
       type="application/rss+xml"
       title={SITE_TITLE}
-      href={withBase('/rss.xml')}
+      href={withBase(feed)}
     />
     <link rel="sitemap" href={withBase('/sitemap-index.xml')} />
 

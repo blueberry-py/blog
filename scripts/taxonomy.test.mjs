@@ -21,6 +21,7 @@ import { fileURLToPath } from 'node:url';
 import YAML from 'yaml';
 
 import { readManifest, splitFrontMatter } from './migration/verify-content.mjs';
+import { expandLegacyFeeds } from './migration/legacy-feeds.mjs';
 
 const REPO_ROOT = path.resolve(fileURLToPath(new URL('..', import.meta.url)));
 const DIST_DIR = path.join(REPO_ROOT, 'dist');
@@ -219,6 +220,60 @@ function collectTerms(field) {
 
 const tagTerms = collectTerms('tags');
 const categoryTerms = collectTerms('categories');
+
+/**
+ * The terms of a taxonomy, in the order the pages of the site list them: the
+ * terms with the most articles first, the terms with the same number of
+ * articles by name.
+ *
+ * @param {object[]} terms The terms of the taxonomy.
+ * @returns {object[]} The terms, in the order of the pages.
+ */
+function sortedTerms(terms) {
+  return [...terms].sort(
+    (a, b) =>
+      b.posts.length - a.posts.length || a.name.localeCompare(b.name, 'en'),
+  );
+}
+
+/**
+ * The feeds the old Hugo site served, with the terms of the articles filled in.
+ */
+const legacyFeeds = expandLegacyFeeds(REPO_ROOT, {
+  tags: sortedTerms(tagTerms).map((term) => term.slug),
+  categories: sortedTerms(categoryTerms).map((term) => term.slug),
+});
+
+/**
+ * The articles a feed holds, in the order the feed holds them.
+ *
+ * @param {object} feed The feed of the baseline.
+ * @returns {string[]} The URLs of the articles of the feed.
+ */
+function expectedItems(feed) {
+  if (feed.kind === 'terms') {
+    const terms =
+      feed.taxonomy === 'tags'
+        ? sortedTerms(tagTerms)
+        : sortedTerms(categoryTerms);
+
+    return terms.map((term) => `${SITE}/${feed.taxonomy}/${term.slug}/`);
+  }
+
+  const members = feed.term
+    ? (feed.taxonomy === 'tags' ? tagTerms : categoryTerms).find(
+        (term) => term.slug === feed.term,
+      ).posts
+    : posts;
+
+  return [...members]
+    .sort(
+      (a, b) =>
+        new Date(b.date) - new Date(a.date) ||
+        a.slug.localeCompare(b.slug, 'en'),
+    )
+    .map((post) => `${SITE}/post/${post.slug}/`);
+}
 
 /** The visible text of an HTML document, without tags and without repeated spaces. */
 function textContent(html) {
@@ -517,6 +572,43 @@ describe('the taxonomies of the built site', () => {
         compact(description),
         compact(article),
         `the item of ${post.slug} holds no more than its summary`,
+      );
+    }
+  });
+
+  it('serves a feed at every route the old site served a feed at', () => {
+    for (const feed of legacyFeeds) {
+      const file = path.join(DIST_DIR, feed.route.replace(/^\//, ''));
+
+      assert.ok(existsSync(file), `no feed was built at ${feed.route}`);
+
+      const xml = readFileSync(file, 'utf8');
+      assert.match(xml, /<rss\b/, `the feed at ${feed.route} is not a feed`);
+
+      const items = [...xml.matchAll(/<item>([\s\S]*?)<\/item>/g)].map(
+        (match) => match[1],
+      );
+      const links = items.map(
+        (item) => /<link>([^<]*)<\/link>/.exec(item)?.[1] ?? '',
+      );
+
+      assert.deepEqual(
+        links,
+        expectedItems(feed),
+        `the feed at ${feed.route} holds the wrong articles`,
+      );
+    }
+  });
+
+  it('points the pages of the taxonomies at their feeds', () => {
+    for (const feed of legacyFeeds) {
+      if (!feed.advertised) continue;
+
+      const html = readPage(feed.page);
+
+      assert.ok(
+        html.includes(`href="${feed.route}"`),
+        `the page ${feed.page} does not point at the feed ${feed.route}`,
       );
     }
   });

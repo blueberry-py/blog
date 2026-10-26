@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "note": "The feeds the Hugo site served, read from the XML files of its build (public/**/index.xml): 59 feeds in five shapes. The old site served a feed of the articles of the site, a feed of the articles of every tag and of every category and a feed of the terms of every taxonomy. The Astro site serves a feed at every one of these routes. The routes that name a term are written with <term>, because the terms of the site are the terms of its articles: the feed of a term is served for every term the articles name.",
+  "feeds": [
+    {
+      "route": "/index.xml",
+      "kind": "posts",
+      "scope": "all",
+      "page": "/",
+      "advertised": false
+    },
+    {
+      "route": "/post/index.xml",
+      "kind": "posts",
+      "scope": "all",
+      "page": "/post/",
+      "advertised": false
+    },
+    {
+      "route": "/posts/index.xml",
+      "kind": "posts",
+      "scope": "all",
+      "page": "/posts/",
+      "advertised": false
+    },
+    {
+      "route": "/tags/index.xml",
+      "kind": "terms",
+      "taxonomy": "tags",
+      "page": "/tags/",
+      "advertised": true
+    },
+    {
+      "route": "/categories/index.xml",
+      "kind": "terms",
+      "taxonomy": "categories",
+      "page": "/categories/",
+      "advertised": true
+    },
+    {
+      "route": "/tags/<term>/index.xml",
+      "kind": "posts",
+      "taxonomy": "tags",
+      "page": "/tags/<term>/",
+      "advertised": true
+    },
+    {
+      "route": "/categories/<term>/index.xml",
+      "kind": "posts",
+      "taxonomy": "categories",
+      "page": "/categories/<term>/",
+      "advertised": true
+    }
+  ]
+}

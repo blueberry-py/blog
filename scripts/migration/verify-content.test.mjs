@@ -647,4 +647,48 @@ describe('the verification of the built output', () => {
       `expected a link-outside-base problem, got ${JSON.stringify(result.problems)}`,
     );
   });
+
+  it('reports a feed of the old site that the output does not hold', async () => {
+    const { buildManifest, verifyBuiltOutput } = await loadVerifier();
+
+    await withFixture(
+      {
+        ...CONTENT,
+        ...OUTPUT,
+        'scripts/migration/legacy-feeds.json': JSON.stringify({
+          version: 1,
+          feeds: [{ route: '/post/index.xml', kind: 'posts', scope: 'all' }],
+        }),
+      },
+      async (root) => {
+        const manifest = buildManifest(root, ['content/post/alpha.md']);
+        const result = verifyBuiltOutput(manifest, root);
+
+        assert.ok(
+          result.problems.some(
+            (problem) =>
+              problem.code === 'missing-feed' &&
+              problem.route === '/post/index.xml',
+          ),
+          `expected a missing-feed problem, got ${JSON.stringify(result.problems)}`,
+        );
+      },
+    );
+  });
+
+  it('reports a page of a term that has no feed', async () => {
+    const result = await auditBuiltOutput({
+      ...OUTPUT,
+      'dist/tags/python/index.html': '<h1>Python</h1>',
+    });
+
+    assert.ok(
+      result.problems.some(
+        (problem) =>
+          problem.code === 'missing-feed' &&
+          problem.route === '/tags/python/index.xml',
+      ),
+      `expected a missing-feed problem, got ${JSON.stringify(result.problems)}`,
+    );
+  });
 });

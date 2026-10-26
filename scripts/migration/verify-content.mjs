@@ -26,6 +26,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { readLegacyAliases } from './legacy-aliases.mjs';
+import { legacyFeedRoutes } from './legacy-feeds.mjs';
 
 const REPO_ROOT = path.resolve(
   fileURLToPath(new URL('../..', import.meta.url)),
@@ -683,6 +684,36 @@ export function verifyBuiltOutput(manifest, rootDir, options = {}) {
       code: 'missing-alias',
       route,
       detail: `the old route ${route} is not served`,
+    });
+  }
+
+  // The old site served a feed of its articles, of every tag and of every
+  // category. The feeds of the routes that name no term are the same in every
+  // build of the site, so they are checked against the baseline of the old
+  // site.
+  for (const route of legacyFeedRoutes(rootDir)) {
+    if (existsSync(path.join(outputDir, route.replace(/^\//, '')))) continue;
+
+    problems.push({
+      code: 'missing-feed',
+      route,
+      detail: `the feed of the old site is not served at ${route}`,
+    });
+  }
+
+  // The feed of a term is served next to the page of the term, so every page
+  // of a taxonomy has a feed of the articles it holds.
+  for (const page of pages) {
+    if (!/^\/(tags|categories)\/[^/]+\/$/.test(page.route)) continue;
+
+    const route = `${page.route}index.xml`;
+
+    if (existsSync(path.join(outputDir, route.replace(/^\//, '')))) continue;
+
+    problems.push({
+      code: 'missing-feed',
+      route,
+      detail: `the page of the term ${page.route} has no feed`,
     });
   }
 
