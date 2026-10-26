@@ -214,6 +214,32 @@ describe('the ignore files of the repository', () => {
     }
   });
 
+  it('ignores the state of the deploy tools', () => {
+    const gitignore = read('.gitignore');
+    const prettierignore = read('.prettierignore');
+    const markdownlint = read('.markdownlint-cli2.yaml');
+    const eslint = read('eslint.config.js');
+
+    assert.ok(
+      ignores(gitignore, '.netlify'),
+      'the .gitignore does not ignore the state of the Netlify CLI',
+    );
+    assert.ok(
+      ignores(prettierignore, '.netlify'),
+      'the .prettierignore does not ignore the state of the Netlify CLI',
+    );
+    assert.match(
+      markdownlint,
+      /\.netlify\/\*\*/,
+      'the Markdown linter does not ignore the state of the Netlify CLI',
+    );
+    assert.match(
+      eslint,
+      /'\.netlify\/'/,
+      'the linter does not ignore the state of the Netlify CLI',
+    );
+  });
+
   it('ignores no output of Hugo', () => {
     assert.doesNotMatch(
       read('.gitignore'),
@@ -257,6 +283,17 @@ describe('the README of the repository', () => {
       'pnpm build',
       'pnpm check',
     ]) {
+      assert.ok(
+        readme.includes(command),
+        `the README does not document ${command}`,
+      );
+    }
+  });
+
+  it('documents how a deployment is previewed', () => {
+    const readme = read('README.md');
+
+    for (const command of ['netlify deploy', 'BASE_PATH=/blog']) {
       assert.ok(
         readme.includes(command),
         `the README does not document ${command}`,

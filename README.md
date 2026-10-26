@@ -82,6 +82,28 @@ host but GitHub Pages, which serves the project site of the repository under
 The repository has to be set to "GitHub Actions" as the source of the GitHub
 Pages site, otherwise the workflow has no site to deploy to.
 
+### Previewing a deployment
+
+The preview of a host is the output of the build of the site, so a preview
+starts with a build. Every host but GitHub Pages serves the site from the root
+and uses the default build; the project site of GitHub Pages asks for the base
+path it is served under:
+
+```sh
+pnpm build
+SITE_URL=https://blueberry-py.github.io BASE_PATH=/blog pnpm build
+```
+
+Netlify shows a draft of the site under a temporary URL, and the site that is
+live keeps serving the last published deployment until the draft is published:
+
+```sh
+netlify deploy --dir dist
+```
+
+The Worker is previewed locally against the built output, as described in
+[Cloudflare Workers](#cloudflare-workers).
+
 ### Render
 
 Render reads no configuration file from the repository, so the settings of the

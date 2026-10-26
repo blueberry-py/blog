@@ -20,6 +20,7 @@ export default [
       '.astro/',
       'public/',
       '.wrangler/',
+      '.netlify/',
       // The migration plans and the ledger of the migration are working
       // documents, not site sources.
       'docs/',

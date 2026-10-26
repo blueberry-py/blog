@@ -256,3 +256,265 @@ describe('manifest verification', () => {
     );
   });
 });
+
+/** A post with a cover image and an image in its body. */
+const POST_WITH_IMAGES = `+++
+title = "Alpha"
+slug = "alpha"
+date = 2024-01-31T15:32:01+08:00
+image = "cover.png"
++++
+
+## Alpha
+
+![pic](pic.png)
+`;
+
+/** The content tree of the small site the built output checks read. */
+const CONTENT = {
+  'content/post/alpha.md': POST_WITH_IMAGES,
+  'content/post/cover.png': 'not really a png',
+  'content/post/pic.png': 'not really a png',
+};
+
+/** The output of a build of that small site. */
+const OUTPUT = {
+  'dist/index.html':
+    '<link rel="canonical" href="https://example.com/" /><a href="/post/alpha/">Alpha</a>',
+  'dist/post/alpha/index.html':
+    '<img src="/_astro/cover.abc.webp" /><img src="/_astro/pic.def.webp" />',
+  'dist/404.html': '<h1>Not found</h1>',
+  'dist/_astro/cover.abc.webp': 'not really a png',
+  'dist/_astro/pic.def.webp': 'not really a png',
+};
+
+/**
+ * Audit the built output of the small site.
+ *
+ * The fixture is written to a throwaway directory, so the checks read a site
+ * of their own instead of the site of the repository.
+ */
+async function auditBuiltOutput(files = OUTPUT, options = {}) {
+  const { buildManifest, verifyBuiltOutput } = await loadVerifier();
+
+  return withFixture({ ...CONTENT, ...files }, async (root) => {
+    const manifest = buildManifest(root, ['content/post/alpha.md']);
+
+    return verifyBuiltOutput(manifest, root, options);
+  });
+}
+
+describe('the built output', () => {
+  it('collects the local references of a page and leaves the others out', async () => {
+    const { collectLocalReferences } = await loadVerifier();
+
+    const html = [
+      '<a href="/post/alpha/">Alpha</a>',
+      '<a href="https://example.com/other">Other</a>',
+      '<a href="#section">Section</a>',
+      '<img src="/_astro/cover.webp" />',
+      '<script src="//cdn.example.com/x.js"></script>',
+    ].join('\n');
+
+    assert.deepEqual(collectLocalReferences(html), [
+      '/post/alpha/',
+      '/_astro/cover.webp',
+    ]);
+  });
+
+  it('takes the base path off a local reference', async () => {
+    const { localPath } = await loadVerifier();
+
+    assert.equal(localPath('/post/alpha/', '/'), '/post/alpha/');
+    assert.equal(localPath('/blog/post/alpha/', '/blog/'), '/post/alpha/');
+    assert.equal(localPath('/blog/', '/blog/'), '/');
+    assert.equal(localPath('/blog', '/blog/'), '/');
+    assert.equal(localPath('/post/alpha/', '/blog/'), null);
+  });
+
+  it('resolves a local path to the file of the output that serves it', async () => {
+    const { outputFileFor } = await loadVerifier();
+
+    await withFixture(
+      {
+        'dist/index.html': 'home',
+        'dist/post/alpha/index.html': 'alpha',
+        'dist/favicon.png': 'icon',
+      },
+      async (root) => {
+        const output = path.join(root, 'dist');
+
+        assert.equal(
+          outputFileFor(output, '/'),
+          path.join(output, 'index.html'),
+        );
+        assert.equal(
+          outputFileFor(output, '/post/alpha/'),
+          path.join(output, 'post', 'alpha', 'index.html'),
+        );
+        assert.equal(
+          outputFileFor(output, '/favicon.png'),
+          path.join(output, 'favicon.png'),
+        );
+        assert.equal(outputFileFor(output, '/missing/'), null);
+        assert.equal(outputFileFor(output, '/../outside'), null);
+      },
+    );
+  });
+
+  it('reads the base path of a build from the canonical URL of its home page', async () => {
+    const { detectBase } = await loadVerifier();
+
+    await withFixture(
+      {
+        'dist/index.html':
+          '<link rel="canonical" href="https://blueberry-py.github.io/blog/" />',
+      },
+      async (root) => {
+        assert.equal(detectBase(path.join(root, 'dist')), '/blog/');
+      },
+    );
+  });
+});
+
+describe('the verification of the built output', () => {
+  it('passes when every route, asset and link is intact', async () => {
+    const result = await auditBuiltOutput();
+
+    assert.deepEqual(result.problems, []);
+    assert.equal(result.ok, true);
+  });
+
+  it('reports a site that is not built', async () => {
+    const result = await auditBuiltOutput({});
+
+    assert.ok(
+      result.problems.some((problem) => problem.code === 'no-built-output'),
+      `expected a no-built-output problem, got ${JSON.stringify(result.problems)}`,
+    );
+  });
+
+  it('reports a route of the manifest that has no page', async () => {
+    const withoutPage = { ...OUTPUT };
+    delete withoutPage['dist/post/alpha/index.html'];
+
+    const result = await auditBuiltOutput(withoutPage);
+
+    assert.ok(
+      result.problems.some(
+        (problem) =>
+          problem.code === 'missing-page' && problem.route === '/post/alpha/',
+      ),
+      `expected a missing-page problem, got ${JSON.stringify(result.problems)}`,
+    );
+  });
+
+  it('reports a route that two articles claim', async () => {
+    const { buildManifest, verifyBuiltOutput } = await loadVerifier();
+
+    const shared = POST_WITH_IMAGES.replace(
+      'slug = "alpha"',
+      'slug = "shared"',
+    );
+
+    await withFixture(
+      {
+        ...CONTENT,
+        ...OUTPUT,
+        'content/post/alpha.md': shared,
+        'content/post/beta.md': shared,
+      },
+      async (root) => {
+        const manifest = buildManifest(root, [
+          'content/post/alpha.md',
+          'content/post/beta.md',
+        ]);
+        const result = verifyBuiltOutput(manifest, root);
+
+        assert.ok(
+          result.problems.some((problem) => problem.code === 'duplicate-route'),
+          `expected a duplicate-route problem, got ${JSON.stringify(result.problems)}`,
+        );
+      },
+    );
+  });
+
+  it('reports a local link that points at nothing', async () => {
+    const result = await auditBuiltOutput({
+      ...OUTPUT,
+      'dist/index.html': '<a href="/missing/">Missing</a>',
+    });
+
+    assert.ok(
+      result.problems.some((problem) => problem.code === 'broken-link'),
+      `expected a broken-link problem, got ${JSON.stringify(result.problems)}`,
+    );
+  });
+
+  it('reports a link that points outside of the base path', async () => {
+    const result = await auditBuiltOutput(OUTPUT, { base: '/blog/' });
+
+    assert.ok(
+      result.problems.some((problem) => problem.code === 'link-outside-base'),
+      `expected a link-outside-base problem, got ${JSON.stringify(result.problems)}`,
+    );
+  });
+
+  it('reports a base path that is used twice', async () => {
+    const result = await auditBuiltOutput(
+      {
+        ...OUTPUT,
+        'dist/index.html': '<a href="/blog/blog/post/alpha/">Alpha</a>',
+      },
+      { base: '/blog/' },
+    );
+
+    assert.ok(
+      result.problems.some((problem) => problem.code === 'doubled-base'),
+      `expected a doubled-base problem, got ${JSON.stringify(result.problems)}`,
+    );
+  });
+
+  it('accepts a link whose own name is the name of the base path', async () => {
+    const result = await auditBuiltOutput(
+      {
+        ...OUTPUT,
+        'dist/index.html': '<a href="/blog/tags/blog/">Blog</a>',
+      },
+      { base: '/blog/' },
+    );
+
+    assert.ok(
+      !result.problems.some((problem) => problem.code === 'doubled-base'),
+      `the link to the tag blog is not a doubled base, got ${JSON.stringify(result.problems)}`,
+    );
+  });
+
+  it('reports an image of an article that its page does not render', async () => {
+    const result = await auditBuiltOutput({
+      ...OUTPUT,
+      'dist/post/alpha/index.html': '<img src="/_astro/cover.abc.webp" />',
+    });
+
+    assert.ok(
+      result.problems.some(
+        (problem) =>
+          problem.code === 'missing-built-asset' &&
+          problem.detail.includes('pic.png'),
+      ),
+      `expected a missing-built-asset problem, got ${JSON.stringify(result.problems)}`,
+    );
+  });
+
+  it('reports a number of articles that does not match the manifest', async () => {
+    const result = await auditBuiltOutput({
+      ...OUTPUT,
+      'dist/post/beta/index.html': '<p>Beta</p>',
+    });
+
+    assert.ok(
+      result.problems.some((problem) => problem.code === 'post-count-mismatch'),
+      `expected a post-count-mismatch problem, got ${JSON.stringify(result.problems)}`,
+    );
+  });
+});

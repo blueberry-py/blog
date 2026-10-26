@@ -17,9 +17,11 @@ import { before, describe, it } from 'node:test';
 import { fileURLToPath } from 'node:url';
 
 import {
+  listBuiltPages,
   parseFrontMatterFields,
   readManifest,
   splitFrontMatter,
+  verifyBuiltOutput,
 } from './migration/verify-content.mjs';
 
 const REPO_ROOT = path.resolve(fileURLToPath(new URL('..', import.meta.url)));
@@ -32,8 +34,14 @@ const ASTRO_BIN = path.join(
   'astro.mjs',
 );
 
-/** The canonical URL of the build the checks read. */
+/** The canonical URL of the build for a root host. */
 const SITE = 'https://blueberrypy.netlify.app';
+
+/** The canonical URL of the build for the project site of GitHub Pages. */
+const PAGES_SITE = 'https://blueberry-py.github.io';
+
+/** The base path of the project site of GitHub Pages. */
+const PAGES_BASE = '/blog/';
 
 const manifest = readManifest(REPO_ROOT);
 const postEntries = manifest.entries.filter(
@@ -43,8 +51,14 @@ const pageEntries = manifest.entries.filter(
   (entry) => entry.collection === 'page',
 );
 
-/** Build the site once: every check below reads the output of this build. */
-function buildSite() {
+/**
+ * Build the site once: every check below reads the output of this build.
+ *
+ * The build reads the URL of the site and the base path from the
+ * environment, so they are given here: the checks read the site they asked
+ * for, whatever the environment of the shell holds.
+ */
+function buildSite(site = SITE, base = '/') {
   try {
     execFileSync(process.execPath, [ASTRO_BIN, 'build'], {
       cwd: REPO_ROOT,
@@ -52,8 +66,8 @@ function buildSite() {
       env: {
         ...process.env,
         ASTRO_TELEMETRY_DISABLED: '1',
-        SITE_URL: SITE,
-        BASE_PATH: '/',
+        SITE_URL: site,
+        BASE_PATH: base,
       },
     });
   } catch (error) {
@@ -61,6 +75,28 @@ function buildSite() {
     throw new Error(`the site did not build:\n${output}`, { cause: error });
   }
 }
+
+/**
+ * The routes of the built output and the images every one of them renders.
+ *
+ * The name of an asset carries the hash of its content, and that hash differs
+ * between two builds, so only the name of the image itself is compared.
+ */
+function outputInventory() {
+  const inventory = {};
+
+  for (const page of listBuiltPages(DIST_DIR)) {
+    inventory[page.route] = imageSources(readFileSync(page.file, 'utf8'))
+      .filter((source) => source.startsWith('/'))
+      .map((source) => path.posix.basename(source).split('.')[0])
+      .sort();
+  }
+
+  return inventory;
+}
+
+/** The inventory of the build for a root host, read before the next build. */
+let rootInventory = null;
 
 /** The front matter and the body of a content file, as the site sees them. */
 function readSource(entry) {
@@ -169,6 +205,7 @@ function tocFragments(html) {
 describe('the built site', () => {
   before(() => {
     buildSite();
+    rootInventory = outputInventory();
   });
 
   it('serves one page per content route', () => {
@@ -317,5 +354,36 @@ describe('the built site', () => {
     }
 
     assert.ok(withToc > 0, 'no post has a table of contents');
+  });
+
+  it('has no broken link, no missing page and no missing asset', () => {
+    const result = verifyBuiltOutput(manifest, REPO_ROOT, { base: '/' });
+
+    assert.deepEqual(result.problems, []);
+  });
+});
+
+describe('the site built for the project site of GitHub Pages', () => {
+  before(() => {
+    buildSite(PAGES_SITE, PAGES_BASE);
+  });
+
+  it('serves one page per content route', () => {
+    for (const entry of manifest.entries) {
+      assert.ok(
+        existsSync(pageFile(entry.route)),
+        `${entry.source} has no page at ${entry.route}`,
+      );
+    }
+  });
+
+  it('links every page under the base path exactly once', () => {
+    const result = verifyBuiltOutput(manifest, REPO_ROOT, { base: PAGES_BASE });
+
+    assert.deepEqual(result.problems, []);
+  });
+
+  it('serves the same routes and the same assets as a build for a root host', () => {
+    assert.deepEqual(outputInventory(), rootInventory);
   });
 });

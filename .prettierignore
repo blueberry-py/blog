@@ -4,6 +4,7 @@ dist/
 .astro/
 public/
 .wrangler/
+.netlify/
 .superpowers/
 
 # The lockfile is written by pnpm, not by hand.
