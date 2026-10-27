@@ -197,6 +197,12 @@ pnpm deploy:cloudflare
 A deployment from the Cloudflare dashboard (Workers Builds) uses the build
 command `pnpm build:root` and the deploy command `pnpm deploy:cloudflare`.
 
+Cloudflare builds a preview of every branch with `wrangler preview`, which
+stops when the configuration holds no `previews` block. The Worker sets no
+variables, no secrets and no bindings, so the block of `wrangler.toml` is
+empty: the preview reads the assets and the compatibility settings of the
+Worker itself.
+
 The Worker can be served locally, against the built output:
 
 ```sh
