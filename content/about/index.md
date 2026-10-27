@@ -4,7 +4,7 @@ date: 2024-01-31T16:11:57+08:00
 slug: about
 ---
 
-BlueberryPy is a place to share Python and other fun stuff :)
+BlueberryPy is a place to share Python and other fun stuff 😊
 
 This site is synced across:
 
@@ -12,3 +12,4 @@ This site is synced across:
 - [Netlify](https://blueberrypy.netlify.app/)
 - [Render](https://blueberrypy.onrender.com/)
 - [Vercel](https://blueberrypy-blog.vercel.app/)
+- [Cloudflare](https://blog.blueberrypy.workers.dev/)

@@ -46,6 +46,7 @@ Before we continue, please note that this blog is synced across the following pl
 - [Netlify](https://blueberrypy.netlify.app/post/this-month-for-pythonistas-2026-09/)
 - [Render](https://blueberrypy.onrender.com/post/this-month-for-pythonistas-2026-09/)
 - [Vercel](https://blueberrypy-blog.vercel.app/post/this-month-for-pythonistas-2026-09/)
+- [Cloudflare](https://blog.blueberrypy.workers.dev/post/this-month-for-pythonistas-2026-09/)
 
 Ready? Let's get started!
 
@@ -97,6 +98,10 @@ PyPy v8.0.0 is a major version shipping three interpreters: PyPy2.7, PyPy3.11 (l
 
 > An AGENTS.md file gives your AI coding agent the context it needs to write code that fits your project's guidelines. It's a plain Markdown file at your project root where you can pin your Python version, dependency manager, coding conventions, and constraints. In this tutorial, you'll build one of these files section by section and watch your agent go from sloppy output to clean, idiomatic code.
 
+### RealPython's [How to Review AI-Generated Python Code Efficiently](https://realpython.com/review-ai-generated-code/)
+
+> An AI coding agent writes code faster than any human can read it, which makes you the bottleneck. Your job and responsibilities stay the same, but the volume and speed increase. To manage this, you need to review the code with a plan. You can't read every line, so focus on the parts where the risk is highest.
+
 ## Articles
 
 ### [Speeding Up a Python Service with CinderX: JIT and Static Typing](https://dev.to/deadlovelll/speeding-up-a-python-service-with-cinderx-jit-and-static-typing-53bh)
@@ -130,6 +135,10 @@ This article by Trey Hunner explains creating temporary files and directories us
 ### [pytest plugins that actually change how you test in 2026](https://dev.to/peytongreen_dev/pytest-plugins-that-actually-change-how-you-test-in-2026-1ecn)
 
 In this hands-on guide, the author recommends seven pytest plugins that reshape testing workflows in 2026: `pytest-httpx` mocks HTTP at the transport layer and fails tests when registered mocks go unused; `pytest-randomly` exposes order dependencies via randomized runs and reproducible seeds; anyio's built-in plugin simplifies async tests across asyncio and trio backends; `syrupy` enables snapshot or golden-file testing; `pytest-watch` reruns tests on file save; `freezegun` deterministically freezes time, avoiding the outdated pytest-freezegun wrapper; and `pytest-cov`, configured with branch coverage, skip-covered reporting and thresholds, reveals real gaps. Together they form a free, no-subscription testing stack.
+
+### [Agentic Engineering in Python: From Vibes to Evidence](https://realpython.com/agentic-engineering/)
+
+This article introduces **agentic engineering** — delegating bounded coding tasks to AI agents while humans retain ownership of intent, constraints, review, and release. Unlike vibe coding, which accepts plausible-looking output, agentic engineering demands evidence. It centers on two loops: a fast agent execution loop and a slower human acceptance loop. Key tools include the eight-level Engineering Evidence Ladder (from code existing to CI integration) and the RECAP review checklist (Role, Edges, Contracts, Assumptions, Proof). The article also warns against implementation-mirroring tests, scope creep, poor audit trails, and excessive agent access.
 
 ## Podcasts
 

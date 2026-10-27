@@ -46,6 +46,7 @@ Before we continue, please note that this blog is synced across the following pl
 - [Netlify](https://blueberrypy.netlify.app/post/this-month-for-pythonistas-2026-08/)
 - [Render](https://blueberrypy.onrender.com/post/this-month-for-pythonistas-2026-08/)
 - [Vercel](https://blueberrypy-blog.vercel.app/post/this-month-for-pythonistas-2026-08/)
+- [Cloudflare](https://blog.blueberrypy.workers.dev/post/this-month-for-pythonistas-2026-08/)
 
 Ready? Let's get started!
 
@@ -213,4 +214,4 @@ The article argues that LLMs have improved coding productivity by roughly 2x, no
 
 As we wrap up this journey together, I want to take a moment to express my gratitude for your reading. If you've enjoyed this issue and would like to help sustain this blog, please consider [starring this blog on github](https://github.com/blueberry-py/blog/stargazers), it would be great motivation for me to keep updating!
 
-Alright, that concludes the July Edition of "This Month for Pythonistas". Thank you again for reading my post and I hope you enjoy it or find something useful. Happy coding and see you in September! 👋
+Alright, that concludes the August Edition of "This Month for Pythonistas". Thank you again for reading my post and I hope you enjoy it or find something useful. Happy coding and see you in September! 👋
