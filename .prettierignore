@@ -13,6 +13,11 @@ pnpm-lock.yaml
 # The migration plans are working documents, not site content.
 docs/
 
+# The instructions of the coding agents are working documents too.
+AGENTS.md
+.qoder/
+.qoder-cn/
+
 # Binary assets.
 *.jpg
 *.jpeg

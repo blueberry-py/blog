@@ -1,0 +1,4 @@
+# The whole gate runs before a branch leaves the machine: the CI job runs the
+# same two commands, so a push that passes here passes the job.
+pnpm check
+pnpm test

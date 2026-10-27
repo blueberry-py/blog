@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 import { defineConfig } from 'astro/config';
 
 import { publicGuard } from './scripts/public-guard.mjs';
-import { legacyRedirects } from './scripts/migration/legacy-aliases.mjs';
+import { legacyRedirects } from './scripts/legacy-redirects.mjs';
 
 /**
  * The sitemap of the site at the URL the old Hugo site served it at.

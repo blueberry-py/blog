@@ -25,6 +25,9 @@ export default [
       // documents, not site sources.
       'docs/',
       '.superpowers/',
+      // The instructions of the coding agents are working documents too.
+      '.qoder/',
+      '.qoder-cn/',
     ],
   },
   js.configs.recommended,

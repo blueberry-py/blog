@@ -63,7 +63,7 @@ test('the formatted sources of the site pass the formatter', () => {
     'eslint.config.js',
     'src/content.config.ts',
     'src/lib/content-schema.ts',
-    'scripts/migration/verify-content.mjs',
+    'scripts/content.mjs',
     'content/post/one-liner-bun.md',
     'content/about/index.md',
     'README.md',
@@ -89,7 +89,7 @@ test('the sources of the site pass the linter', () => {
     'eslint.config.js',
     'src/content.config.ts',
     'src/lib/content-schema.ts',
-    'scripts/migration/verify-content.mjs',
+    'scripts/content.mjs',
   ]);
 
   assert.equal(result.code, 0, `eslint reported:\n${result.output}`);

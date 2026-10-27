@@ -38,3 +38,7 @@ ignores:
   # documents, not site content.
   - 'docs/**'
   - '.superpowers/**'
+  # The instructions of the coding agents are working documents too.
+  - 'AGENTS.md'
+  - '.qoder/**'
+  - '.qoder-cn/**'

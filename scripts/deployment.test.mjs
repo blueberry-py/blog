@@ -208,6 +208,25 @@ describe('the deployment to Cloudflare Workers', () => {
       'the build still runs a shell script',
     );
   });
+
+  it('gives a preview of a branch the settings of the Worker', () => {
+    const config = wrangler();
+
+    assert.ok(
+      'previews' in config,
+      'wrangler.toml holds no previews block, and a preview of a branch stops without one',
+    );
+    assert.deepEqual(
+      Object.keys(config.previews),
+      [],
+      'the preview asks for settings of its own, while the Worker gives the settings of the site',
+    );
+    assert.equal(
+      config.vars,
+      undefined,
+      'the Worker has variables, which a preview of a branch is not given by the Worker itself',
+    );
+  });
 });
 
 describe('the deployment to Vercel', () => {

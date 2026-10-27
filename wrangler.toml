@@ -6,3 +6,9 @@ compatibility_date = '2025-07-31'
 [assets]
 directory = './dist'
 not_found_handling = '404-page'
+
+# Cloudflare builds a preview of every branch with `wrangler preview`, which
+# stops without a `previews` block. The Worker holds no variables, no secrets
+# and no bindings, so the preview needs nothing of its own: the block is empty
+# and the preview reads the assets and the compatibility settings above.
+[previews]

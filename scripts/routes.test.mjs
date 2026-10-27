@@ -17,12 +17,13 @@ import { before, describe, it } from 'node:test';
 import { fileURLToPath } from 'node:url';
 
 import {
+  contentManifest,
   listBuiltPages,
   parseFrontMatterFields,
-  readManifest,
   splitFrontMatter,
   verifyBuiltOutput,
-} from './migration/verify-content.mjs';
+} from './content.mjs';
+import { readLegacyRedirects } from './legacy-redirects.mjs';
 
 const REPO_ROOT = path.resolve(fileURLToPath(new URL('..', import.meta.url)));
 const DIST_DIR = path.join(REPO_ROOT, 'dist');
@@ -43,7 +44,8 @@ const PAGES_SITE = 'https://blueberry-py.github.io';
 /** The base path of the project site of GitHub Pages. */
 const PAGES_BASE = '/blog/';
 
-const manifest = readManifest(REPO_ROOT);
+/** The content the site publishes: every article and page that is no draft. */
+const inventory = contentManifest(REPO_ROOT);
 
 /**
  * The routes of the old Hugo site that the new site answers with an alias.
@@ -52,18 +54,13 @@ const manifest = readManifest(REPO_ROOT);
  * articles per list; the new site serves every list in full, so every one of
  * those routes leads to the route that holds the same articles now.
  */
-const aliases = JSON.parse(
-  readFileSync(
-    path.join(REPO_ROOT, 'scripts/migration/legacy-aliases.json'),
-    'utf8',
-  ),
-).aliases;
+const aliases = readLegacyRedirects(REPO_ROOT);
 
 const aliasRoutes = new Set(Object.keys(aliases));
-const postEntries = manifest.entries.filter(
+const postEntries = inventory.entries.filter(
   (entry) => entry.collection === 'post',
 );
-const pageEntries = manifest.entries.filter(
+const pageEntries = inventory.entries.filter(
   (entry) => entry.collection === 'page',
 );
 
@@ -225,10 +222,7 @@ describe('the built site', () => {
   });
 
   it('serves one page per content route', () => {
-    for (const entry of manifest.entries) {
-      const { fields } = readSource(entry);
-      if (fields.draft === 'true') continue;
-
+    for (const entry of inventory.entries) {
       assert.ok(
         existsSync(pageFile(entry.route)),
         `${entry.source} has no page at ${entry.route}`,
@@ -244,10 +238,7 @@ describe('the built site', () => {
       .map((route) => route.replace(/^\/post\//, '').replace(/\/$/, ''))
       .sort();
 
-    const expected = postEntries
-      .filter((entry) => readSource(entry).fields.draft !== 'true')
-      .map((entry) => entry.slug)
-      .sort();
+    const expected = postEntries.map((entry) => entry.slug).sort();
 
     assert.deepEqual(built, expected);
   });
@@ -398,7 +389,7 @@ describe('the built site', () => {
   });
 
   it('has no broken link, no missing page and no missing asset', () => {
-    const result = verifyBuiltOutput(manifest, REPO_ROOT, { base: '/' });
+    const result = verifyBuiltOutput(inventory, REPO_ROOT, { base: '/' });
 
     assert.deepEqual(result.problems, []);
   });
@@ -410,7 +401,7 @@ describe('the site built for the project site of GitHub Pages', () => {
   });
 
   it('serves one page per content route', () => {
-    for (const entry of manifest.entries) {
+    for (const entry of inventory.entries) {
       assert.ok(
         existsSync(pageFile(entry.route)),
         `${entry.source} has no page at ${entry.route}`,
@@ -419,7 +410,9 @@ describe('the site built for the project site of GitHub Pages', () => {
   });
 
   it('links every page under the base path exactly once', () => {
-    const result = verifyBuiltOutput(manifest, REPO_ROOT, { base: PAGES_BASE });
+    const result = verifyBuiltOutput(inventory, REPO_ROOT, {
+      base: PAGES_BASE,
+    });
 
     assert.deepEqual(result.problems, []);
   });

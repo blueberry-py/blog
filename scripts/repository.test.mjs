@@ -31,12 +31,12 @@ const SOURCE_DIRECTORIES = ['.github', 'src'];
 const CONFIGURATION_FILES = [
   '.gitignore',
   '.markdownlint-cli2.yaml',
-  '.pre-commit-config.yaml',
   '.prettierignore',
   '.prettierrc.json',
   'README.md',
   'astro.config.mjs',
   'eslint.config.js',
+  'lint-staged.config.js',
   'netlify.toml',
   'package.json',
   'vercel.json',
@@ -299,6 +299,74 @@ describe('the line endings of the repository', () => {
   });
 });
 
+describe('the gate of a commit', () => {
+  it('runs the tools of the repository instead of a hook of another language', () => {
+    assert.equal(
+      existsSync(path.join(REPO_ROOT, '.pre-commit-config.yaml')),
+      false,
+      'the configuration of pre-commit is still there',
+    );
+  });
+
+  it('installs the hooks with the dependencies', () => {
+    const manifest = JSON.parse(read('package.json'));
+
+    assert.equal(
+      manifest.scripts.prepare,
+      'husky',
+      '`pnpm install` does not install the hooks of the repository',
+    );
+
+    for (const hook of ['.husky/pre-commit', '.husky/pre-push']) {
+      assert.ok(existsSync(path.join(REPO_ROOT, hook)), `${hook} is missing`);
+    }
+  });
+
+  it('formats and lints the files of a commit', () => {
+    assert.match(
+      read('.husky/pre-commit'),
+      /pnpm exec lint-staged/,
+      'the pre-commit hook does not run the staged files through lint-staged',
+    );
+
+    const staged = read('lint-staged.config.js');
+
+    for (const command of ['markdownlint-cli2', 'eslint', 'prettier']) {
+      assert.ok(
+        staged.includes(command),
+        `the files of a commit are not run through ${command}`,
+      );
+    }
+  });
+
+  it('runs the whole gate before a push', () => {
+    const hook = read('.husky/pre-push');
+
+    for (const command of ['pnpm check', 'pnpm test']) {
+      assert.ok(
+        hook.includes(command),
+        `the pre-push hook does not run ${command}`,
+      );
+    }
+  });
+
+  it('runs the same gate in CI', () => {
+    for (const file of [
+      '.github/workflows/ci.yml',
+      '.github/workflows/deploy.yml',
+    ]) {
+      const workflow = read(file);
+
+      for (const command of ['pnpm check', 'pnpm test']) {
+        assert.ok(
+          workflow.includes(command),
+          `${file} does not run ${command}`,
+        );
+      }
+    }
+  });
+});
+
 describe('the sources of the site', () => {
   it('name no path of Hugo', () => {
     const found = siteSources().filter((file) =>
@@ -404,21 +472,14 @@ describe('the README of the repository', () => {
     );
     assert.match(
       readme,
-      /baseline of `pnpm verify:content`/,
-      'the README does not say what the baseline of the verification follows',
+      /follow the change of the markup of an article/,
+      'the README does not say that the checks read the articles as they are written',
     );
   });
 
-  it('tells how the articles outside the baseline are reconciled', () => {
-    const readme = read('README.md');
-
+  it('tells that the site publishes the articles that are not drafts', () => {
     assert.match(
-      readme,
-      /pnpm convert:frontmatter -- --path/,
-      'the README does not tell how an article outside the baseline is converted',
-    );
-    assert.match(
-      readme,
+      read('README.md'),
       /`draft: false`/,
       'the README does not tell that an article that is not a draft is published',
     );
