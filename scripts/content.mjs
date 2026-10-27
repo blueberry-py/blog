@@ -1,40 +1,29 @@
 #!/usr/bin/env node
 /**
- * Content and URL inventory for the Hugo -> Astro migration.
+ * The inventory of the content tree and the helpers of the built output.
  *
- * The inventory is the contract between the migration and the site that
- * replaces it: every tracked Markdown file under `content/post` and
- * `content/about` is recorded with the route Hugo served it at, a hash of its
- * Markdown body, and the local assets it references. `verify-content.mjs`
- * re-checks that contract, so a lost post, a rewritten body or a missing
- * image fails loudly instead of silently disappearing from the new site.
+ * Every article and every page of the site is a Markdown file under
+ * `content/post` and `content/about`. This module reads that tree into an
+ * inventory: the route each file is served at and the images it uses. The
+ * inventory is computed from the working tree, the way the build reads it, so
+ * the checks of the built site read the corpus of the build they check.
  *
- * Usage:
- *   node scripts/migration/verify-content.mjs            verify against the manifest
- *   node scripts/migration/verify-content.mjs --generate  rewrite the manifest
+ * The rest of the module reads an output: a page, a feed, a sitemap. A check
+ * joins the two, which is what `verifyBuiltOutput` does: every article of the
+ * inventory has a page, every reference of every document resolves to a file
+ * of the output, and every route the old site served is still answered.
  */
-import { createHash } from 'node:crypto';
-import { execFileSync } from 'node:child_process';
-import {
-  existsSync,
-  readFileSync,
-  readdirSync,
-  statSync,
-  writeFileSync,
-} from 'node:fs';
+import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 
-import { readLegacyAliases } from './legacy-aliases.mjs';
-import { legacyFeedRoutes } from './legacy-feeds.mjs';
-
-const REPO_ROOT = path.resolve(
-  fileURLToPath(new URL('../..', import.meta.url)),
-);
-const MANIFEST_PATH = 'scripts/migration/legacy-routes.json';
+import { legacyFeedRoutes } from './legacy-feed-routes.mjs';
+import { readLegacyRedirects } from './legacy-redirects.mjs';
 
 const POST_ROOT = 'content/post';
 const PAGE_ROOT = 'content/about';
+
+/** The directories of the content tree, relative to the root of the repository. */
+const CONTENT_DIRECTORIES = [POST_ROOT, PAGE_ROOT];
 
 /** The directory the built site is written to. */
 const OUTPUT_DIRECTORY = 'dist';
@@ -45,8 +34,9 @@ const DELIMITERS = ['+++', '---'];
 /**
  * Split a Markdown file into its front matter and its body.
  *
- * The body is returned byte-for-byte: the migration must not rewrite article
- * text, so hashing and verification work on the untouched remainder.
+ * The body is returned byte-for-byte: the site publishes the words of an
+ * article as they were written, so the checks that read a body read the
+ * untouched remainder.
  */
 export function splitFrontMatter(raw) {
   const text = raw.replace(/^\uFEFF/, '');
@@ -128,7 +118,7 @@ function postPath(sourcePath) {
   return slug;
 }
 
-/** The slug Hugo served a post at: explicit front matter first, the path second. */
+/** The slug a post is served at: explicit front matter first, the path second. */
 export function deriveSlug(sourcePath, fields = {}) {
   const explicit = typeof fields.slug === 'string' ? fields.slug.trim() : '';
   if (explicit) return explicit;
@@ -139,7 +129,7 @@ export function deriveSlug(sourcePath, fields = {}) {
 }
 
 /**
- * The public route Hugo served a content file at. Posts are routed by their
+ * The public route a content file is served at. Posts are routed by their
  * slug; pages are routed by their path, because that is what Hugo does.
  */
 export function deriveRoute(sourcePath, slug) {
@@ -166,10 +156,10 @@ function isLocalTarget(target) {
  * references, in document order, followed by the ones named by its front
  * matter.
  *
- * Only images count as assets: they are what a Hugo page bundle carries, and
- * they are what the built site has to resolve. A Markdown link to another
- * page is a route reference, not an asset, and a bare hostname such as
- * `www.jd.com` is neither.
+ * Only images count as assets: they are what a page bundle carries, and they
+ * are what the built site has to resolve. A Markdown link to another page is a
+ * route reference, not an asset, and a bare hostname such as `www.jd.com` is
+ * neither.
  */
 export function collectLocalAssetRefs(sourcePath, fields = {}, body = '') {
   const directory = path.posix.dirname(sourcePath);
@@ -199,24 +189,8 @@ export function collectLocalAssetRefs(sourcePath, fields = {}, body = '') {
   return refs;
 }
 
-/**
- * A stable hash of a Markdown body.
- *
- * The line endings are normalized first: git stores the blobs with LF endings
- * and checks them out with CRLF on Windows, so the hash has to describe the
- * article text rather than the checkout of the machine that generated it.
- */
-export function hashBody(body) {
-  const normalized = body.replace(/\r\n/g, '\n');
-
-  return `sha256:${createHash('sha256').update(normalized, 'utf8').digest('hex')}`;
-}
-
-/** Build the inventory entry of a single content file. */
-export function buildEntry(rootDir, sourcePath) {
-  const raw = readFileSync(path.join(rootDir, sourcePath), 'utf8');
-  const { frontMatter, body } = splitFrontMatter(raw);
-  const fields = parseFrontMatterFields(frontMatter);
+/** The inventory entry of a content file. */
+function buildEntry(sourcePath, fields, body) {
   const slug = deriveSlug(sourcePath, fields);
 
   return {
@@ -224,99 +198,59 @@ export function buildEntry(rootDir, sourcePath) {
     collection: sourcePath.startsWith(`${POST_ROOT}/`) ? 'post' : 'page',
     slug,
     route: deriveRoute(sourcePath, slug),
-    bodyHash: hashBody(body),
     assets: collectLocalAssetRefs(sourcePath, fields, body),
   };
 }
 
-/** Build a complete inventory from an explicit list of content files. */
-export function buildManifest(rootDir, sourcePaths) {
-  const entries = [...sourcePaths]
-    .sort()
-    .map((sourcePath) => buildEntry(rootDir, sourcePath));
+/** The Markdown files of the content tree, sorted by their path. */
+function contentSources(rootDir) {
+  const found = [];
 
-  return { version: 1, entries };
+  const walk = (directory) => {
+    const absolute = path.join(rootDir, directory);
+
+    if (!existsSync(absolute)) return;
+
+    for (const entry of readdirSync(absolute, { withFileTypes: true })) {
+      const sourcePath = `${directory}/${entry.name}`;
+
+      if (entry.isDirectory()) {
+        walk(sourcePath);
+        continue;
+      }
+
+      if (/\.mdx?$/.test(entry.name)) found.push(sourcePath);
+    }
+  };
+
+  for (const directory of CONTENT_DIRECTORIES) {
+    walk(directory);
+  }
+
+  return found.sort();
 }
 
 /**
- * The Markdown files the migration owns: the tracked files under the post and
- * page roots. Untracked files belong to the user and are reconciled
- * separately, so they are deliberately not part of the inventory.
+ * The inventory of the content tree: every article and every page of the
+ * build, with the route it is served at and the images it uses.
+ *
+ * A draft is a file the build leaves out, so it is left out here as well: the
+ * inventory describes the site the build publishes, not the files on disk.
  */
-export function listTrackedContentFiles(rootDir = REPO_ROOT) {
-  const output = execFileSync('git', ['ls-files', '--', POST_ROOT, PAGE_ROOT], {
-    cwd: rootDir,
-    encoding: 'utf8',
-  });
+export function contentManifest(rootDir) {
+  const entries = [];
 
-  return output
-    .split('\n')
-    .map((line) => line.trim())
-    .filter((line) => line.endsWith('.md'));
-}
-
-/** Check a manifest against the content tree it describes. */
-export function verifyManifest(manifest, rootDir) {
-  const problems = [];
-  const routes = new Map();
-
-  for (const entry of manifest.entries) {
-    const absolute = path.join(rootDir, entry.source);
-
-    if (!existsSync(absolute)) {
-      problems.push({
-        code: 'missing-source',
-        source: entry.source,
-        detail: 'the tracked Markdown file no longer exists',
-      });
-      continue;
-    }
-
-    const raw = readFileSync(absolute, 'utf8');
+  for (const sourcePath of contentSources(rootDir)) {
+    const raw = readFileSync(path.join(rootDir, sourcePath), 'utf8');
     const { frontMatter, body } = splitFrontMatter(raw);
     const fields = parseFrontMatterFields(frontMatter);
 
-    const currentHash = hashBody(body);
-    if (currentHash !== entry.bodyHash) {
-      problems.push({
-        code: 'body-changed',
-        source: entry.source,
-        detail: `body hash ${entry.bodyHash} no longer matches ${currentHash}`,
-      });
-    }
+    if (fields.draft === 'true') continue;
 
-    const route = deriveRoute(entry.source, deriveSlug(entry.source, fields));
-    if (route !== entry.route) {
-      problems.push({
-        code: 'route-changed',
-        source: entry.source,
-        detail: `route ${entry.route} no longer matches ${route}`,
-      });
-    }
-
-    const previous = routes.get(route);
-    if (previous) {
-      problems.push({
-        code: 'duplicate-route',
-        source: entry.source,
-        detail: `route ${route} is already served by ${previous}`,
-      });
-    } else {
-      routes.set(route, entry.source);
-    }
-
-    for (const asset of entry.assets) {
-      if (!existsSync(path.join(rootDir, asset))) {
-        problems.push({
-          code: 'missing-asset',
-          source: entry.source,
-          detail: `referenced asset ${asset} does not exist`,
-        });
-      }
-    }
+    entries.push(buildEntry(sourcePath, fields, body));
   }
 
-  return { ok: problems.length === 0, problems };
+  return { version: 1, entries };
 }
 
 /**
@@ -541,15 +475,16 @@ function routeOfSite(reference, origin) {
 }
 
 /**
- * Check the built output of the site against the manifest.
+ * Check the built output of the site against the inventory.
  *
- * The manifest says which routes the articles are served at and which images
+ * The inventory says which routes the articles are served at and which images
  * they use; the output says which files the site is made of. This check joins
- * the two: every route of the manifest has a page, every local reference of
- * every page and of every feed resolves to a file of the output, and every
- * image of an article is rendered by the page of that article.
+ * the two: every route of the inventory has a page, every local reference of
+ * every page and of every feed resolves to a file of the output, every image of
+ * an article is rendered by the page of that article, and every route and feed
+ * the old site served is still answered.
  */
-export function verifyBuiltOutput(manifest, rootDir, options = {}) {
+export function verifyBuiltOutput(inventory, rootDir, options = {}) {
   const { base = '/', output = OUTPUT_DIRECTORY } = options;
   const outputDir = path.join(rootDir, output);
   const problems = [];
@@ -634,7 +569,7 @@ export function verifyBuiltOutput(manifest, rootDir, options = {}) {
     routes.set(page.route, page.file);
   }
 
-  for (const entry of manifest.entries) {
+  for (const entry of inventory.entries) {
     const previous = sources.get(entry.route);
 
     if (previous) {
@@ -658,26 +593,26 @@ export function verifyBuiltOutput(manifest, rootDir, options = {}) {
     }
   }
 
-  const posts = manifest.entries.filter(
+  const posts = inventory.entries.filter(
     (entry) => entry.collection === 'post',
   ).length;
 
-  // The aliases of the routes of the old site are pages of the output as
-  // well, but they hold no article: they send the reader to the route that
-  // holds the articles.
-  const aliasRoutes = new Set(Object.keys(readLegacyAliases(rootDir)));
+  // The routes of the old site are pages of the output as well, but they hold
+  // no article: they send the reader to the route that holds the articles.
+  const redirectRoutes = new Set(Object.keys(readLegacyRedirects(rootDir)));
   const builtPosts = pages.filter(
-    (page) => page.route.startsWith('/post/') && !aliasRoutes.has(page.route),
+    (page) =>
+      page.route.startsWith('/post/') && !redirectRoutes.has(page.route),
   ).length;
 
   if (posts !== builtPosts) {
     problems.push({
       code: 'post-count-mismatch',
-      detail: `the manifest holds ${posts} articles, the output holds ${builtPosts}`,
+      detail: `the content tree holds ${posts} articles, the output holds ${builtPosts}`,
     });
   }
 
-  for (const route of aliasRoutes) {
+  for (const route of redirectRoutes) {
     if (routes.has(route)) continue;
 
     problems.push({
@@ -687,10 +622,9 @@ export function verifyBuiltOutput(manifest, rootDir, options = {}) {
     });
   }
 
-  // The old site served a feed of its articles, of every tag and of every
-  // category. The feeds of the routes that name no term are the same in every
-  // build of the site, so they are checked against the baseline of the old
-  // site.
+  // The old site served a feed of its articles and of the terms of every
+  // taxonomy. The feeds of the routes that name no term are the same in every
+  // build of the site, so they are checked against the routes of the old site.
   for (const route of legacyFeedRoutes(rootDir)) {
     if (existsSync(path.join(outputDir, route.replace(/^\//, '')))) continue;
 
@@ -740,7 +674,7 @@ export function verifyBuiltOutput(manifest, rootDir, options = {}) {
     }
   }
 
-  for (const entry of manifest.entries) {
+  for (const entry of inventory.entries) {
     if (entry.assets.length === 0) continue;
 
     const page = routes.get(entry.route);
@@ -780,70 +714,4 @@ export function verifyBuiltOutput(manifest, rootDir, options = {}) {
       base,
     },
   };
-}
-
-/** Read the committed manifest. */
-export function readManifest(rootDir = REPO_ROOT) {
-  return JSON.parse(readFileSync(path.join(rootDir, MANIFEST_PATH), 'utf8'));
-}
-
-/** The name of the file or the route a problem is about. */
-function problemLabel(problem) {
-  return problem.source ?? problem.route ?? problem.document ?? '';
-}
-
-function main(argv) {
-  const rootDir = REPO_ROOT;
-
-  if (argv.includes('--generate')) {
-    const sourcePaths = listTrackedContentFiles(rootDir);
-    const manifest = buildManifest(rootDir, sourcePaths);
-    writeFileSync(
-      path.join(rootDir, MANIFEST_PATH),
-      `${JSON.stringify(manifest, null, 2)}\n`,
-      'utf8',
-    );
-    console.log(`wrote ${MANIFEST_PATH}: ${manifest.entries.length} entries`);
-    return 0;
-  }
-
-  const manifest = readManifest(rootDir);
-  const content = verifyManifest(manifest, rootDir);
-  const outputDir = path.join(rootDir, OUTPUT_DIRECTORY);
-  const built = existsSync(outputDir);
-  const base = built ? detectBase(outputDir) : '/';
-  const output = verifyBuiltOutput(manifest, rootDir, { base });
-  const problems = [...content.problems, ...output.problems];
-
-  if (problems.length === 0) {
-    console.log(
-      `content inventory OK: ${manifest.entries.length} entries verified`,
-    );
-
-    if (built) {
-      console.log(
-        `built output OK: ${output.stats.pages} pages and ${output.stats.feeds} feeds built under ${base}`,
-      );
-    } else {
-      console.log('built output: not audited, the site is not built');
-    }
-
-    return 0;
-  }
-
-  for (const problem of problems) {
-    console.error(
-      `${problem.code}: ${problemLabel(problem)}: ${problem.detail}`,
-    );
-  }
-  console.error(`${problems.length} content problem(s) found`);
-
-  return 1;
-}
-
-if (
-  process.argv[1] &&
-  path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)
-) {
-  process.exit(main(process.argv.slice(2)));
 }

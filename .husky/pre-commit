@@ -1,0 +1,3 @@
+# The files of the commit are formatted and linted, and a file that was fixed is
+# staged again: the commands and their globs are `lint-staged.config.js`.
+pnpm exec lint-staged

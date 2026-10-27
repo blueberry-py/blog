@@ -22,8 +22,32 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # The gate of a push to main: the commands of `ci.yml`, run before the site
+  # is built, so a push that does not pass them publishes nothing.
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+      - name: Install Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - name: Install the dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Check the sources
+        run: pnpm check
+      - name: Test the tooling
+        run: pnpm test
+
   # Build job
   build:
+    needs: verify
     runs-on: ubuntu-latest
     env:
       # The project site of the repository is served under /blog, so the site is

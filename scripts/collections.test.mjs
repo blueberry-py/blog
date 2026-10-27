@@ -9,7 +9,7 @@ import { z } from 'astro/zod';
  * them to the loaders, and these tests exercise the rules themselves.
  */
 async function loadSchemas() {
-  return import('../../src/lib/content-schema.ts');
+  return import('../src/lib/content-schema.ts');
 }
 
 /**

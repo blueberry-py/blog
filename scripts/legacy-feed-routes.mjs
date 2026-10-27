@@ -3,9 +3,8 @@
  *
  * Hugo served a feed of the articles of the site, a feed of the articles of
  * every tag and of every category and a feed of the terms of every taxonomy.
- * The routes of those feeds are written down in `legacy-feeds.json`; this
- * module reads that baseline and turns it into the routes the built site has
- * to serve.
+ * The routes of those feeds are written down in `legacy-feed-routes.json`; this
+ * module reads them and turns them into the routes the built site has to serve.
  *
  * The routes that name a term are written with `<term>`, because the terms of
  * the site are the terms its articles name: the feed of a term is served for
@@ -14,13 +13,13 @@
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 
-const FEEDS_PATH = 'scripts/migration/legacy-feeds.json';
+const FEEDS_PATH = 'scripts/legacy-feed-routes.json';
 
 /**
- * The feeds the old site served, as the baseline writes them down.
+ * The feeds the old site served, with the route and the kind of each of them.
  *
  * @param {string} rootDir The root of the repository.
- * @returns {object[]} The feeds, with the route and the kind of each of them.
+ * @returns {object[]} The feeds.
  */
 export function readLegacyFeeds(rootDir) {
   const file = path.join(rootDir, FEEDS_PATH);

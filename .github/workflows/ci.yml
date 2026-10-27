@@ -1,0 +1,42 @@
+name: Checks
+
+# The gate of a pull request. A push to main is gated by the verify job of
+# `deploy.yml`, which runs the same two commands before the site is built, so
+# the checks are not run twice for the same commit.
+on:
+  pull_request:
+
+  # Allows the checks to be run manually from the Actions tab
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# One run per branch: a new push replaces the run of the push it supersedes.
+concurrency:
+  group: 'checks-${{ github.ref }}'
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+      - name: Install Node.js
+        # The version of `.nvmrc` is the version the repository pins, and the
+        # cache is the store of pnpm, keyed by the lockfile.
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - name: Install the dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Check the sources
+        # `astro check`, ESLint, markdownlint-cli2 and Prettier over the whole
+        # repository: the commands the hooks run, over the whole tree.
+        run: pnpm check
+      - name: Test the tooling
+        run: pnpm test

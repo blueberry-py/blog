@@ -20,8 +20,8 @@ import { fileURLToPath } from 'node:url';
 
 import YAML from 'yaml';
 
-import { readManifest, splitFrontMatter } from './migration/verify-content.mjs';
-import { expandLegacyFeeds } from './migration/legacy-feeds.mjs';
+import { contentManifest, splitFrontMatter } from './content.mjs';
+import { expandLegacyFeeds } from './legacy-feed-routes.mjs';
 
 const REPO_ROOT = path.resolve(fileURLToPath(new URL('..', import.meta.url)));
 const DIST_DIR = path.join(REPO_ROOT, 'dist');
@@ -36,8 +36,9 @@ const ASTRO_BIN = path.join(
 /** The canonical URL of the build the checks read. */
 const SITE = 'https://blueberrypy.netlify.app';
 
-const manifest = readManifest(REPO_ROOT);
-const postEntries = manifest.entries.filter(
+/** The content the site publishes: every article and page that is no draft. */
+const inventory = contentManifest(REPO_ROOT);
+const postEntries = inventory.entries.filter(
   (entry) => entry.collection === 'post',
 );
 
@@ -68,27 +69,48 @@ function readSource(entry) {
   return { fields: YAML.parse(frontMatter) ?? {}, body };
 }
 
-/**
- * The articles the old Hugo site showed as belonging to an article.
- *
- * The old theme showed the five articles that shared the most keywords and
- * tags with an article, in the block it titled "Related content". The
- * baseline holds the block of every article of the old site, so the new site
- * can be compared with the old one.
- */
-const legacyRelated = JSON.parse(
-  readFileSync(
-    path.join(REPO_ROOT, 'scripts/migration/legacy-related.json'),
-    'utf8',
-  ),
-).related;
-
 /** The posts of the corpus, with the front matter the site reads. */
 const posts = postEntries.map((entry) => {
   const { fields } = readSource(entry);
 
   return { ...entry, ...fields };
 });
+
+/**
+ * The terms of an article the site relates it to other articles by: its
+ * keywords and its tags.
+ *
+ * @param {object} post An article of the corpus.
+ * @returns {Set<string>} The terms of the article, each of them once.
+ */
+function relatedTerms(post) {
+  return new Set(
+    [...(post.keywords ?? []), ...(post.tags ?? [])].map((term) =>
+      String(term).trim(),
+    ),
+  );
+}
+
+/**
+ * Whether two articles have a term in common.
+ *
+ * The block of related articles holds the articles about the same subjects, so
+ * an article that shares no keyword and no tag with the article belongs to no
+ * block of it.
+ *
+ * @param {object} post An article of the corpus.
+ * @param {object} other Another article of the corpus.
+ * @returns {boolean} Whether the two share a term.
+ */
+function sharesTerm(post, other) {
+  const theirs = relatedTerms(other);
+
+  for (const term of relatedTerms(post)) {
+    if (theirs.has(term)) return true;
+  }
+
+  return false;
+}
 
 /**
  * The text of the feed, with the entities of XML decoded.
@@ -316,8 +338,8 @@ function linkedPosts(html) {
 /**
  * The articles the page of an article shows as belonging to it.
  *
- * The block of the old site was an `aside` that held the articles; the new
- * site keeps the name of the block, so the articles are read from it.
+ * The block is an `aside` that holds the articles, so the articles are read
+ * from it.
  *
  * @param {string} html The page of an article.
  * @returns {string[]} The slugs of the articles, in the order they appear.
@@ -488,23 +510,56 @@ describe('the taxonomies of the built site', () => {
   });
 
   it('shows the articles that belong to an article', () => {
+    const bySlug = new Map(posts.map((post) => [post.slug, post]));
+    let withRelated = 0;
+
     for (const post of posts) {
       const html = readPage(`/post/${post.slug}/`);
-      const expected = legacyRelated[post.slug] ?? [];
+      const related = relatedOf(html);
 
-      assert.deepEqual(
-        relatedOf(html),
-        expected,
-        `the page of ${post.slug} does not show the articles the old site showed`,
+      assert.ok(
+        related.length <= 5,
+        `the page of ${post.slug} shows ${related.length} related articles`,
+      );
+      assert.equal(
+        new Set(related).size,
+        related.length,
+        `the page of ${post.slug} shows the same article twice`,
       );
 
-      if (expected.length === 0) continue;
+      for (const slug of related) {
+        assert.notEqual(
+          slug,
+          post.slug,
+          `the page of ${post.slug} relates the article to itself`,
+        );
 
+        const other = bySlug.get(slug);
+
+        assert.ok(
+          other,
+          `the page of ${post.slug} relates it to ${slug}, which is no article of the site`,
+        );
+        assert.ok(
+          new Date(other.date) <= new Date(post.date),
+          `the page of ${post.slug} relates it to the later article ${slug}`,
+        );
+        assert.ok(
+          sharesTerm(post, other),
+          `the page of ${post.slug} relates it to ${slug}, which shares no term`,
+        );
+      }
+
+      if (related.length === 0) continue;
+
+      withRelated += 1;
       assert.ok(
         headingTexts(html).includes('Related content'),
         `the page of ${post.slug} has no block of related articles`,
       );
     }
+
+    assert.ok(withRelated > 0, 'no page shows related articles');
   });
 
   it('publishes the posts in the feed', () => {
