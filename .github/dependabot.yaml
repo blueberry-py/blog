@@ -6,3 +6,12 @@ updates:
     schedule:
       interval: weekly
       day: wednesday
+
+  # The lockfile holds the dependencies the site is built and linted with.
+  # Nothing of `node_modules` is served, but a stale lockfile is how an
+  # advisory in a tool of the build sits unnoticed.
+  - package-ecosystem: npm
+    directory: '/'
+    schedule:
+      interval: weekly
+      day: wednesday
