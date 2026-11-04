@@ -1,6 +1,6 @@
 [build.environment]
-NODE_VERSION = "24.22.1"
-PNPM_VERSION = "12.15.0"
+NODE_VERSION = "26.13.0"
+PNPM_VERSION = "12.16.1"
 TZ = "Asia/Shanghai"
 SITE_URL = "https://blueberrypy.netlify.app"
 

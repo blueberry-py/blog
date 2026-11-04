@@ -97,8 +97,8 @@ describe('the deployment to GitHub Pages', () => {
 
     assert.equal(
       step?.with?.['node-version'],
-      '24.22.1',
-      'the action does not build with Node 24.22.1',
+      '26.13.0',
+      'the action does not build with Node 26.13.0',
     );
   });
 
@@ -173,7 +173,7 @@ describe('the deployment to Netlify', () => {
   it('pins the version of Node and the timezone of the site', () => {
     const environment = netlify().build?.environment ?? {};
 
-    assert.equal(environment.NODE_VERSION, '24.22.1');
+    assert.equal(environment.NODE_VERSION, '26.13.0');
     assert.equal(environment.TZ, 'Asia/Shanghai');
   });
 
