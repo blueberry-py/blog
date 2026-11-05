@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "packageManager": "pnpm@12.16.1",
-  "engines": {
-    "node": ">=22.23.4"
-  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -15,15 +11,20 @@
     "preview": "astro preview",
     "prepare": "husky",
     "check": "astro check && pnpm lint && pnpm format:check",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
     "lint": "eslint . && markdownlint-cli2 \"**/*.md\"",
     "test": "node --test --test-concurrency=1 scripts/tooling.test.mjs scripts/collections.test.mjs scripts/legacy-redirects.test.mjs scripts/routes.test.mjs scripts/taxonomy.test.mjs scripts/deployment.test.mjs scripts/repository.test.mjs scripts/public-guard.test.mjs scripts/build-host.test.mjs scripts/cover.test.mjs",
     "deploy:cloudflare": "pnpm build:root && wrangler deploy",
     "deploy:netlify": "pnpm build:root && netlify deploy --dir dist"
   },
+  "dependencies": {
+    "@astrojs/rss": "4.0.19",
+    "@astrojs/sitemap": "3.7.4"
+  },
   "devDependencies": {
     "@astrojs/check": "0.9.12",
+    "@astrojs/compiler-rs": "0.5.2",
     "@astrojs/markdown-remark": "^7.3.5",
     "@eslint/js": "10.0.1",
     "astro": "^7.4.5",
@@ -33,16 +34,15 @@
     "husky": "9.1.7",
     "lint-staged": "17.6.0",
     "markdownlint-cli2": "0.24.0",
-    "prettier": "3.9.10",
-    "prettier-plugin-astro": "1.1.2",
+    "oxfmt": "0.76.0",
     "smol-toml": "1.9.1",
     "typescript": "6.0.3",
     "typescript-eslint": "~8.72.1",
     "wrangler": "^4.156.2",
     "yaml": "2.9.1"
   },
-  "dependencies": {
-    "@astrojs/rss": "4.0.19",
-    "@astrojs/sitemap": "3.7.4"
-  }
+  "engines": {
+    "node": ">=22.23.4"
+  },
+  "packageManager": "pnpm@12.16.1"
 }

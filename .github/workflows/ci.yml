@@ -35,7 +35,7 @@ jobs:
       - name: Install the dependencies
         run: pnpm install --frozen-lockfile
       - name: Check the sources
-        # `astro check`, ESLint, markdownlint-cli2 and Prettier over the whole
+        # `astro check`, ESLint, markdownlint-cli2 and oxfmt over the whole
         # repository: the commands the hooks run, over the whole tree.
         run: pnpm check
       - name: Test the tooling

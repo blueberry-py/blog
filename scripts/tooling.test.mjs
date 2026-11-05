@@ -15,7 +15,7 @@ import { fileURLToPath } from 'node:url';
 
 const REPO_ROOT = path.resolve(fileURLToPath(new URL('..', import.meta.url)));
 
-const PRETTIER = path.join(REPO_ROOT, 'node_modules/prettier/bin/prettier.cjs');
+const OXFMT = path.join(REPO_ROOT, 'node_modules/oxfmt/bin/oxfmt');
 const ESLINT = path.join(REPO_ROOT, 'node_modules/eslint/bin/eslint.js');
 const MARKDOWNLINT = path.join(
   REPO_ROOT,
@@ -57,7 +57,7 @@ test.after(() => {
 });
 
 test('the formatted sources of the site pass the formatter', () => {
-  const result = run(PRETTIER, [
+  const result = run(OXFMT, [
     '--check',
     'astro.config.mjs',
     'eslint.config.js',
@@ -69,7 +69,7 @@ test('the formatted sources of the site pass the formatter', () => {
     'README.md',
   ]);
 
-  assert.equal(result.code, 0, `prettier reported:\n${result.output}`);
+  assert.equal(result.code, 0, `oxfmt reported:\n${result.output}`);
 });
 
 test('the formatter reports an Astro file that is not formatted', () => {
@@ -77,7 +77,7 @@ test('the formatter reports an Astro file that is not formatted', () => {
     'Unformatted.astro',
     '---\nconst  answer=42\n---\n<div>{answer}</div>\n',
   );
-  const result = run(PRETTIER, ['--check', fixture]);
+  const result = run(OXFMT, ['--check', fixture]);
 
   assert.notEqual(result.code, 0, 'an unformatted Astro file has to fail');
   assert.match(result.output, /Unformatted\.astro/);

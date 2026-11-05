@@ -64,16 +64,15 @@ published without a cover, and the build says which cover is missing.
 
 | Command             | What it does                                                                                            |
 | ------------------- | ------------------------------------------------------------------------------------------------------- |
-| `pnpm format`       | Formats the JavaScript, TypeScript, Astro and Markdown sources with Prettier.                           |
+| `pnpm format`       | Formats the JavaScript, TypeScript, Astro and Markdown sources with oxfmt.                              |
 | `pnpm format:check` | Reports the sources that are not formatted, without writing them.                                       |
 | `pnpm lint`         | Lints the JavaScript, TypeScript and Astro sources with ESLint and the Markdown with markdownlint-cli2. |
 | `pnpm check`        | Runs `astro check`, `pnpm lint` and `pnpm format:check`.                                                |
 | `pnpm test`         | Runs the tests of the tooling, of the built site and of the repository.                                 |
 
-The configuration of the tools lives in `.prettierrc.json`, `.prettierignore`,
-`eslint.config.js` and `.markdownlint-cli2.yaml`. A commit runs the files it
-touches through `lint-staged`, which reads its globs from
-`lint-staged.config.js`.
+The configuration of the tools lives in `.oxfmtrc.json`, `eslint.config.js` and
+`.markdownlint-cli2.yaml`. A commit runs the files it touches through
+`lint-staged`, which reads its globs from `lint-staged.config.js`.
 
 ### What the tools do to an article
 
@@ -94,7 +93,7 @@ The Markdown rules the articles do not follow are listed, with the reason, in
 repository, so a fresh clone is gated without another step. Before a commit,
 `lint-staged` works on the files of the commit: markdownlint-cli2 fixes the
 articles with the rules of `.markdownlint-cli2.yaml`, ESLint fixes the code it
-can, and Prettier formats both. A file that was fixed is staged again, so the
+can, and oxfmt formats both. A file that was fixed is staged again, so the
 commit carries the fixed copy.
 
 Before a push, the whole gate runs:
@@ -112,7 +111,7 @@ The hooks can be skipped with `git commit --no-verify`; the CI job cannot, and
 it is the gate that decides what is published.
 
 The hooks use the tools the repository already has, not a second toolchain, and
-the checks of the `.pre-commit-config.yaml` they replaced still happen: Prettier
+the checks of the `.pre-commit-config.yaml` they replaced still happen: oxfmt
 owns the trailing whitespace and the final newline, `.gitattributes` owns the
 line endings, markdownlint-cli2 owns the rules of the articles (read from one
 configuration), and the push protection of GitHub refuses a private key.

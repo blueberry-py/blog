@@ -51,15 +51,12 @@ export default [
     },
   },
   {
-    // The code of an Astro component is TypeScript that runs on Node.
+    // The code of an Astro component is TypeScript that runs on Node. The
+    // template and the `<style>` block of the component are read by neither
+    // linter here: `astro check` type-checks them and oxfmt formats them.
     files: ['**/*.astro', '**/*.astro/*.js', '**/*.astro/*.ts'],
     languageOptions: {
       globals: { ...globals.node },
-    },
-    rules: {
-      // Prettier formats the Astro files themselves (`pnpm format:check`);
-      // the ESLint pass only looks at the code.
-      'prettier/prettier': 'off',
     },
   },
 ];

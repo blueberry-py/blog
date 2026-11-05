@@ -31,8 +31,7 @@ const SOURCE_DIRECTORIES = ['.github', 'src'];
 const CONFIGURATION_FILES = [
   '.gitignore',
   '.markdownlint-cli2.yaml',
-  '.prettierignore',
-  '.prettierrc.json',
+  '.oxfmtrc.json',
   'README.md',
   'astro.config.mjs',
   'eslint.config.js',
@@ -216,7 +215,7 @@ describe('the ignore files of the repository', () => {
 
   it('ignores the state of the deploy tools', () => {
     const gitignore = read('.gitignore');
-    const prettierignore = read('.prettierignore');
+    const formatter = JSON.parse(read('.oxfmtrc.json'));
     const markdownlint = read('.markdownlint-cli2.yaml');
     const eslint = read('eslint.config.js');
 
@@ -225,8 +224,8 @@ describe('the ignore files of the repository', () => {
       'the .gitignore does not ignore the state of the Netlify CLI',
     );
     assert.ok(
-      ignores(prettierignore, '.netlify'),
-      'the .prettierignore does not ignore the state of the Netlify CLI',
+      formatter.ignorePatterns.includes('.netlify/'),
+      'the formatter does not ignore the state of the Netlify CLI',
     );
     assert.match(
       markdownlint,
@@ -264,7 +263,7 @@ describe('the ignore files of the repository', () => {
   });
 
   it('ignores no theme in the formatter and in the Markdown linter', () => {
-    for (const file of ['.prettierignore', '.markdownlint-cli2.yaml']) {
+    for (const file of ['.oxfmtrc.json', '.markdownlint-cli2.yaml']) {
       assert.doesNotMatch(
         read(file),
         /themes\/|resources\/|archetypes\//,
@@ -289,10 +288,10 @@ describe('the line endings of the repository', () => {
   });
 
   it('tells the formatter which line endings it writes', () => {
-    const prettier = JSON.parse(read('.prettierrc.json'));
+    const formatter = JSON.parse(read('.oxfmtrc.json'));
 
     assert.equal(
-      prettier.endOfLine,
+      formatter.endOfLine,
       'lf',
       'the formatter is not told which line endings it writes',
     );
@@ -331,7 +330,7 @@ describe('the gate of a commit', () => {
 
     const staged = read('lint-staged.config.js');
 
-    for (const command of ['markdownlint-cli2', 'eslint', 'prettier']) {
+    for (const command of ['markdownlint-cli2', 'eslint', 'oxfmt']) {
       assert.ok(
         staged.includes(command),
         `the files of a commit are not run through ${command}`,
