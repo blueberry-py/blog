@@ -467,7 +467,7 @@ describe('the README of the repository', () => {
     );
     assert.match(
       readme,
-      /changed the markup of ten of the thirty-eight\s+articles/,
+      /changed the markup of ten of the thirty-seven\s+articles/,
       'the README does not say that the formatter changed the markup of ten articles',
     );
     assert.match(
