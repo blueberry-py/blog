@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.9.12",
-    "@astrojs/markdown-remark": "^7.3.5",
+    "@astrojs/markdown-remark": "^7.3.6",
     "@eslint/js": "10.0.1",
     "astro": "^7.4.5",
     "eslint": "^10.14.0",
