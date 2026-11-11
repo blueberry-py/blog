@@ -62,7 +62,7 @@ jobs:
         with:
           path: .
           node-version: 26.13.0
-          package-manager: pnpm@12.16.1
+          package-manager: pnpm@12.18.0
 
   # Deployment job
   deploy:
