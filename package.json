@@ -24,10 +24,10 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.9.12",
-    "@astrojs/compiler-rs": "0.5.2",
-    "@astrojs/markdown-remark": "^7.3.6",
+    "@astrojs/compiler-rs": "^0.5.3",
+    "@astrojs/markdown-remark": "^7.3.8",
     "@eslint/js": "10.0.1",
-    "astro": "^7.4.8",
+    "astro": "^7.4.11",
     "eslint": "^10.14.0",
     "eslint-plugin-astro": "3.2.1",
     "globals": "^17.14.0",
@@ -38,7 +38,7 @@
     "smol-toml": "1.9.1",
     "typescript": "6.0.3",
     "typescript-eslint": "~8.72.2",
-    "wrangler": "^4.159.0",
+    "wrangler": "^4.160.1",
     "yaml": "2.9.1"
   },
   "engines": {
