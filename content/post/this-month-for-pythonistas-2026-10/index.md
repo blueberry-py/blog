@@ -132,6 +132,10 @@ Polars 2.0 is out. Highlights: `collect()` on a `LazyFrame` now defaults to the 
 
 > This course gives you a framework for thinking about these different loops, and shows you how to build each one. You’ll apply them to a requirements-review agent that analyzes software specifications for facts, ambiguities, assumptions, and clarification questions. Learn from Sydney Runkle, Product Manager and maintainer of Deep Agents at LangChain, and Esmaeil Gargari, Curriculum Product Lead at DeepLearning.AI.
 
+### RealPython's [Python Performance Optimization: A Practical Guide](https://realpython.com/python-performance-optimization-guide/)
+
+> Python performance optimization is the practice of making your code run faster. You find the bottleneck first, then fix only what's slow, starting with algorithms and data structures before reaching for concurrency or C extensions.
+
 ## Articles
 
 ### [The 5 most exciting new features of Python 3.15](https://mathspp.com/blog/the-5-most-exciting-new-features-of-python-315)
@@ -142,9 +146,17 @@ Python 3.15's five headline features: **lazy imports** (PEP 810) introduce a `la
 
 The author benchmarks Python 3.15 (3.15.0rc3) against CPython 3.10 – 3.14, PyPy 3.12, Node 26.3, and Rust 1.97, using Fibonacci and bubble-sort scripts in single- and 4-thread modes, with standard, JIT, and free-threading (FT) builds on Linux. Results: 3.15 is essentially on par with 3.14 (roughly 1–4% gains, some regressions); 3.11 and 3.14 were the only major speedup releases. The standout is the experimental JIT build, 1.20–1.28x faster than standard 3.15, and free-threading, ~4.5x faster in multithreaded Fibonacci but slower single-threaded. PyPy, Node, and Rust remain far ahead (Rust up to 77x). Conclusion: 3.15 is a minor overall improvement; only the JIT shows clear gains, so upgrading isn't urgent.
 
+### [Hello Python 3.15, goodbye 3.10, and now I can use 3.11](https://simonwillison.net/2026/Oct/12/python-3-15/)
+
+Simon Willison marks Python 3.15's release, highlighting explicit lazy imports (PEP 810), which cut the startup cost of plugin-heavy CLIs like his `llm` tool; unpacking inside comprehensions (PEP 798); and a new built-in sampling profiler, Tachyon (`profiling.sampling`), replacing the need for py-spy. He notes 3.15 is barely faster than 3.14 except for an experimental JIT showing a 1.2x gain, explains upgrading via `uv`, and celebrates 3.10 reaching end-of-life, letting his projects finally adopt 3.11 features: `tomllib`, `TaskGroup`, `timeout()`, `datetime.UTC`, and richer SQLite support.
+
 ### [How we built an async-aware Python profiler](https://www.datadoghq.com/blog/engineering/async-python-profiler/)
 
 Datadog's engineering blog explains how they built an async-aware Python profiler for asyncio-based services. Traditional flame graphs report each task's stack independently, losing which application path triggered work; their "stacked stacks" model tracks parent-child task dependencies and rebuilds a dependency tree to preserve the logical execution path, including tasks that outlive their creators. Because per-task overhead is O(n_tasks), they reduced costs by removing C++ exceptions (-15%), interning strings (-25%), and replacing the process_vm_readv syscall with guarded memcpy plus a SIGSEGV/SIGBUS recovery handler (-50%), cutting total overhead over 60% while improving fidelity. In production it uncovered a pylzstr infinite loop, wasteful debug logging, and NumPy hot spots, and ships in recent ddtrace releases.
+
+### [Module profiling overview](https://mathspp.com/blog/module-profiling-overview)
+
+Python 3.15 introduces the `profiling` standard-library module, which unifies Python's profiling tools under one namespace and replaces the deprecated pure-Python `profile` module. It offers two profilers: `profiling.sampling` (Tachyon), a high-frequency statistical profiler with near-zero overhead that's accurate, attachable to running processes and feature-rich, and `profiling.tracing` (formerly cProfile), which gives exact, deterministic call counts at moderate overhead and supports programmatic use. The author recommends Tachyon by default, switching to tracing for exact counts, programmatic access, or tiny (1–2%) performance differences; both should be avoided for micro-benchmarks, where `timeit` is better.
 
 ### [Python's experimental JIT to be removed](https://lwn.net/SubscriberLink/1102102/0c00e4d550f25f8c/)
 
@@ -157,6 +169,18 @@ Carlton Gibson reports on progress toward `async with transaction.atomic()` in D
 ### [Why Parquet Dominates Modern Data Engineering](https://oedokumaci.com/blog/posts/apache-parquet/)
 
 This post explains why Apache Parquet dominates modern data engineering, using NYC taxi trip data. Switching from CSV to Parquet shrank the file to one-sixth its size and sped up reading 27× (175 ms → 6.6 ms). Key advantages: columnar storage lets readers skip unneeded columns; built-in column types avoid CSV's re-parsing and type-inference errors; dictionary, run-length, and bit-packing encodings shrink data (payment types: 76 MB → 2.2 MB); Zstandard compression shrinks further and speeds up network reads; page and row-group metadata enable predicate pushdown, so sorted data allows skipping most row groups.
+
+### [tar-codec: a fast and secure tar parser for the Rust ecosystem](https://astral.sh/blog/tar-codec)
+
+Astral introduces `tar-codec`, a new ground-up tar parser written in Rust, now default in uv 0.13 for parsing Python source distributions. It's roughly twice as fast as the previous `astral-tokio-tar` implementation and much safer: the old fork was too lenient by design, allowing "parser differentials" where identical tarballs extract differently in uv, pip, and other tooling. The post explains tar's history (V7, UStar/pax, GNU variants) and their conflicting state machines, then describes tar-codec's strict, layered design that rejects ambiguous archives rather than guessing, plus planned ZIP work.
+
+### [Python Typing Survey 2026: AI Tools and the Shifting Checker Landscape](https://engineering.fb.com/2026/10/27/developer-tools/python-typing-survey-2026-ai-tools-checker-landscape/)
+
+The 2026 Python Typing Survey (1,794 responses, mostly experienced developers) found type-hint usage stable over three years, while checker choice shifted sharply—speed drove selection (56.5%) and half of respondents now use multiple checkers, with Pyrefly gaining fast and inconsistency between checkers a common pain point. Missing third-party library types remained the top difficulty (65.1%), especially for Django, SQLAlchemy, Pydantic, NumPy and pandas users. AI tools increasingly write types, run checkers and fix their errors, though many are unsure how much types help AI coding; Stack Overflow declined while LLM chat and typing docs rose.
+
+### [Adopting Pyrefly as the Python type checker at Google](https://opensource.googleblog.com/2026/10/adopting-pyrefly-as-the-python-type-checker-at-google.html)
+
+Google has adopted Pyrefly, Meta's open source Rust-based Python type checker, replacing Pytype, which it had used for over a decade and will no longer support beyond Python 3.12. Pytype's bytecode-based analysis struggled to keep pace with evolving typing PEPs. Pyrefly proved roughly ten times faster, ~97% conformant with the official typing conformance suite, sounder on union types, and clearer in its Rust-style error diagnostics. Results: up to 98% faster incremental rebuilds, 90–99% reduction in type-checking's share of clean-build critical paths, and over 80% less daily compute usage.
 
 ## Podcasts
 

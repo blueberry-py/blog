@@ -23,30 +23,33 @@ series:
 
 ### Option 1: DEB package through apt
 
-[source: nodesource github](https://github.com/nodesource/distributions/blob/master/README.md)
+[source: nodesource.com](https://nodesource.com/products/distributions)
 
 #### Install on Ubuntu
 
 ```bash
-curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash -
+curl -fsSL https://deb.nodesource.com/setup_26.x | sudo bash -
 sudo apt install -y nodejs
 ```
 
 #### Install on Debian, as _root_
 
 ```bash
-curl -fsSL https://deb.nodesource.com/setup_24.x | bash -
+curl -fsSL https://deb.nodesource.com/setup_26.x | bash -
 apt install -y nodejs
 ```
 
 ### Option 2: Through NVM (Node Version Manager)
 
-[source: nodejs.org](https://nodejs.org/en/download/package-manager)
+[source: nodejs.org](https://nodejs.org/en/download)
 
 ```bash
 # Install NVM
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.41.0/install.sh | bash
+
+# in lieu of restarting the shell
+\. "$HOME/.nvm/nvm.sh"
 
 # Download and install Node.js
-nvm install 24
+nvm install 26
 ```
