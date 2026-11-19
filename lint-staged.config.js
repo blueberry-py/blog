@@ -16,11 +16,15 @@ export default {
   // The rules of an article are fixed first, so the formatter settles the shape
   // of a file that already passes the linter. `--no-globs` keeps the linter on
   // the files of the commit: the `globs` of the configuration would lint every
-  // article of the repository on every commit.
-  '*.md': ['markdownlint-cli2 --no-globs --fix', 'oxfmt'],
+  // article of the repository on every commit. The formatter is the command of
+  // `pnpm format`, which repeats a run that dies with an access violation.
+  '*.md': ['markdownlint-cli2 --no-globs --fix', 'node scripts/oxfmt.mjs'],
   // ESLint fixes the code it can and reports what it cannot; oxfmt then formats
   // what ESLint left.
-  '*.{js,mjs,cjs,ts,mts,cts,tsx,astro}': ['eslint --fix', 'oxfmt'],
+  '*.{js,mjs,cjs,ts,mts,cts,tsx,astro}': [
+    'eslint --fix',
+    'node scripts/oxfmt.mjs',
+  ],
   // The configuration and the styles are formatted and not linted.
-  '*.{json,jsonc,toml,css,yml,yaml}': ['oxfmt'],
+  '*.{json,jsonc,toml,css,yml,yaml}': ['node scripts/oxfmt.mjs'],
 };

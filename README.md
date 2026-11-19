@@ -74,6 +74,13 @@ The configuration of the tools lives in `.oxfmtrc.json`, `eslint.config.js` and
 `.markdownlint-cli2.yaml`. A commit runs the files it touches through
 `lint-staged`, which reads its globs from `lint-staged.config.js`.
 
+The formatter is started through `scripts/oxfmt.mjs` and not through its own
+program: on Windows a run of oxfmt sometimes dies with an access violation
+(`0xC0000005`) after it printed its report, and the command repeats a run that
+died that way, so `pnpm format` and `pnpm format:check` answer with the result of
+a run that finished. `scripts/formatter.mjs` holds the rule and the tests of it
+live in `scripts/formatter.test.mjs`.
+
 ### What the tools do to an article
 
 The prose of the articles is never re-wrapped (`proseWrap: "preserve"`) and the

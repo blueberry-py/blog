@@ -4,7 +4,9 @@
  * The formatter and the linters are only useful when they really cover the
  * sources of the site and when they really fail on a broken file. These tests
  * run the three tools the way `pnpm format:check` and `pnpm lint` do and check
- * both: the sources of the site pass, and a file with a defect does not.
+ * both: the sources of the site pass, and a file with a defect does not. The
+ * formatter is run through the command of the repository, not through its
+ * program: a run that dies on Windows is repeated there.
  */
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
@@ -15,7 +17,7 @@ import { fileURLToPath } from 'node:url';
 
 const REPO_ROOT = path.resolve(fileURLToPath(new URL('..', import.meta.url)));
 
-const OXFMT = path.join(REPO_ROOT, 'node_modules/oxfmt/bin/oxfmt');
+const OXFMT = path.join(REPO_ROOT, 'scripts/oxfmt.mjs');
 const ESLINT = path.join(REPO_ROOT, 'node_modules/eslint/bin/eslint.js');
 const MARKDOWNLINT = path.join(
   REPO_ROOT,
