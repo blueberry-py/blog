@@ -15,6 +15,44 @@ export const SITE_SUBTITLE = 'Python & Fun';
 /** The handle of the site on the social network the old site linked to. */
 export const SITE_TWITTER_HANDLE = '@linzeyang';
 
+/**
+ * The social profiles of the author, linked under the navigation of the sidebar.
+ *
+ * The slug of a profile names its icon in `src/assets/social`. An entry with
+ * an `href` links to the profile; an entry with an `action` opens the popover
+ * of that id instead: WeChat has no profile page outside the app, so its
+ * entry shows the QR code of the official account.
+ */
+export const SOCIAL_LINKS = [
+  { slug: 'github', label: 'GitHub', href: 'https://github.com/linzeyang' },
+  {
+    slug: 'bluesky',
+    label: 'Bluesky',
+    href: 'https://bsky.app/profile/linzeyang.bsky.social',
+  },
+  {
+    slug: 'mastodon',
+    label: 'Mastodon',
+    href: 'https://mastodon.online/@zeyanglin',
+  },
+  {
+    slug: 'linkedin',
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/zeyanglin',
+  },
+  {
+    slug: 'bilibili',
+    label: 'Bilibili',
+    href: 'https://space.bilibili.com/3494381252249636',
+  },
+  {
+    slug: 'xiaohongshu',
+    label: 'Xiaohongshu',
+    href: 'https://www.xiaohongshu.com/user/profile/6528b2dd000000002a01a6f5',
+  },
+  { slug: 'wechat', label: 'WeChat', action: 'wechat-qr' },
+] as const;
+
 /** The license the articles of the site are published under. */
 export const SITE_LICENSE = 'Licensed under CC BY-NC-SA 4.0';
 

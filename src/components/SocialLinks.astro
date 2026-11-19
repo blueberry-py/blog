@@ -1,0 +1,124 @@
+---
+import { Image } from 'astro:assets';
+import type { SvgComponent } from 'astro/types';
+import Bilibili from '../assets/social/bilibili.svg';
+import Bluesky from '../assets/social/bluesky.svg';
+import GitHub from '../assets/social/github.svg';
+import LinkedIn from '../assets/social/linkedin.svg';
+import Mastodon from '../assets/social/mastodon.svg';
+import wechatQr from '../assets/social/qrcode_for_gh_0cea7a3ff9ed_258.jpg';
+import WeChat from '../assets/social/wechat.svg';
+import Xiaohongshu from '../assets/social/xiaohongshu.svg';
+import { SOCIAL_LINKS } from '../lib/site.ts';
+
+const icons: Record<(typeof SOCIAL_LINKS)[number]['slug'], SvgComponent> = {
+  github: GitHub,
+  bluesky: Bluesky,
+  mastodon: Mastodon,
+  linkedin: LinkedIn,
+  bilibili: Bilibili,
+  xiaohongshu: Xiaohongshu,
+  wechat: WeChat,
+};
+
+const links = SOCIAL_LINKS.map((link) => ({ ...link, Icon: icons[link.slug] }));
+---
+
+<nav class="social-links" aria-label="Social links">
+  <ul>
+    {links.map((link) => {
+      const { label, Icon } = link;
+      return (
+        <li>
+          {'href' in link ? (
+            <a
+              href={link.href}
+              aria-label={label}
+              title={label}
+              target="_blank"
+              rel="me noopener noreferrer"
+            >
+              <Icon
+                width={20}
+                height={20}
+                aria-hidden="true"
+                focusable="false"
+              />
+            </a>
+          ) : (
+            <button
+              type="button"
+              popovertarget={link.action}
+              aria-label={label}
+              aria-expanded="false"
+              aria-controls={link.action}
+              title={label}
+            >
+              <Icon
+                width={20}
+                height={20}
+                aria-hidden="true"
+                focusable="false"
+              />
+            </button>
+          )}
+        </li>
+      );
+    })}
+  </ul>
+</nav>
+
+<div id="wechat-qr" class="wechat-qr" popover="auto">
+  <button
+    type="button"
+    class="wechat-qr-close"
+    popovertarget="wechat-qr"
+    popovertargetaction="hide"
+    aria-label="Close"
+  >
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M6 6l12 12M18 6L6 18"></path>
+    </svg>
+  </button>
+  <p class="wechat-qr-title">WeChat Account</p>
+  <Image
+    src={wechatQr}
+    alt="QR code of the WeChat account"
+    width={220}
+    height={220}
+    format="png"
+    class="wechat-qr-image"
+  />
+  <p class="wechat-qr-hint">Scan with WeChat to follow</p>
+</div>
+
+<script>
+  const popover = document.getElementById('wechat-qr');
+  const trigger = document.querySelector<HTMLButtonElement>(
+    '.social-links [popovertarget="wechat-qr"]',
+  );
+
+  if (popover && trigger) {
+    popover.addEventListener('toggle', (event) => {
+      const open = (event as ToggleEvent).newState === 'open';
+      trigger.setAttribute('aria-expanded', String(open));
+      if (!open && document.activeElement === document.body) {
+        trigger.focus();
+      }
+    });
+  }
+
+  if (!Object.hasOwn(HTMLElement.prototype, 'popover')) {
+    import('@oddbird/popover-polyfill');
+  }
+</script>

@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import avatar from '../assets/avatar.jpg';
+import SocialLinks from './SocialLinks.astro';
 import {
   currentPath,
   SITE_SUBTITLE,
@@ -47,4 +48,6 @@ const isCurrent = (href: string) =>
       ))}
     </ul>
   </nav>
+
+  <SocialLinks />
 </aside>

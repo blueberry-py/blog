@@ -14,13 +14,14 @@
     "format": "oxfmt",
     "format:check": "oxfmt --check",
     "lint": "eslint . && markdownlint-cli2 \"**/*.md\"",
-    "test": "node --test --test-concurrency=1 scripts/tooling.test.mjs scripts/collections.test.mjs scripts/legacy-redirects.test.mjs scripts/routes.test.mjs scripts/taxonomy.test.mjs scripts/deployment.test.mjs scripts/repository.test.mjs scripts/public-guard.test.mjs scripts/build-host.test.mjs scripts/cover.test.mjs",
+    "test": "node --import ./scripts/test-setup.mjs --test --test-concurrency=1 scripts/tooling.test.mjs scripts/collections.test.mjs scripts/legacy-redirects.test.mjs scripts/routes.test.mjs scripts/taxonomy.test.mjs scripts/deployment.test.mjs scripts/repository.test.mjs scripts/public-guard.test.mjs scripts/build-host.test.mjs scripts/cover.test.mjs",
     "deploy:cloudflare": "pnpm build:root && wrangler deploy",
     "deploy:netlify": "pnpm build:root && netlify deploy --dir dist"
   },
   "dependencies": {
     "@astrojs/rss": "4.0.19",
-    "@astrojs/sitemap": "^3.7.5"
+    "@astrojs/sitemap": "^3.7.5",
+    "@oddbird/popover-polyfill": "^0.7.3"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.12",
