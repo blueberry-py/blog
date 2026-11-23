@@ -81,13 +81,11 @@ const SITE_TIMEZONE_NAME = 'CST';
 
 const dateFormatter = new Intl.DateTimeFormat('en-US', {
   timeZone: SITE_TIMEZONE,
-  weekday: 'short',
   month: 'short',
   day: 'numeric',
   year: 'numeric',
   hour: '2-digit',
   minute: '2-digit',
-  second: '2-digit',
   hourCycle: 'h23',
 });
 
@@ -102,6 +100,24 @@ const isoFormatter = new Intl.DateTimeFormat('en-US', {
   hourCycle: 'h23',
 });
 
+const listDateFormatter = new Intl.DateTimeFormat('en-US', {
+  timeZone: SITE_TIMEZONE,
+  month: 'short',
+  day: 'numeric',
+  year: 'numeric',
+});
+
+const dayFormatter = new Intl.DateTimeFormat('en-US', {
+  timeZone: SITE_TIMEZONE,
+  month: 'short',
+  day: 'numeric',
+});
+
+const yearFormatter = new Intl.DateTimeFormat('en-US', {
+  timeZone: SITE_TIMEZONE,
+  year: 'numeric',
+});
+
 /** The parts of a date in the site's timezone, as `Intl` reports them. */
 function dateParts(
   formatter: Intl.DateTimeFormat,
@@ -113,22 +129,37 @@ function dateParts(
 }
 
 /**
- * A date the way Hugo showed it: `Mon Jan 2 2006 15:04:05 MST`.
+ * The date of an article the way its header shows it: `Nov 5, 2026, 10:55 CST`.
  *
  * The site is written in Asia/Shanghai, so the time is the local time of the
- * article and not the time of the machine that builds the site.
+ * article and not the time of the machine that builds the site. The seconds
+ * of the old Hugo format were dropped: a reader of the article wants to know
+ * the day it was published, not the minute it was saved.
  */
 export function formatDate(date: Date): string {
   const parts = dateParts(dateFormatter, date);
 
-  return [
-    parts.get('weekday'),
-    parts.get('month'),
-    parts.get('day'),
-    parts.get('year'),
-    `${parts.get('hour')}:${parts.get('minute')}:${parts.get('second')}`,
-    SITE_TIMEZONE_NAME,
-  ].join(' ');
+  return `${parts.get('month')} ${parts.get('day')}, ${parts.get('year')}, ${parts.get('hour')}:${parts.get('minute')} ${SITE_TIMEZONE_NAME}`;
+}
+
+/**
+ * A date the way a list of articles shows it: `Nov 5, 2026`.
+ *
+ * The list of an article puts the date in the margin next to the title, where
+ * the seconds of `formatDate` are noise: the reader of a list chooses what to
+ * read, and only the article itself needs the exact time it was written.
+ *
+ * @param date The date of the article.
+ * @param withYear Whether the year belongs to the date: the archive groups its
+ * articles by year and leaves the year out of the rows.
+ */
+export function formatListDate(date: Date, withYear = true): string {
+  return (withYear ? listDateFormatter : dayFormatter).format(date);
+}
+
+/** The year an article was published in, in the timezone of the site. */
+export function formatYear(date: Date): string {
+  return yearFormatter.format(date);
 }
 
 /** A date as the `datetime` attribute of a `<time>` element. */

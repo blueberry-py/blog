@@ -188,15 +188,6 @@ pnpm build:root
 pnpm build:pages
 ```
 
-Netlify shows a draft of the site under a temporary URL, and the site that is
-live keeps serving the last published deployment until the draft is published:
-
-```sh
-pnpm deploy:netlify
-```
-
-The site has to be linked to the account of Netlify once, with `netlify link`.
-
 The Worker is previewed locally against the built output, as described in
 [Cloudflare Workers](#cloudflare-workers).
 

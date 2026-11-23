@@ -1,25 +1,81 @@
 ---
+import type { CollectionEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
-import PostCard from '../components/PostCard.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { sortPosts } from '../lib/posts.ts';
-import { withBase } from '../lib/site.ts';
+import {
+  formatDateTime,
+  formatListDate,
+  formatYear,
+  withBase,
+} from '../lib/site.ts';
 
 const posts = sortPosts(
   await getCollection('posts', ({ data }) => data.draft !== true),
 );
+
+interface Year {
+  year: string;
+  posts: CollectionEntry<'posts'>[];
+}
+
+const years: Year[] = [];
+
+for (const post of posts) {
+  const year = formatYear(post.data.date);
+  const last = years.at(-1);
+
+  if (last?.year === year) {
+    last.posts.push(post);
+  } else {
+    years.push({ year, posts: [post] });
+  }
+}
 ---
 
 <BaseLayout
   title="Archives"
   description="Every post of BlueberryPy, from the newest to the oldest"
   path="/archives/"
+  wide
 >
-  <h1 class="page-title">Archives</h1>
+  <div class="split-layout">
+    <div class="split-main">
+      <h1 class="page-title">Archives</h1>
+      <p class="page-subtitle">{posts.length} posts, newest first</p>
 
-  <div class="post-list">
-    {posts.map((post) => (
-      <PostCard post={post} href={withBase(`/post/${post.id}/`)} />
-    ))}
+      {years.map((group) => (
+        <section class="year-group" aria-labelledby={`year-${group.year}`}>
+          <h2 class="year-label" id={`year-${group.year}`}>
+            {group.year}
+            <span class="year-count">{group.posts.length}</span>
+          </h2>
+          <ul class="post-index">
+            {group.posts.map((post) => (
+              <li>
+                <time datetime={formatDateTime(post.data.date)}>
+                  {formatListDate(post.data.date, false)}
+                </time>
+                <a href={withBase(`/post/${post.id}/`)}>{post.data.title}</a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+
+    <aside class="split-rail" aria-label="Jump to a year">
+      <nav class="rail-block">
+        <p class="rail-title">Jump to</p>
+        <ul class="rail-index">
+          {years.map((group) => (
+            <li>
+              <a href={`#year-${group.year}`}>{group.year}</a>
+              <span class="rail-count">{group.posts.length}</span>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </aside>
   </div>
 </BaseLayout>

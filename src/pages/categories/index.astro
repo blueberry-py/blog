@@ -15,12 +15,15 @@ const terms = sortTerms(collectTerms(posts, 'categories'));
   feed="/categories/index.xml"
 >
   <h1 class="page-title">Categories</h1>
+  <p class="page-subtitle">{terms.length} categories, most used first</p>
 
   <ul class="term-list">
     {terms.map((term) => (
       <li>
         <a href={withBase(`/categories/${term.slug}/`)}>{term.name}</a>
-        <span class="term-count">{term.posts.length} posts</span>
+        <span class="term-count">
+          {term.posts.length} {term.posts.length === 1 ? 'post' : 'posts'}
+        </span>
       </li>
     ))}
   </ul>

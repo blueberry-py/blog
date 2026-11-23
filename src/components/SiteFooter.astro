@@ -1,5 +1,10 @@
 ---
-import { SITE_START_YEAR, SITE_TITLE } from '../lib/site.ts';
+import {
+  SITE_LICENSE,
+  SITE_START_YEAR,
+  SITE_TITLE,
+  withBase,
+} from '../lib/site.ts';
 
 const year = new Date().getFullYear();
 ---
@@ -7,5 +12,9 @@ const year = new Date().getFullYear();
 <footer class="site-footer">
   <p>
     © {SITE_START_YEAR} - {year} {SITE_TITLE}
+  </p>
+  <p class="site-footer-meta">
+    <a href={withBase('/rss.xml')}>RSS feed</a>
+    <span>{SITE_LICENSE}</span>
   </p>
 </footer>

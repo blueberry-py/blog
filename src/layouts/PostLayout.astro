@@ -37,46 +37,46 @@ const related = relatedPosts(
   publishedTime={published}
   modifiedTime={published}
   image={cover}
+  wide
 >
-  <article class="post">
-    <header class="post-header">
-      {post.data.image && (
-        <Image
-          class="post-cover"
-          src={post.data.image}
-          alt={`Featured image of post ${post.data.title}`}
-          width={800}
-        />
-      )}
-      <h1 class="post-title">{post.data.title}</h1>
-      {post.data.description && (
-        <p class="post-description">{post.data.description}</p>
-      )}
-      <p class="post-meta">
-        <time datetime={formatDateTime(post.data.date)}>
-          {formatDate(post.data.date)}
-        </time>
-        {post.data.authors.length > 0 && (
-          <span class="post-authors">
-            {' · '}
-            {post.data.authors.join(', ')}
-          </span>
+  <div class="post-layout">
+    <article class="post">
+      <header class="post-header">
+        {post.data.image && (
+          <Image
+            class="post-cover"
+            src={post.data.image}
+            alt={`Featured image of post ${post.data.title}`}
+            width={800}
+            layout="constrained"
+          />
         )}
-      </p>
-    </header>
+        <h1 class="post-title">{post.data.title}</h1>
+        {post.data.description && (
+          <p class="post-description">{post.data.description}</p>
+        )}
+        <p class="post-meta">
+          <time datetime={formatDateTime(post.data.date)}>
+            {formatDate(post.data.date)}
+          </time>
+        </p>
+      </header>
 
-    <TableOfContents headings={headings} />
+      <TableOfContents headings={headings} variant="disclosure" />
 
-    <div class="post-content">
-      <slot />
-    </div>
+      <div class="post-content">
+        <slot />
+      </div>
 
-    <TaxonomyLinks tags={post.data.tags} categories={post.data.categories} />
+      <TaxonomyLinks tags={post.data.tags} categories={post.data.categories} />
 
-    <footer class="post-footer">
-      <p class="post-license">{SITE_LICENSE}</p>
-    </footer>
-  </article>
+      <footer class="post-footer">
+        <p class="post-license">{SITE_LICENSE}</p>
+      </footer>
+    </article>
 
-  <RelatedContent posts={related} />
+    <TableOfContents headings={headings} variant="rail" />
+
+    <RelatedContent posts={related} />
+  </div>
 </BaseLayout>

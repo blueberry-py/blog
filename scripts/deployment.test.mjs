@@ -309,11 +309,6 @@ describe('the build of the site for a host', () => {
       /build:root/,
       'the deployment to Cloudflare Workers does not build the site for its host',
     );
-    assert.match(
-      scripts['deploy:netlify'] ?? '',
-      /build:root/,
-      'the deployment to Netlify does not build the site for its host',
-    );
   });
 });
 

@@ -23,15 +23,24 @@ const isCurrent = (href: string) =>
 ---
 
 <aside class="sidebar">
-  <a class="site-avatar" href={withBase('/')}>
-    <Image src={avatar} alt="" width={192} height={192} />
-  </a>
+  <div class="site-identity">
+    <a class="site-avatar" href={withBase('/')}>
+      <Image
+        src={avatar}
+        alt=""
+        width={104}
+        height={104}
+        layout="fixed"
+        loading="eager"
+      />
+    </a>
 
-  <div>
-    <p class="site-name">
-      <a href={withBase('/')}>{SITE_TITLE}</a>
-    </p>
-    <p class="site-subtitle">{SITE_SUBTITLE}</p>
+    <div>
+      <p class="site-name">
+        <a href={withBase('/')}>{SITE_TITLE}</a>
+      </p>
+      <p class="site-subtitle">{SITE_SUBTITLE}</p>
+    </div>
   </div>
 
   <nav class="site-nav" aria-label="Main navigation">

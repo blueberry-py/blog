@@ -29,6 +29,12 @@ const { term } = Astro.props;
   feed={`/categories/${term.slug}/index.xml`}
 >
   <h1 class="section-term">{term.name}</h1>
+  <p class="section-term-meta">
+    <a href={withBase('/categories/')}>All categories</a>
+    <span>
+      {term.posts.length} {term.posts.length === 1 ? 'post' : 'posts'}
+    </span>
+  </p>
 
   <div class="post-list">
     {term.posts.map((post) => (

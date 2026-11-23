@@ -397,14 +397,10 @@ describe('the README of the repository', () => {
     }
   });
 
-  it('documents how a deployment is previewed', () => {
+  it('documents the build of each host', () => {
     const readme = read('README.md');
 
-    for (const command of [
-      'pnpm build:root',
-      'pnpm build:pages',
-      'pnpm deploy:netlify',
-    ]) {
+    for (const command of ['pnpm build:root', 'pnpm build:pages']) {
       assert.ok(
         readme.includes(command),
         `the README does not document ${command}`,

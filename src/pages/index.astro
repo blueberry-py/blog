@@ -1,9 +1,16 @@
 ---
+import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import PostCard from '../components/PostCard.astro';
-import TaxonomyWidget from '../components/TaxonomyWidget.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE_SUBTITLE, SITE_TITLE, withBase } from '../lib/site.ts';
+import {
+  formatDateTime,
+  formatListDate,
+  formatYear,
+  SITE_SUBTITLE,
+  SITE_TITLE,
+  withBase,
+} from '../lib/site.ts';
 import { sortPosts } from '../lib/posts.ts';
 import { collectTerms, sortTerms } from '../lib/taxonomy.ts';
 
@@ -11,26 +18,102 @@ const posts = sortPosts(
   await getCollection('posts', ({ data }) => data.draft !== true),
 );
 
+const [lead, ...others] = posts;
+const earlier = others.slice(0, 10);
+
 const categories = sortTerms(collectTerms(posts, 'categories'));
 const tags = sortTerms(collectTerms(posts, 'tags'));
+
+const places = [
+  { href: '/archives/', label: 'All posts', count: posts.length },
+  { href: '/categories/', label: 'Categories', count: categories.length },
+  { href: '/tags/', label: 'Tags', count: tags.length },
+];
+
+const years: { year: string; count: number }[] = [];
+
+for (const post of posts) {
+  const year = formatYear(post.data.date);
+  const last = years.at(-1);
+
+  if (last?.year === year) {
+    last.count += 1;
+  } else {
+    years.push({ year, count: 1 });
+  }
+}
 ---
 
-<BaseLayout title={SITE_TITLE} description={SITE_SUBTITLE} path="/">
-  <h1 class="page-title">{SITE_TITLE}</h1>
-  <p class="page-subtitle">{SITE_SUBTITLE}</p>
+<BaseLayout title={SITE_TITLE} description={SITE_SUBTITLE} path="/" wide>
+  <div class="split-layout">
+    <div class="split-main">
+      {lead && (
+        <article class="lead">
+          <p class="lead-date">
+            <time datetime={formatDateTime(lead.data.date)}>
+              {formatListDate(lead.data.date)}
+            </time>
+          </p>
+          <h1 class="lead-title">
+            <a href={withBase(`/post/${lead.id}/`)}>{lead.data.title}</a>
+          </h1>
+          {lead.data.description && (
+            <p class="lead-description">{lead.data.description}</p>
+          )}
+          {lead.data.image && (
+            <Image
+              class="lead-cover"
+              src={lead.data.image}
+              alt={`Featured image of post ${lead.data.title}`}
+              width={800}
+              layout="constrained"
+            />
+          )}
+        </article>
+      )}
 
-  <div class="post-list">
-    {posts.map((post) => (
-      <PostCard post={post} href={withBase(`/post/${post.id}/`)} />
-    ))}
-  </div>
+      {earlier.length > 0 && (
+        <>
+          <h2 class="section-label">Earlier posts</h2>
+          <div class="post-list">
+            {earlier.map((post) => (
+              <PostCard post={post} href={withBase(`/post/${post.id}/`)} />
+            ))}
+          </div>
+        </>
+      )}
 
-  <div class="widgets">
-    <TaxonomyWidget
-      title="Categories"
-      indexHref="/categories/"
-      terms={categories}
-    />
-    <TaxonomyWidget title="Tags" indexHref="/tags/" terms={tags} />
+      <p class="index-more">
+        <a href={withBase('/archives/')}>All {posts.length} posts</a>
+      </p>
+    </div>
+
+    <aside class="split-rail" aria-label="Browse the site">
+      <nav class="rail-block">
+        <p class="rail-title">Browse</p>
+        <ul class="rail-index">
+          {places.map((place) => (
+            <li>
+              <a href={withBase(place.href)}>{place.label}</a>
+              <span class="rail-count">{place.count}</span>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <section class="rail-block">
+        <p class="rail-title">Years</p>
+        <ul class="rail-index">
+          {years.map((group) => (
+            <li>
+              <a href={withBase(`/archives/#year-${group.year}`)}>
+                {group.year}
+              </a>
+              <span class="rail-count">{group.count}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </aside>
   </div>
 </BaseLayout>

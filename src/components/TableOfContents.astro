@@ -1,28 +1,33 @@
 ---
 import type { MarkdownHeading } from 'astro';
+import TocItems from './TocItems.astro';
 
 interface Props {
   headings: MarkdownHeading[];
   minDepth?: number;
   maxDepth?: number;
+  variant?: 'rail' | 'disclosure';
 }
 
-const { headings, minDepth = 2, maxDepth = 3 } = Astro.props;
+const { headings, minDepth = 2, maxDepth = 3, variant = 'rail' } = Astro.props;
 
 const items = headings.filter(
   (heading) => heading.depth >= minDepth && heading.depth <= maxDepth,
 );
 ---
 
-{items.length > 0 && (
-  <nav class="toc" aria-label="Table of contents">
-    <p class="toc-title">Table of contents</p>
-    <ul>
-      {items.map((heading) => (
-        <li class={`toc-depth-${heading.depth}`}>
-          <a href={`#${heading.slug}`}>{heading.text}</a>
-        </li>
-      ))}
-    </ul>
+{items.length > 0 && variant === 'rail' && (
+  <nav class="toc toc-rail" aria-label="On this page">
+    <p class="toc-title">On this page</p>
+    <TocItems headings={items} />
   </nav>
+)}
+
+{items.length > 0 && variant === 'disclosure' && (
+  <details class="toc-disclosure">
+    <summary>On this page</summary>
+    <nav class="toc" aria-label="Table of contents">
+      <TocItems headings={items} />
+    </nav>
+  </details>
 )}

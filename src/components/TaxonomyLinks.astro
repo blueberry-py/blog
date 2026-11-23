@@ -32,24 +32,62 @@ async function termNames() {
   return names;
 }
 
+function withoutRepeats(values: string[]): string[] {
+  const seen = new Set<string>();
+
+  return values.filter((value) => {
+    const slug = termSlug(value);
+
+    if (seen.has(slug)) return false;
+
+    seen.add(slug);
+
+    return true;
+  });
+}
+
 const { tags: tagNames, categories: categoryNames } = await termNames();
+
+const categoryList = withoutRepeats(categories);
+const categorySlugs = new Set(categoryList.map(termSlug));
+
+const tagList = withoutRepeats(tags).filter(
+  (tag) => !categorySlugs.has(termSlug(tag)),
+);
+
+const nameOf = (value: string, kind: 'tags' | 'categories') =>
+  (kind === 'tags' ? tagNames : categoryNames).get(termSlug(value)) ?? value;
 ---
 
-{(tags.length > 0 || categories.length > 0) && (
+{(categoryList.length > 0 || tagList.length > 0) && (
   <ul class="taxonomy-links">
-    {categories.map((category) => (
-      <li class="taxonomy-category">
-        <a href={withBase(`/categories/${termSlug(category)}/`)}>
-          {categoryNames.get(termSlug(category)) ?? category}
-        </a>
+    {categoryList.length > 0 && (
+      <li class="taxonomy-group">
+        <span class="taxonomy-label">Categories</span>
+        <ul class="taxonomy-values">
+          {categoryList.map((category) => (
+            <li>
+              <a href={withBase(`/categories/${termSlug(category)}/`)}>
+                {nameOf(category, 'categories')}
+              </a>
+            </li>
+          ))}
+        </ul>
       </li>
-    ))}
-    {tags.map((tag) => (
-      <li class="taxonomy-tag">
-        <a href={withBase(`/tags/${termSlug(tag)}/`)}>
-          {tagNames.get(termSlug(tag)) ?? tag}
-        </a>
+    )}
+    {tagList.length > 0 && (
+      <li class="taxonomy-group">
+        <span class="taxonomy-label">Tags</span>
+        <ul class="taxonomy-values">
+          {tagList.map((tag) => (
+            <li>
+              <a href={withBase(`/tags/${termSlug(tag)}/`)}>
+                {nameOf(tag, 'tags')}
+              </a>
+            </li>
+          ))}
+        </ul>
       </li>
-    ))}
+    )}
   </ul>
 )}

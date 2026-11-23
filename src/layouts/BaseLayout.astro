@@ -20,6 +20,7 @@ interface Props {
   modifiedTime?: string;
   image?: string;
   feed?: string;
+  wide?: boolean;
 }
 
 const {
@@ -33,6 +34,7 @@ const {
   modifiedTime,
   image,
   feed = '/rss.xml',
+  wide = false,
 } = Astro.props;
 
 const canonical = Astro.site
@@ -46,6 +48,16 @@ const canonical = Astro.site
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+    <meta
+      name="theme-color"
+      content="#ffffff"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#0e0d15"
+      media="(prefers-color-scheme: dark)"
+    />
     <title>{title}</title>
     <meta name="description" content={description} />
     {canonical && <link rel="canonical" href={canonical} />}
@@ -83,9 +95,12 @@ const canonical = Astro.site
     {image && <meta name="twitter:image" content={image} />}
   </head>
   <body>
+    <a class="skip-link" href="#main">
+      Skip to content
+    </a>
     <div class="container">
       <SiteHeader />
-      <main class="main">
+      <main class="main" class:list={{ 'main-wide': wide }} id="main">
         <slot />
       </main>
     </div>
