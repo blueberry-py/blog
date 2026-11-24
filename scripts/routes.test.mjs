@@ -239,6 +239,35 @@ describe('the built site', () => {
     assert.match(html, /<h1[\s>]/, 'the 404 page has no heading');
   });
 
+  it('shows thumbnails only for earlier homepage posts with covers', () => {
+    const posts = postEntries
+      .map((entry) => ({ entry, fields: readSource(entry).fields }))
+      .sort(
+        (a, b) =>
+          Date.parse(b.fields.date) - Date.parse(a.fields.date) ||
+          a.entry.slug.localeCompare(b.entry.slug, 'en'),
+      );
+    const earlier = posts.slice(1, 11);
+    const expected = earlier.filter(({ fields }) => fields.image).length;
+    const home = readPage('/');
+    const thumbnails = [
+      ...home.matchAll(
+        /<img\b[^>]*class="[^"]*\bpost-card-image\b[^"]*"[^>]*>/g,
+      ),
+    ];
+
+    assert.equal(thumbnails.length, expected);
+    if (posts[0].fields.image) {
+      assert.match(home, /class="[^"]*\blead-cover\b/);
+    } else {
+      assert.doesNotMatch(home, /class="[^"]*\blead-cover\b/);
+    }
+
+    for (const { entry } of posts) {
+      assert.doesNotMatch(readPage(entry.route), /\bpost-card-image\b/);
+    }
+  });
+
   it('renders the title of every post', () => {
     for (const entry of postEntries) {
       const { fields } = readSource(entry);

@@ -587,6 +587,27 @@ img {
   font-variant-numeric: tabular-nums;
 }
 
+.post-card-body,
+.post-card-content {
+  min-inline-size: 0;
+}
+
+.post-card-body--with-image {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  column-gap: 1rem;
+  align-items: start;
+}
+
+.post-card-image {
+  display: block;
+  inline-size: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--radius);
+  background: var(--color-surface);
+}
+
 .post-card-title {
   margin: 0;
   font-size: var(--text-md);
@@ -1330,6 +1351,11 @@ img {
   .post-card-date {
     margin: 0;
     order: -1;
+  }
+
+  .post-card-body--with-image {
+    grid-template-columns: 6rem minmax(0, 1fr);
+    column-gap: 0.85rem;
   }
 
   .year-group {

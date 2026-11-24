@@ -77,7 +77,11 @@ for (const post of posts) {
           <h2 class="section-label">Earlier posts</h2>
           <div class="post-list">
             {earlier.map((post) => (
-              <PostCard post={post} href={withBase(`/post/${post.id}/`)} />
+              <PostCard
+                post={post}
+                href={withBase(`/post/${post.id}/`)}
+                showImage
+              />
             ))}
           </div>
         </>

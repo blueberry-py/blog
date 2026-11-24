@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import { formatDateTime, formatListDate } from '../lib/site.ts';
 
@@ -6,9 +7,11 @@ interface Props {
   post: CollectionEntry<'posts'>;
   href: string;
   withYear?: boolean;
+  showImage?: boolean;
 }
 
-const { post, href, withYear = true } = Astro.props;
+const { post, href, withYear = true, showImage = false } = Astro.props;
+const image = showImage ? post.data.image : undefined;
 ---
 
 <article class="post-card">
@@ -17,12 +20,29 @@ const { post, href, withYear = true } = Astro.props;
       {formatListDate(post.data.date, withYear)}
     </time>
   </p>
-  <div class="post-card-body">
-    <h2 class="post-card-title">
-      <a href={href}>{post.data.title}</a>
-    </h2>
-    {post.data.description && (
-      <p class="post-card-description">{post.data.description}</p>
+  <div
+    class={
+      image ? 'post-card-body post-card-body--with-image' : 'post-card-body'
+    }
+  >
+    {image && (
+      <Image
+        class="post-card-image"
+        src={image}
+        alt=""
+        width={224}
+        height={126}
+        layout="constrained"
+        sizes="(max-width: 60rem) 6rem, 7rem"
+      />
     )}
+    <div class="post-card-content">
+      <h2 class="post-card-title">
+        <a href={href}>{post.data.title}</a>
+      </h2>
+      {post.data.description && (
+        <p class="post-card-description">{post.data.description}</p>
+      )}
+    </div>
   </div>
 </article>
