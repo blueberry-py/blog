@@ -10,7 +10,7 @@ import { sortPosts } from './posts.ts';
  * term was that name in lower case.
  */
 export interface Term {
-  /** The slug of the term: the name in lower case, the way Hugo served it. */
+  /** The slug of the term: its name in lower case. */
   slug: string;
   /** The name the term is shown with. */
   name: string;
@@ -18,25 +18,52 @@ export interface Term {
   posts: CollectionEntry<'posts'>[];
 }
 
-/** The slug Hugo served a term at: the name of the term in lower case. */
+/** The slug of a term: its name in lower case. */
 export function termSlug(name: string): string {
   return name.trim().toLowerCase();
 }
 
+/** The number of capital letters a spelling carries. */
+function capitals(name: string): number {
+  return (name.match(/[A-Z]/g) ?? []).length;
+}
+
 /**
- * The name Hugo showed a term with.
+ * The name a term is shown with.
  *
- * Hugo titled a term with the spelling its posts used, and used the lower case
- * spelling when the posts used both spellings: the posts that carried `AI` and
- * `ai` gave the term the name `Ai`, a term that only ever appeared as `GPT`
- * stayed `GPT`.
+ * The posts spell a term as they please, and every spelling reaches the same
+ * term: `AI` and `ai` are served at `/tags/ai/`. The name carries the capitals
+ * the posts gave it, so a term the posts wrote `LLM` is shown as `LLM`; a term
+ * they only ever wrote in lower case is shown with its first letter in upper
+ * case, so a tag reads as a name and not as a word in the middle of a
+ * sentence.
+ *
+ * A term the posts spelled more than one way is named with the spelling that
+ * carries the most capitals, and with the one they used most when the
+ * spellings carry as many.
  */
 export function termName(spellings: Iterable<string>): string {
-  const names = [...new Set([...spellings].map((name) => name.trim()))].sort();
-  const lower = names.find((name) => name === name.toLowerCase());
-  const chosen = lower ?? names[0] ?? '';
+  const counts = new Map<string, number>();
 
-  return chosen.charAt(0).toUpperCase() + chosen.slice(1);
+  for (const spelling of spellings) {
+    const name = spelling.trim();
+
+    if (name === '') continue;
+
+    counts.set(name, (counts.get(name) ?? 0) + 1);
+  }
+
+  const chosen =
+    [...counts.keys()].sort(
+      (a, b) =>
+        capitals(b) - capitals(a) ||
+        (counts.get(b) ?? 0) - (counts.get(a) ?? 0) ||
+        a.localeCompare(b, 'en'),
+    )[0] ?? '';
+
+  return capitals(chosen) > 0
+    ? chosen
+    : chosen.charAt(0).toUpperCase() + chosen.slice(1);
 }
 
 /**
@@ -49,15 +76,15 @@ export function collectTerms(
   posts: CollectionEntry<'posts'>[],
   field: 'tags' | 'categories',
 ): Term[] {
-  const spellings = new Map<string, Set<string>>();
+  const spellings = new Map<string, string[]>();
   const members = new Map<string, CollectionEntry<'posts'>[]>();
 
   for (const post of posts) {
     for (const value of post.data[field]) {
       const slug = termSlug(value);
 
-      if (!spellings.has(slug)) spellings.set(slug, new Set());
-      spellings.get(slug)?.add(value.trim());
+      if (!spellings.has(slug)) spellings.set(slug, []);
+      spellings.get(slug)?.push(value.trim());
 
       if (!members.has(slug)) members.set(slug, []);
       members.get(slug)?.push(post);

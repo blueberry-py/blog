@@ -26,7 +26,6 @@ const { term } = Astro.props;
   title={term.name}
   description={`The posts of BlueberryPy tagged ${term.name}`}
   path={`/tags/${term.slug}/`}
-  feed={`/tags/${term.slug}/index.xml`}
 >
   <h1 class="section-term">{term.name}</h1>
   <p class="section-term-meta">

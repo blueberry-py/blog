@@ -10,14 +10,11 @@
  *
  * The rest of the module reads an output: a page, a feed, a sitemap. A check
  * joins the two, which is what `verifyBuiltOutput` does: every article of the
- * inventory has a page, every reference of every document resolves to a file
- * of the output, and every route the old site served is still answered.
+ * inventory has a page, and every reference of every document resolves to a
+ * file of the output.
  */
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import path from 'node:path';
-
-import { legacyFeedRoutes } from './legacy-feed-routes.mjs';
-import { readLegacyRedirects } from './legacy-redirects.mjs';
 
 const POST_ROOT = 'content/post';
 const PAGE_ROOT = 'content/about';
@@ -28,8 +25,8 @@ const CONTENT_DIRECTORIES = [POST_ROOT, PAGE_ROOT];
 /** The directory the built site is written to. */
 const OUTPUT_DIRECTORY = 'dist';
 
-/** Front matter delimiters understood by Hugo and by Astro. */
-const DELIMITERS = ['+++', '---'];
+/** The fence of the YAML front matter of a content file. */
+const FRONT_MATTER_FENCE = '---';
 
 /**
  * Split a Markdown file into its front matter and its body.
@@ -41,23 +38,21 @@ const DELIMITERS = ['+++', '---'];
 export function splitFrontMatter(raw) {
   const text = raw.replace(/^\uFEFF/, '');
   const lines = text.split('\n');
-  const opening = lines[0].trim();
-  const delimiter = DELIMITERS.includes(opening) ? opening : null;
 
-  if (!delimiter) {
-    return { frontMatter: '', body: text, delimiter: null };
+  if (lines[0].trim() !== FRONT_MATTER_FENCE) {
+    return { frontMatter: '', body: text };
   }
 
   let closing = -1;
   for (let index = 1; index < lines.length; index += 1) {
-    if (lines[index].trim() === delimiter) {
+    if (lines[index].trim() === FRONT_MATTER_FENCE) {
       closing = index;
       break;
     }
   }
 
   if (closing === -1) {
-    return { frontMatter: '', body: text, delimiter: null, unterminated: true };
+    return { frontMatter: '', body: text };
   }
 
   return {
@@ -66,13 +61,12 @@ export function splitFrontMatter(raw) {
       .map((line) => line.replace(/\r$/, ''))
       .join('\n'),
     body: lines.slice(closing + 1).join('\n'),
-    delimiter,
   };
 }
 
 /**
- * Read the scalar fields of a front matter block without pulling in a TOML or
- * YAML parser: this module has to run on a bare checkout, before the project
+ * Read the scalar fields of a front matter block without pulling in a YAML
+ * parser: this module has to run on a bare checkout, before the project
  * dependencies exist.
  */
 export function parseFrontMatterFields(frontMatter) {
@@ -80,7 +74,7 @@ export function parseFrontMatterFields(frontMatter) {
 
   for (const rawLine of frontMatter.split('\n')) {
     const line = rawLine.replace(/\r$/, '');
-    const match = line.match(/^\s*([A-Za-z0-9_-]+)\s*[:=]\s*(.+?)\s*$/);
+    const match = line.match(/^\s*([A-Za-z0-9_-]+)\s*:\s*(.+?)\s*$/);
     if (!match) continue;
 
     const key = match[1];
@@ -479,10 +473,8 @@ function routeOfSite(reference, origin) {
  *
  * The inventory says which routes the articles are served at and which images
  * they use; the output says which files the site is made of. This check joins
- * the two: every route of the inventory has a page, every local reference of
- * every page and of every feed resolves to a file of the output, every image of
- * an article is rendered by the page of that article, and every route and feed
- * the old site served is still answered.
+ * the two: every route of the inventory has a page, and every local reference
+ * of every page and of every feed resolves to a file of the output.
  */
 export function verifyBuiltOutput(inventory, rootDir, options = {}) {
   const { base = '/', output = OUTPUT_DIRECTORY } = options;
@@ -597,57 +589,14 @@ export function verifyBuiltOutput(inventory, rootDir, options = {}) {
     (entry) => entry.collection === 'post',
   ).length;
 
-  // The routes of the old site are pages of the output as well, but they hold
-  // no article: they send the reader to the route that holds the articles.
-  const redirectRoutes = new Set(Object.keys(readLegacyRedirects(rootDir)));
-  const builtPosts = pages.filter(
-    (page) =>
-      page.route.startsWith('/post/') && !redirectRoutes.has(page.route),
+  const builtPosts = pages.filter((page) =>
+    page.route.startsWith('/post/'),
   ).length;
 
   if (posts !== builtPosts) {
     problems.push({
       code: 'post-count-mismatch',
       detail: `the content tree holds ${posts} articles, the output holds ${builtPosts}`,
-    });
-  }
-
-  for (const route of redirectRoutes) {
-    if (routes.has(route)) continue;
-
-    problems.push({
-      code: 'missing-alias',
-      route,
-      detail: `the old route ${route} is not served`,
-    });
-  }
-
-  // The old site served a feed of its articles and of the terms of every
-  // taxonomy. The feeds of the routes that name no term are the same in every
-  // build of the site, so they are checked against the routes of the old site.
-  for (const route of legacyFeedRoutes(rootDir)) {
-    if (existsSync(path.join(outputDir, route.replace(/^\//, '')))) continue;
-
-    problems.push({
-      code: 'missing-feed',
-      route,
-      detail: `the feed of the old site is not served at ${route}`,
-    });
-  }
-
-  // The feed of a term is served next to the page of the term, so every page
-  // of a taxonomy has a feed of the articles it holds.
-  for (const page of pages) {
-    if (!/^\/(tags|categories)\/[^/]+\/$/.test(page.route)) continue;
-
-    const route = `${page.route}index.xml`;
-
-    if (existsSync(path.join(outputDir, route.replace(/^\//, '')))) continue;
-
-    problems.push({
-      code: 'missing-feed',
-      route,
-      detail: `the page of the term ${page.route} has no feed`,
     });
   }
 

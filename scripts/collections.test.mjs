@@ -119,13 +119,11 @@ describe('post schema', () => {
       image: 'cover.png',
       keywords: ['python', 'astro'],
       series: ['one liner'],
-      externalLink: 'https://example.com',
     });
 
     assert.equal(data.image, 'cover.png');
     assert.deepEqual(data.keywords, ['python', 'astro']);
     assert.deepEqual(data.series, ['one liner']);
-    assert.equal(data.externalLink, 'https://example.com');
   });
 });
 

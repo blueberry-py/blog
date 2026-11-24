@@ -22,7 +22,6 @@ export const postSchema = z.looseObject({
   draft: z.boolean().default(false),
   keywords: z.array(z.string()).optional(),
   series: z.array(z.string()).optional(),
-  externalLink: z.string().optional(),
 });
 
 /**

@@ -126,18 +126,8 @@ configuration), and the push protection of GitHub refuses a private key.
 ### What the tests check
 
 `pnpm test` builds the site and reads the output: every article is served at the
-route of its slug, with its title, its date, its images and its words; every
-page and every feed points at a file of the output; and every route of the old
-site is answered.
-
-### The old URLs
-
-Hugo split every list into pages of ten articles, and served `/post/` as the page
-of articles. The new site serves every list in full, so an old route answers
-with a page that leads to the route which holds the same articles now: `/post/`
-leads to `/archives/`, `/page/2/` to the home page, and `/tags/python/page/2/` to
-`/tags/python/`. All of them are written down in
-`scripts/legacy-redirects.json`, and the build answers every one of them.
+route of its slug, with its title, its date, its images and its words; and every
+page and every feed points at a file of the output.
 
 ## Deployment
 

@@ -3,11 +3,9 @@
  * Checks for the taxonomies, the feeds and the social metadata of the built
  * site.
  *
- * Hugo served a page for every tag and every category, a feed of the posts and
- * a sitemap of the routes, and it described every post with the metadata social
- * networks read. These checks build the site and read the result, so a
- * taxonomy that lists the wrong posts, a feed that points at the wrong URL or a
- * post that no social network can describe fails here.
+ * These checks build the site and read the result, so a taxonomy that lists
+ * the wrong posts, a feed that points at the wrong URL or a post that no
+ * social network can describe fails here.
  *
  * Usage: node --test scripts/taxonomy.test.mjs
  */
@@ -21,7 +19,6 @@ import { fileURLToPath } from 'node:url';
 import YAML from 'yaml';
 
 import { contentManifest, splitFrontMatter } from './content.mjs';
-import { expandLegacyFeeds } from './legacy-feed-routes.mjs';
 
 const REPO_ROOT = path.resolve(fileURLToPath(new URL('..', import.meta.url)));
 const DIST_DIR = path.join(REPO_ROOT, 'dist');
@@ -196,24 +193,47 @@ function readPage(route) {
   return readFileSync(file, 'utf8');
 }
 
-/** The slug Hugo served a term at: the name in lower case. */
+/** The slug of a term: its name in lower case. */
 function termSlug(name) {
   return String(name).trim().toLowerCase();
 }
 
+/** The number of capital letters a spelling carries. */
+function capitals(name) {
+  return (name.match(/[A-Z]/g) ?? []).length;
+}
+
 /**
- * The name Hugo showed a term with.
+ * The name a term is shown with.
  *
- * Hugo titled a term with the spelling the posts used, and used the lower case
- * spelling when the posts used both spellings: `AI` and `ai` became `Ai`, a
- * term that only ever appeared as `GPT` stayed `GPT`.
+ * The posts spell a term as they please, and every spelling reaches the same
+ * term. The name carries the capitals the posts gave it, and a term they only
+ * ever wrote in lower case is shown with its first letter in upper case. A
+ * term spelled more than one way is named with the spelling that carries the
+ * most capitals, and with the one used most when the spellings carry as many.
  */
 function termName(names) {
-  const spellings = [...new Set(names)].sort();
-  const lower = spellings.find((name) => name === name.toLowerCase());
-  const chosen = lower ?? spellings[0];
+  const counts = new Map();
 
-  return chosen.charAt(0).toUpperCase() + chosen.slice(1);
+  for (const name of names) {
+    const spelling = String(name).trim();
+
+    if (spelling === '') continue;
+
+    counts.set(spelling, (counts.get(spelling) ?? 0) + 1);
+  }
+
+  const chosen =
+    [...counts.keys()].sort(
+      (a, b) =>
+        capitals(b) - capitals(a) ||
+        counts.get(b) - counts.get(a) ||
+        a.localeCompare(b, 'en'),
+    )[0] ?? '';
+
+  return capitals(chosen) > 0
+    ? chosen
+    : chosen.charAt(0).toUpperCase() + chosen.slice(1);
 }
 
 /** The terms of the corpus, per taxonomy, with the posts that carry them. */
@@ -226,7 +246,7 @@ function collectTerms(field) {
       const slug = termSlug(value);
 
       if (!spellings.has(slug)) spellings.set(slug, []);
-      spellings.get(slug).push(String(value));
+      spellings.get(slug).push(String(value).trim());
 
       if (!members.has(slug)) members.set(slug, []);
       members.get(slug).push(post);
@@ -242,60 +262,6 @@ function collectTerms(field) {
 
 const tagTerms = collectTerms('tags');
 const categoryTerms = collectTerms('categories');
-
-/**
- * The terms of a taxonomy, in the order the pages of the site list them: the
- * terms with the most articles first, the terms with the same number of
- * articles by name.
- *
- * @param {object[]} terms The terms of the taxonomy.
- * @returns {object[]} The terms, in the order of the pages.
- */
-function sortedTerms(terms) {
-  return [...terms].sort(
-    (a, b) =>
-      b.posts.length - a.posts.length || a.name.localeCompare(b.name, 'en'),
-  );
-}
-
-/**
- * The feeds the old Hugo site served, with the terms of the articles filled in.
- */
-const legacyFeeds = expandLegacyFeeds(REPO_ROOT, {
-  tags: sortedTerms(tagTerms).map((term) => term.slug),
-  categories: sortedTerms(categoryTerms).map((term) => term.slug),
-});
-
-/**
- * The articles a feed holds, in the order the feed holds them.
- *
- * @param {object} feed The feed of the baseline.
- * @returns {string[]} The URLs of the articles of the feed.
- */
-function expectedItems(feed) {
-  if (feed.kind === 'terms') {
-    const terms =
-      feed.taxonomy === 'tags'
-        ? sortedTerms(tagTerms)
-        : sortedTerms(categoryTerms);
-
-    return terms.map((term) => `${SITE}/${feed.taxonomy}/${term.slug}/`);
-  }
-
-  const members = feed.term
-    ? (feed.taxonomy === 'tags' ? tagTerms : categoryTerms).find(
-        (term) => term.slug === feed.term,
-      ).posts
-    : posts;
-
-  return [...members]
-    .sort(
-      (a, b) =>
-        new Date(b.date) - new Date(a.date) ||
-        a.slug.localeCompare(b.slug, 'en'),
-    )
-    .map((post) => `${SITE}/post/${post.slug}/`);
-}
 
 /** The visible text of an HTML document, without tags and without repeated spaces. */
 function textContent(html) {
@@ -372,21 +338,6 @@ function metaContent(html, attribute, value) {
   return unescapeHtml(pattern.exec(html)?.[1] ?? '');
 }
 
-/** The names the old Hugo site gave to the terms it served. */
-const LEGACY_TERM_NAMES = {
-  'tags/ai': 'Ai',
-  'tags/gpt': 'GPT',
-  'tags/ide': 'IDE',
-  'tags/llama': 'Llama',
-  'tags/llm': 'Llm',
-  'tags/linux': 'Linux',
-  'tags/python': 'Python',
-  'tags/2023': '2023',
-  'categories/ai': 'AI',
-  'categories/llm': 'Llm',
-  'categories/python': 'Python',
-};
-
 describe('the taxonomies of the built site', () => {
   before(() => {
     buildSite();
@@ -414,16 +365,7 @@ describe('the taxonomies of the built site', () => {
     }
   });
 
-  it('names every term the way Hugo named it', () => {
-    for (const [route, name] of Object.entries(LEGACY_TERM_NAMES)) {
-      const html = readPage(`/${route}/`);
-
-      assert.ok(
-        headingTexts(html).includes(name),
-        `/${route}/ is not titled ${name}`,
-      );
-    }
-
+  it('shows every term with its own name', () => {
     for (const term of [...tagTerms, ...categoryTerms]) {
       const route = term.slug;
       const html = readPage(
@@ -591,11 +533,6 @@ describe('the taxonomies of the built site', () => {
         `the item of ${post.slug} carries the wrong date`,
       );
     }
-
-    assert.ok(
-      existsSync(path.join(DIST_DIR, 'index.xml')),
-      'the feed is not served at the /index.xml the old site used',
-    );
   });
 
   it('publishes the whole of every post in the feed', () => {
@@ -631,49 +568,9 @@ describe('the taxonomies of the built site', () => {
     }
   });
 
-  it('serves a feed at every route the old site served a feed at', () => {
-    for (const feed of legacyFeeds) {
-      const file = path.join(DIST_DIR, feed.route.replace(/^\//, ''));
-
-      assert.ok(existsSync(file), `no feed was built at ${feed.route}`);
-
-      const xml = readFileSync(file, 'utf8');
-      assert.match(xml, /<rss\b/, `the feed at ${feed.route} is not a feed`);
-
-      const items = [...xml.matchAll(/<item>([\s\S]*?)<\/item>/g)].map(
-        (match) => match[1],
-      );
-      const links = items.map(
-        (item) => /<link>([^<]*)<\/link>/.exec(item)?.[1] ?? '',
-      );
-
-      assert.deepEqual(
-        links,
-        expectedItems(feed),
-        `the feed at ${feed.route} holds the wrong articles`,
-      );
-    }
-  });
-
-  it('points the pages of the taxonomies at their feeds', () => {
-    for (const feed of legacyFeeds) {
-      if (!feed.advertised) continue;
-
-      const html = readPage(feed.page);
-
-      assert.ok(
-        html.includes(`href="${feed.route}"`),
-        `the page ${feed.page} does not point at the feed ${feed.route}`,
-      );
-    }
-  });
-
   it('lists the routes of the site in the sitemap', () => {
     const index = path.join(DIST_DIR, 'sitemap-index.xml');
-    assert.ok(
-      existsSync(index),
-      'no sitemap index was built (the old site served /sitemap.xml)',
-    );
+    assert.ok(existsSync(index), 'no sitemap index was built');
 
     const indexXml = readFileSync(index, 'utf8');
     const sitemap = /<loc>([^<]*sitemap-[^<]*)<\/loc>/.exec(indexXml)?.[1];

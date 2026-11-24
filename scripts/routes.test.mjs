@@ -2,7 +2,7 @@
 /**
  * Route and render checks for the built site.
  *
- * Hugo served every post at `/post/{slug}/` with its title, date, body and
+ * Every post is served at `/post/{slug}/` with its title, date, body and
  * images. These checks build the site and read the result, so a page that
  * renders but renders the wrong thing fails here instead of reaching a
  * reader.
@@ -23,7 +23,6 @@ import {
   splitFrontMatter,
   verifyBuiltOutput,
 } from './content.mjs';
-import { readLegacyRedirects } from './legacy-redirects.mjs';
 
 const REPO_ROOT = path.resolve(fileURLToPath(new URL('..', import.meta.url)));
 const DIST_DIR = path.join(REPO_ROOT, 'dist');
@@ -47,16 +46,6 @@ const PAGES_BASE = '/blog/';
 /** The content the site publishes: every article and page that is no draft. */
 const inventory = contentManifest(REPO_ROOT);
 
-/**
- * The routes of the old Hugo site that the new site answers with an alias.
- *
- * The old site served a page of articles at `/post/` and a page of ten
- * articles per list; the new site serves every list in full, so every one of
- * those routes leads to the route that holds the same articles now.
- */
-const aliases = readLegacyRedirects(REPO_ROOT);
-
-const aliasRoutes = new Set(Object.keys(aliases));
 const postEntries = inventory.entries.filter(
   (entry) => entry.collection === 'post',
 );
@@ -233,7 +222,6 @@ describe('the built site', () => {
   it('serves no page outside the content routes', () => {
     const built = listBuiltPages(DIST_DIR)
       .map((page) => page.route)
-      .filter((route) => !aliasRoutes.has(route))
       .filter((route) => route.startsWith('/post/'))
       .map((route) => route.replace(/^\/post\//, '').replace(/\/$/, ''))
       .sort();
@@ -241,31 +229,6 @@ describe('the built site', () => {
     const expected = postEntries.map((entry) => entry.slug).sort();
 
     assert.deepEqual(built, expected);
-  });
-
-  it('serves the routes of the old site', () => {
-    for (const [from, to] of Object.entries(aliases)) {
-      const file = pageFile(from);
-
-      assert.ok(
-        existsSync(file),
-        `the old route ${from} is not served (expected ${file})`,
-      );
-
-      const html = readFileSync(file, 'utf8');
-      const destination =
-        /<meta http-equiv="refresh" content="0;url=([^"]+)"/.exec(html)?.[1];
-
-      assert.equal(
-        destination,
-        to,
-        `the old route ${from} does not lead to ${to}`,
-      );
-      assert.ok(
-        existsSync(pageFile(to)),
-        `the old route ${from} leads to ${to}, which is not served`,
-      );
-    }
   });
 
   it('serves a 404 page', () => {
@@ -419,30 +382,5 @@ describe('the site built for the project site of GitHub Pages', () => {
 
   it('serves the same routes and the same assets as a build for a root host', () => {
     assert.deepEqual(outputInventory(), rootInventory);
-  });
-
-  it('serves the routes of the old site under the base path', () => {
-    for (const [from, to] of Object.entries(aliases)) {
-      const file = pageFile(from);
-
-      assert.ok(
-        existsSync(file),
-        `the old route ${from} is not served (expected ${file})`,
-      );
-
-      const html = readFileSync(file, 'utf8');
-      const destination =
-        /<meta http-equiv="refresh" content="0;url=([^"]+)"/.exec(html)?.[1];
-
-      assert.equal(
-        destination,
-        `${PAGES_BASE}${to.replace(/^\//, '')}`,
-        `the old route ${from} does not lead to ${to}`,
-      );
-      assert.ok(
-        existsSync(pageFile(to)),
-        `the old route ${from} leads to ${to}, which is not served`,
-      );
-    }
   });
 });

@@ -15,7 +15,7 @@
     "lint": "eslint . && markdownlint-cli2 \"**/*.md\"",
     "prepare": "husky",
     "preview": "astro preview",
-    "test": "node --import ./scripts/test-setup.mjs --test --test-concurrency=1 scripts/formatter.test.mjs scripts/tooling.test.mjs scripts/collections.test.mjs scripts/legacy-redirects.test.mjs scripts/routes.test.mjs scripts/taxonomy.test.mjs scripts/deployment.test.mjs scripts/repository.test.mjs scripts/public-guard.test.mjs scripts/build-host.test.mjs scripts/cover.test.mjs"
+    "test": "node --import ./scripts/test-setup.mjs --test --test-concurrency=1 scripts/formatter.test.mjs scripts/tooling.test.mjs scripts/collections.test.mjs scripts/routes.test.mjs scripts/taxonomy.test.mjs scripts/deployment.test.mjs scripts/repository.test.mjs scripts/public-guard.test.mjs scripts/build-host.test.mjs scripts/cover.test.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "4.0.19",
