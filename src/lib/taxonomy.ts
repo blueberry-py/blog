@@ -5,9 +5,9 @@ import { sortPosts } from './posts.ts';
 /**
  * A term of the site: a tag or a category.
  *
- * The terms of the old Hugo site were built from the front matter of the
- * posts: the name of a term was the name the posts gave it, and the URL of a
- * term was that name in lower case.
+ * The terms are built from the front matter of the posts: the URL of a term is
+ * its name in lower case, and the name the term is shown with is chosen from
+ * the spellings the posts used.
  */
 export interface Term {
   /** The slug of the term: its name in lower case. */

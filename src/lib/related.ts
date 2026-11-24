@@ -1,5 +1,7 @@
 import type { CollectionEntry } from 'astro:content';
 
+import { termSlug } from './taxonomy.ts';
+
 /**
  * The articles that belong to an article.
  *
@@ -30,17 +32,19 @@ const THRESHOLD = 80;
 export const RELATED_LIMIT = 5;
 
 /**
- * The terms of an article, without the spaces around them.
+ * The terms of an article, as the slugs of the taxonomies.
  *
- * The terms are compared the way Hugo compared them: as they are written, so
- * `AI` and `ai` are two terms.
+ * Two articles that spell a term differently still share it: `AI` and `ai` are
+ * the same tag, and that tag is what the two articles have in common.
  *
  * @param {string[] | undefined} values The terms of an article.
  * @returns {Set<string>} The terms, each of them once.
  */
 function terms(values: string[] | undefined): Set<string> {
   return new Set(
-    (values ?? []).map((value) => value.trim()).filter((value) => value !== ''),
+    (values ?? [])
+      .map((value) => termSlug(value))
+      .filter((value) => value !== ''),
   );
 }
 

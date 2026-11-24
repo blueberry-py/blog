@@ -1,9 +1,7 @@
 /**
- * The identity of the blog and the helpers that follow from it.
- *
- * The values come from the configuration of the old Hugo site
- * (`config/_default/config.toml`): the name, the subtitle, the timezone the
- * articles were written in and the way their dates were shown.
+ * The identity of the blog and the helpers that follow from it: the name, the
+ * subtitle, the timezone the articles are written in and the way their dates
+ * are shown.
  */
 
 /** The name of the site, shown in the header, in the footer and in the titles. */
@@ -12,7 +10,7 @@ export const SITE_TITLE = 'BlueberryPy';
 /** The subtitle of the site, shown under the name. */
 export const SITE_SUBTITLE = 'Python & Fun';
 
-/** The handle of the site on the social network the old site linked to. */
+/** The handle of the site on the social networks. */
 export const SITE_TWITTER_HANDLE = '@linzeyang';
 
 /**
@@ -62,23 +60,6 @@ export const SITE_START_YEAR = 2024;
 /** The timezone the articles are dated in. */
 export const SITE_TIMEZONE = 'Asia/Shanghai';
 
-/**
- * The offset of the site's timezone.
- *
- * Asia/Shanghai has no daylight saving time since 1991, so every date the
- * blog shows carries this offset.
- */
-const SITE_UTC_OFFSET = '+08:00';
-
-/**
- * The name of the site's timezone.
- *
- * Hugo printed the dates with the abbreviation of the zone, which for
- * Asia/Shanghai is `CST`. `Intl` only knows the offset (`GMT+8`), so the
- * abbreviation of the old site is kept here.
- */
-const SITE_TIMEZONE_NAME = 'CST';
-
 const dateFormatter = new Intl.DateTimeFormat('en-US', {
   timeZone: SITE_TIMEZONE,
   month: 'short',
@@ -87,6 +68,7 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', {
   hour: '2-digit',
   minute: '2-digit',
   hourCycle: 'h23',
+  timeZoneName: 'short',
 });
 
 const isoFormatter = new Intl.DateTimeFormat('en-US', {
@@ -98,6 +80,7 @@ const isoFormatter = new Intl.DateTimeFormat('en-US', {
   minute: '2-digit',
   second: '2-digit',
   hourCycle: 'h23',
+  timeZoneName: 'longOffset',
 });
 
 const listDateFormatter = new Intl.DateTimeFormat('en-US', {
@@ -129,17 +112,18 @@ function dateParts(
 }
 
 /**
- * The date of an article the way its header shows it: `Nov 5, 2026, 10:55 CST`.
+ * The date of an article the way its header shows it: `Nov 5, 2026, 10:55 GMT+8`.
  *
  * The site is written in Asia/Shanghai, so the time is the local time of the
- * article and not the time of the machine that builds the site. The seconds
- * of the old Hugo format were dropped: a reader of the article wants to know
- * the day it was published, not the minute it was saved.
+ * article and not the time of the machine that builds the site, and the zone
+ * of the date is the one `Intl` names. The seconds are dropped: a reader of
+ * the article wants to know the day it was published, not the second it was
+ * saved.
  */
 export function formatDate(date: Date): string {
   const parts = dateParts(dateFormatter, date);
 
-  return `${parts.get('month')} ${parts.get('day')}, ${parts.get('year')}, ${parts.get('hour')}:${parts.get('minute')} ${SITE_TIMEZONE_NAME}`;
+  return `${parts.get('month')} ${parts.get('day')}, ${parts.get('year')}, ${parts.get('hour')}:${parts.get('minute')} ${parts.get('timeZoneName')}`;
 }
 
 /**
@@ -162,11 +146,19 @@ export function formatYear(date: Date): string {
   return yearFormatter.format(date);
 }
 
-/** A date as the `datetime` attribute of a `<time>` element. */
+/**
+ * A date as the `datetime` attribute of a `<time>` element.
+ *
+ * The offset is the one `Intl` names for the zone of the site: the formatter
+ * names `Asia/Shanghai` `GMT+08:00`, and the attribute wants `+08:00`.
+ */
 export function formatDateTime(date: Date): string {
   const parts = dateParts(isoFormatter, date);
+  const zone = parts.get('timeZoneName') ?? '';
+  // A zone at the prime meridian is named `GMT`, which the attribute writes `Z`.
+  const offset = zone === 'GMT' ? 'Z' : zone.replace(/^GMT/, '');
 
-  return `${parts.get('year')}-${parts.get('month')}-${parts.get('day')}T${parts.get('hour')}:${parts.get('minute')}:${parts.get('second')}${SITE_UTC_OFFSET}`;
+  return `${parts.get('year')}-${parts.get('month')}-${parts.get('day')}T${parts.get('hour')}:${parts.get('minute')}:${parts.get('second')}${offset}`;
 }
 
 /** The base path of the deployment: `/` for the root hosts, `/blog/` for GitHub Pages. */

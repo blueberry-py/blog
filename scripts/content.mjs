@@ -124,7 +124,7 @@ export function deriveSlug(sourcePath, fields = {}) {
 
 /**
  * The public route a content file is served at. Posts are routed by their
- * slug; pages are routed by their path, because that is what Hugo does.
+ * slug; pages are routed by their path.
  */
 export function deriveRoute(sourcePath, slug) {
   if (sourcePath.startsWith(`${POST_ROOT}/`)) {

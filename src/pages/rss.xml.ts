@@ -14,8 +14,8 @@ import { sortPosts } from '../lib/posts.ts';
  * base path of the build and every link of an item carries it as well.
  *
  * The description of an item is the body of the post, rendered as the page of
- * the post renders it, the way the feed of the old site held it: a reader of
- * the feed reads the whole article and not the summary of its front matter.
+ * the post renders it: a reader of the feed reads the whole article and not
+ * the summary of its front matter.
  */
 export async function GET(context: APIContext) {
   const posts = sortPosts(

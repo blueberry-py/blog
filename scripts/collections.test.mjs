@@ -104,14 +104,14 @@ describe('post schema', () => {
     const data = postSchema.parse({
       ...POST,
       cover: 'cover.png',
-      aliases: ['old-url'],
+      readingTime: 4,
     });
 
     assert.equal(data.cover, 'cover.png');
-    assert.deepEqual(data.aliases, ['old-url']);
+    assert.equal(data.readingTime, 4);
   });
 
-  it('accepts the optional metadata Hugo wrote', async () => {
+  it('accepts the optional metadata of a post', async () => {
     const { postSchema } = await loadSchemas();
 
     const data = postSchema.parse({

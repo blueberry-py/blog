@@ -270,8 +270,8 @@ describe('the built site', () => {
         `${entry.route} does not carry the publication date ${fields.date}`,
       );
       assert.ok(
-        html.includes('CST'),
-        `${entry.route} does not show the date in Asia/Shanghai`,
+        html.includes('GMT+8'),
+        `${entry.route} does not show the timezone of Asia/Shanghai`,
       );
     }
   });

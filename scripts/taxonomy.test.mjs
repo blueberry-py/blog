@@ -75,7 +75,7 @@ const posts = postEntries.map((entry) => {
 
 /**
  * The terms of an article the site relates it to other articles by: its
- * keywords and its tags.
+ * keywords and its tags, as the site compares them, in lower case.
  *
  * @param {object} post An article of the corpus.
  * @returns {Set<string>} The terms of the article, each of them once.
@@ -83,7 +83,7 @@ const posts = postEntries.map((entry) => {
 function relatedTerms(post) {
   return new Set(
     [...(post.keywords ?? []), ...(post.tags ?? [])].map((term) =>
-      String(term).trim(),
+      String(term).trim().toLowerCase(),
     ),
   );
 }
