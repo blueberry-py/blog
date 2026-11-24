@@ -906,14 +906,20 @@ img {
   font-size: 1.7rem;
 }
 
+/* A section is a column of a long read: the hairline above it draws the seam
+   before the eye reads the title. */
 .post-content h2 {
-  margin: 2.75rem 0 0.9rem;
-  font-size: 1.375rem;
+  margin-block: 3.25rem 1rem;
+  padding-block-start: 1.5rem;
+  border-block-start: var(--hairline);
+  font-size: 1.5rem;
 }
 
+/* An entry below a section: one step up from the prose, not a second section. */
 .post-content h3 {
-  margin: 2rem 0 0.7rem;
-  font-size: 1.125rem;
+  margin-block: 2.5rem 0.75rem;
+  font-size: 1.1875rem;
+  font-weight: 600;
 }
 
 .post-content h4,
@@ -927,8 +933,21 @@ img {
   margin-block-start: 0;
 }
 
+/* A section that opens an article wears no seam. */
+.post-content > h2:first-child {
+  padding-block-start: 0;
+  border-block-start: none;
+}
+
 .post-content p {
-  margin: 1.1rem 0;
+  margin-block: 1.25rem;
+  text-wrap: pretty;
+}
+
+/* Lists, code, tables and quotes take the wider step, so the paragraphs
+   between them keep a rhythm of their own instead of borrowing theirs. */
+.post-content :is(ul, ol, pre, table, blockquote) {
+  margin-block: 1.75rem;
 }
 
 .post-content ul,
@@ -945,7 +964,6 @@ img {
 }
 
 .post-content blockquote {
-  margin: 1.75rem 0;
   padding: 0.15rem 0 0.15rem 1.15rem;
   border-inline-start: 3px solid var(--color-quote-border);
   color: var(--color-muted);
@@ -969,7 +987,6 @@ img {
   display: block;
   width: 100%;
   overflow-x: auto;
-  margin: 1.75rem 0;
   border-collapse: collapse;
   font-family: var(--font-sans);
   font-size: var(--text-sm);
@@ -996,7 +1013,6 @@ img {
 }
 
 .post-content pre {
-  margin: 1.75rem 0;
   padding: 1rem 1.15rem;
   overflow-x: auto;
   border: var(--hairline);
