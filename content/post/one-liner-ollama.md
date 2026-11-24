@@ -8,7 +8,6 @@ authors:
 tags:
   - ollama
   - AI
-  - Llama
   - llm
   - linux
   - ubuntu

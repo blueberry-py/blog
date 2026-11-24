@@ -19,10 +19,6 @@ series:
 
 ## One-liner series: minikube, kubectl and kustomize
 
-| OS                 | Shell |
-| ------------------ | ----- |
-| Ubuntu 20.04 amd64 | Bash  |
-
 ### Install minikube
 
 [source](https://minikube.sigs.k8s.io/docs/start/)
@@ -30,7 +26,7 @@ series:
 #### As Binary
 
 ```bash
-curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-linux-amd64
 
 sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-amd64
 ```

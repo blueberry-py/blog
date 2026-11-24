@@ -11,7 +11,6 @@ tags:
   - windows
   - linux
   - ubuntu
-  - macos
 categories:
   - cli
   - linux
@@ -24,16 +23,16 @@ series:
 
 [source: pnpm docs](https://pnpm.io/installation)
 
-### Install on POSIX systems (except Intel Macs (darwin-x64))
+### Install on Linux
 
 ```bash
-curl -fsSL https://get.pnpm.io/install.sh | sh -
+curl -fsSL https://get.pnpm.io | sh -
 ```
 
 ### Install on Windows (PowerShell)
 
 ```powershell
-Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
+irm https://get.pnpm.io/ps1 | iex
 ```
 
 ### Update

@@ -25,10 +25,10 @@ series:
 
 [source: OpenCode documentation](https://opencode.ai/docs#install)
 
-### Install on Linux, macOS
+### Install on Linux or macOS
 
 ```bash
-curl -fsSL https://opencode.ai/install | bash
+curl -fsSL https://opencode.ai/v2/install | bash
 ```
 
 ### Install on Windows
@@ -36,13 +36,7 @@ curl -fsSL https://opencode.ai/install | bash
 #### Install with npm
 
 ```bash
-npm install -g opencode-ai
-```
-
-#### Install with chocolatey
-
-```bash
-choco install opencode
+npm install -g @opencode/cli
 ```
 
 ### Verify installation
